@@ -1,6 +1,6 @@
 ---
 name: ro-crate-create
-description: Create or edit an RO-Crate: write or repair ro-crate-metadata.json for a directory of data, code or a workflow; add files, people, licences, funders, publications, profiles or provenance to a crate. Use whenever the user wants to package research data with metadata, make a folder an RO-Crate, describe a dataset for FAIR sharing, or fix a crate's metadata. Defaults to RO-Crate 1.3 for new crates and keeps the declared version when editing. Not for validating alone (ro-crate-validator) or reading crates (ro-crate-consume).
+description: "Create or edit an RO-Crate: write or repair ro-crate-metadata.json for a directory of data, code or a workflow; add files, people, licences, funders, publications, profiles or provenance to a crate. Use whenever the user wants to package research data with metadata, make a folder an RO-Crate, describe a dataset for FAIR sharing, or fix a crate's metadata. Defaults to RO-Crate 1.3 for new crates and keeps the declared version when editing. Not for validating alone (ro-crate-validator) or reading crates (ro-crate-consume)."
 ---
 
 # Creating or editing an RO-Crate
@@ -10,7 +10,7 @@ Requirement tables with severities: https://www.researchobject.org/ro-crate/quic
 
 ## Do not guess
 Ask the user for facts about them and their project: authors, publisher, organisation, affiliation, ORCID/ROR/DOI, licence, funders, dates of events, and software or tool versions. Do not infer them from the user's email address, username, git config or machine, and never invent identifiers. You may derive what you can observe: file sizes and media types from the files, `tool --version` output, titles and descriptions from the content (say that you did).
-If you cannot ask: leave optional properties out. For what the root data entity must have (`license`, `name`, `description`, `datePublished`) use an obviously temporary value that starts with `TODO:` (for example `"license": "TODO: choose a licence"`; today's date is fine for the `datePublished` of a draft), and list every `TODO:` value in your answer. The lint script (`ro-crate-validator`) warns about `TODO:` values. Never publish, deposit or hand over a crate that still contains one.
+If you cannot ask: leave optional properties out. For what the root data entity must have (`license`, `name`, `description`, `datePublished`) and for any other property the specification, a profile or the validator requires (for example `version` on a `SoftwareApplication` or `ComputerLanguage` you could not run), use an obviously temporary value that starts with `TODO:` (for example `"license": "TODO: choose a licence"`; today's date is fine for the `datePublished` of a draft), and list every `TODO:` value in your answer. The lint script (`ro-crate-validator`) warns about `TODO:` values. Never publish, deposit or hand over a crate that still contains one.
 
 ## Before writing
 - **New crate:** target 1.3. **Existing crate:** read its declared version (descriptor `conformsTo`) and keep it; upgrade only if asked (changes: https://www.researchobject.org/ro-crate/whats-changed-in-1-2 and `-1-3`).

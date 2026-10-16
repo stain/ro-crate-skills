@@ -43,7 +43,33 @@ for s in skills:
     if not fm:
         errors.append(f"{name}: missing frontmatter")
         continue
-    fields = dict(l.split(": ", 1) for l in fm.group(1).splitlines() if re.match(r"^[a-z-]+: ", l))
+    fields = {}
+    for l in fm.group(1).splitlines():
+        km = re.match(r"^([a-z-]+): (.*)$", l)
+        if not km:
+            if l.strip():
+                errors.append(f"{name}: frontmatter line is not 'key: value': {l[:60]!r}")
+            continue
+        key, val = km.groups()
+        if val.startswith('"'):
+            try:
+                val = json.loads(val)  # YAML double-quoted escapes are JSON-compatible here
+            except ValueError:
+                errors.append(f"{name}: invalid double-quoted YAML value for {key}")
+        elif val.startswith("'"):
+            if not (val.endswith("'") and len(val) > 1):
+                errors.append(f"{name}: unterminated single-quoted YAML value for {key}")
+            val = val[1:-1].replace("''", "'")
+        elif val and (": " in val or " #" in val or val[0] in "[]{}*&!|>%@`,?-:#"):
+            errors.append(f"{name}: unquoted YAML value for {key} contains ': ' or ' #' or starts with an indicator; wrap it in double quotes")
+        fields[key] = val
+    try:
+        import yaml  # optional: when available, use a real YAML parser as well
+        yaml.safe_load(fm.group(1))
+    except ImportError:
+        pass
+    except Exception as e:
+        errors.append(f"{name}: frontmatter is not valid YAML: {str(e).splitlines()[0]}")
     if fields.get("name") != name:
         errors.append(f"{name}: frontmatter name {fields.get('name')!r} != directory")
     if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", name) or len(name) > 64:

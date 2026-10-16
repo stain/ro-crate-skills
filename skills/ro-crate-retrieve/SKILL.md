@@ -1,6 +1,6 @@
 ---
 name: ro-crate-retrieve
-description: Find and fetch the RO-Crate for a DOI, persistent identifier, landing page or URL, or follow a reference from one crate to another (Dataset with conformsTo https://w3id.org/ro/crate), using FAIR Signposting Link headers, content negotiation and archives. Use whenever the user gives a DOI/URL and wants 'the crate', its metadata or files, or when a crate references another crate or a profile. Not for creating or editing crates (ro-crate-create) or reading one you already have (ro-crate-consume).
+description: "Find and fetch the RO-Crate for a DOI, persistent identifier, landing page or URL, or follow a reference from one crate to another (Dataset with conformsTo https://w3id.org/ro/crate), using FAIR Signposting Link headers, content negotiation and archives. Use whenever the user gives a DOI/URL and wants 'the crate', its metadata or files, or when a crate references another crate or a profile. Not for creating or editing crates (ro-crate-create) or reading one you already have (ro-crate-consume)."
 ---
 
 # Retrieving an RO-Crate from an identifier or URL

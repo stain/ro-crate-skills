@@ -1,6 +1,6 @@
 ---
 name: ro-crate-spec
-description: Answer questions about the RO-Crate specification itself: what a term, requirement or version rule means, whether something is allowed or required, which property or type to use, where in the spec something is described, how profiles relate. Use for 'what does RO-Crate say about ...' and 'is X required', before answering from memory. For version differences see ro-crate-compatibility.
+description: "Answer questions about the RO-Crate specification itself: what a term, requirement or version rule means, whether something is allowed or required, which property or type to use, where in the spec something is described, how profiles relate. Use for 'what does RO-Crate say about ...' and 'is X required', before answering from memory. For version differences see ro-crate-compatibility."
 ---
 
 # RO-Crate specification: principles and where to look

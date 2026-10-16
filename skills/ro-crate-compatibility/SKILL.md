@@ -1,6 +1,6 @@
 ---
 name: ro-crate-compatibility
-description: Understand differences between RO-Crate versions 1.0, 1.1, 1.2 and 1.3 and migrate or check crates. Use when a crate declares an older or newer version, has ro-crate-metadata.jsonld or profiles in the descriptor's conformsTo, when upgrading a crate to 1.3, when a validator reports a version mismatch, or when asked what changed between versions.
+description: "Understand differences between RO-Crate versions 1.0, 1.1, 1.2 and 1.3 and migrate or check crates. Use when a crate declares an older or newer version, has ro-crate-metadata.jsonld or profiles in the descriptor's conformsTo, when upgrading a crate to 1.3, when a validator reports a version mismatch, or when asked what changed between versions."
 ---
 
 # RO-Crate version compatibility

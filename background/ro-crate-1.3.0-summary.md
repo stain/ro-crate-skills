@@ -126,4 +126,5 @@ See [README.md](README.md) for licence and provenance. Version differences: [ro-
 - The Retrieving algorithm's heuristic fallback (`./ro-crate-metadata.json`) is optional and only for URIs that end in a
   crate-like path; see 1440 for when relative-root resolution is not recommended.
 - The spec still calls JSON-LD 1.0 the baseline; the `@base` handling sections apply 1.1-style behaviour in tools.
+- The BagIt example in the implementation notes writes `BagIt-version: 1.0`; the BagIt spec (RFC 8493) and `bagit-python` require `BagIt-Version`.
 - The spec says to use `contentUrl` (not `url`) for direct download links of files on the web (changed in 1.2).
