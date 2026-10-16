@@ -37,6 +37,13 @@ rocrate-validator validate --output-format json <crate dir>
 3. Never silence a failure by deleting correct metadata.
 4. Report validator version, profile, severity level, failures fixed, and accepted warnings.
 
+## Semantic review (after the validator passes or its failures are understood)
+Passing checks only means the structure is valid. Then review each entity yourself, with two separate verdicts:
+1. **Compliance**: MUST/SHOULD rules of the spec and declared profiles (use the severities in the project's [quick reference](https://www.researchobject.org/ro-crate/quick-reference)). Include checks the validator may skip, e.g. every entity reachable from the root, unique `@id`s, `hasPart` targets exist, root `@id` taken from the descriptor's `about` (it may be an absolute URI, not `./`). A MUST violation makes the crate invalid.
+2. **Usefulness** for the intended audience, taken from the root's `name`, `description` and `keywords` (or ask the user). Vague descriptions, missing licences/authors/provenance, unhelpful names are quality gaps. They never change validity; report them separately (optionally scored 1-5).
+
+Report each problem with a concrete, discrete fix: `add`/`replace`/`remove`, the property, the exact suggested value (none for remove), and a one-line rationale. Never invent identifiers (ORCIDs, DOIs, RORs) as fix values; ask for them. Inspired by https://github.com/alexhambley/RO-Crate-RAG-Validator, an optional LLM/RAG tool that does this per entity (needs API keys; run `rocrate-validator` first and treat its output as advisory).
+
 ## Pitfalls
 - Passing validation does not mean the content is right (names, licences, authorship); review semantics yourself.
 - Network failures look like crashes; check connectivity before blaming the crate.

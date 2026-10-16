@@ -32,8 +32,9 @@ Existing drafts to link to or align with rather than duplicate:
 
 - [stain/data-preparation-skills](https://github.com/stain/data-preparation-skills): `ro-crate-provenance` (RO-Crate 1.3 + Process Run Crate for data files; fuller than our placeholder, so our `ro-crate-provenance` should link to it), `reproducible-data-preparation`, `data-license-investigation`, `snakemake-data-pipeline`.
 - [sanskritsuthar/workflowhub-skills](https://github.com/sanskritsuthar/workflowhub-skills): `ro-crate-consume`, `workflowhub-find`, `workflowhub-inspect`, `workflowhub-explain`, `workflowhub-evaluate`, `workflowhub-cite`, `fair-signposting`. Overlaps with our `ro-crate-consume`, `ro-crate-workflows` and `ro-crate-repositories`.
+- [alexhambley/RO-Crate-RAG-Validator](https://github.com/alexhambley/RO-Crate-RAG-Validator) (BSD-3-Clause): experimental Streamlit/CLI tool that validates each entity against profile Markdown using RAG and an LLM (needs your own chat and embeddings API keys). Optional and not a dependency: it checks entities one at a time and gives non-deterministic results, so run `rocrate-validator` first. Its ideas (compliance vs usefulness, fixes as add/replace/remove operations, audience from the root) are used in `ro-crate-validator`.
 
-Open question: whether to depend on, vendor, or only link to these skills.
+Open question: whether to depend on, vendor, or only link to the first two.
 
 Based on the [RO-Crate 1.3 specification](https://www.researchobject.org/ro-crate/specification/1.3/) and the [tools list](https://www.researchobject.org/ro-crate/tools).
 

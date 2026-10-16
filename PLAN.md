@@ -9,10 +9,11 @@ Default target: RO-Crate 1.3. Run `python tests/check_repo.py` before every comm
 3. **Decide the relationship to the sibling repos** (link / depend / vendor); check licences first:
    - https://github.com/stain/data-preparation-skills (`ro-crate-provenance`, MIT per frontmatter)
    - https://github.com/sanskritsuthar/workflowhub-skills (`ro-crate-consume`, `fair-signposting`, `workflowhub-*`; licence not checked)
-4. **Overlap:** our `ro-crate-consume` and `ro-crate-provenance` overlap with the above. Prefer reuse over duplicate drafting.
-5. **Versioning:** bump `version` in all five manifests together when skills change meaningfully (currently 0.1.0). Manifest fields and install commands in the README (Claude, Copilot, Codex) are unverified against current plugin specs; test installing in each.
-6. **CI:** consider a GitHub Action running `tests/check_repo.py` (and the validator on fixtures).
-7. **Add `.agents/skills` or similar only if** a target agent needs it; check each agent's current discovery rules.
+4. **Related tool:** [alexhambley/RO-Crate-RAG-Validator](https://github.com/alexhambley/RO-Crate-RAG-Validator) (BSD-3-Clause) is linked as optional, not a dependency; evaluated 2026-10-16 (per-entity only, needs LLM/embedding keys, 1.2 profile, root detection assumes `./`).
+5. **Overlap:** our `ro-crate-consume` and `ro-crate-provenance` overlap with the above. Prefer reuse over duplicate drafting.
+6. **Versioning:** bump `version` in all five manifests together when skills change meaningfully (currently 0.1.0). Manifest fields and install commands in the README (Claude, Copilot, Codex) are unverified against current plugin specs; test installing in each.
+7. **CI:** consider a GitHub Action running `tests/check_repo.py` (and the validator on fixtures).
+8. **Add `.agents/skills` or similar only if** a target agent needs it; check each agent's current discovery rules.
 
 ## Skills drafted but need review/testing
 | Skill | Needs |
@@ -20,7 +21,7 @@ Default target: RO-Crate 1.3. Run `python tests/check_repo.py` before every comm
 | `ro-crate-consume` | Check against spec 1.3 text; test on real crates incl. detached, zipped, 1.0/1.1 (`.jsonld`) crates; add validation-first step (see validator skill) |
 | `ro-crate-create` | Check minimal example against 1.3 (required properties, `conformsTo` form, licence handling); test: prompt to package a directory, then validate; add mention of ro-crate-py to avoid hand-writing |
 | `ro-crate-tools` | Verify tool names, package names, CLI commands; refresh against https://www.researchobject.org/ro-crate/tools |
-| `ro-crate-validator` | Run every command; document real output; add known false positives (see data-preparation-skills `references/validator-findings.md`); check `--no-auto-profile`, `--skip-availability-checks`, offline use |
+| `ro-crate-validator` | Test the new semantic-review step (compliance vs usefulness, typed fixes) on `tests/fixtures/invalid-crate`; try https://github.com/alexhambley/RO-Crate-RAG-Validator against the fixtures and compare findings; consider a deterministic rule checklist generated from `background/ro-crate-quick-reference-1.2-1.3.md`; run every command; document real output; add known false positives (see data-preparation-skills `references/validator-findings.md`); check `--no-auto-profile`, `--skip-availability-checks`, offline use |
 
 ## Placeholders to develop (suggested priority)
 **High**
