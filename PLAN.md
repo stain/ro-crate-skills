@@ -41,3 +41,27 @@ Done: `tests/graders/` and iteration 4 (3 repeats x 14 evals, `tests/eval-result
   crates by script (do not commit large ones; record version, validator result, licence, source URL).
 - **Lint script:** extend with profile-aware checks only if they stay deterministic; keep standard library only.
 - `background/` holds the spec copies (Apache-2.0, see NOTICE) and summaries for people and agents developing skills; shipped skills must not link into it.
+
+## Notes from stalled session
+
+
+
+I'll test triggering the way the skill-creator does, by running claude -p with the plugin loaded and checking which skill the agent consults. First I need to see what the CLI supports here.
+...
+
+
+The harness is confirmed working — the plugin loads all 17 skills alongside the built-ins, and I can see which skill gets picked per query (~6s each). Next I'll build a larger prompt set, split into development and held-out test prompts, so I can tune skill descriptions without overfitting. · summary
+
+  Ran 2 shell commands
+
+Harness tests pass. Now the first real run on the 66 development prompts, scored by what the agent actually invokes.
+
+  Ran 1 shell command
+
+First pass scored 43/51 on positives and 15/15 on negatives (~$2.50), with nearly all failures caused by the agent skipping skill consultation. Since results are noisy, I'm rerunning it three times to identify which misses are consistent. · summary
+
+  Ran 1 shell command
+
+Baseline runs show 86% positive and 100% negative accuracy, with consistent misses on cases where the agent relies on memory instead of verified skill facts. I'll sharpen the skill descriptions and keywords for those tasks using only the dev prompts, then evaluate on the held-out set. ·
+
+claude --resume 369cabbf-2ae2-445a-913d-5c7107fcc707
