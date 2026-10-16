@@ -1,6 +1,6 @@
 ---
 name: ro-crate-packaging
-description: Placeholder: package, distribute and publish RO-Crates - structure, zip, detached crates, ro-crate-preview.html, web-based crates, repositories (Zenodo, WorkflowHub). Use when exporting or publishing.
+description: "Placeholder: package, distribute and publish RO-Crates - structure, zip, detached crates, ro-crate-preview.html, web-based crates, repositories (Zenodo, WorkflowHub). Use when exporting or publishing."
 ---
 
 # RO-Crate packaging and distribution

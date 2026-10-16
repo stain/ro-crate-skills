@@ -1,6 +1,6 @@
 ---
 name: ro-crate-profile
-description: Placeholder: understand and create RO-Crate profiles - constraints on crate structure, types and properties, incl. conformsTo and validation. Use when defining or applying a profile to crates.
+description: "Placeholder: understand and create RO-Crate profiles - constraints on crate structure, types and properties, incl. conformsTo and validation. Use when defining or applying a profile to crates."
 ---
 
 # RO-Crate profiles

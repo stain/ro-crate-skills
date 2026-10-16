@@ -1,6 +1,6 @@
 ---
 name: ro-crate-contextual-entities
-description: Placeholder: model contextual entities (people, organizations, licenses, places, publications, funding, equipment, etc.) in an RO-Crate. Use when describing who/what/where around the data.
+description: "Placeholder: model contextual entities (people, organizations, licenses, places, publications, funding, equipment, etc.) in an RO-Crate. Use when describing who/what/where around the data."
 ---
 
 # RO-Crate contextual entities

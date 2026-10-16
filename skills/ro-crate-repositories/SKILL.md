@@ -1,6 +1,6 @@
 ---
 name: ro-crate-repositories
-description: Placeholder: publish and find RO-Crates in WorkflowHub, Zenodo, Dataverse and other repositories. Use when depositing or retrieving crates.
+description: "Placeholder: publish and find RO-Crates in WorkflowHub, Zenodo, Dataverse and other repositories. Use when depositing or retrieving crates."
 ---
 
 # RO-Crate repositories and registries

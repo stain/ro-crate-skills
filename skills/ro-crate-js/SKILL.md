@@ -1,6 +1,6 @@
 ---
 name: ro-crate-js
-description: Placeholder: use ro-crate-js (ro-crate npm) and related JavaScript tools to read/write crates. Use for Node.js or browser tooling.
+description: "Placeholder: use ro-crate-js (ro-crate npm) and related JavaScript tools to read/write crates. Use for Node.js or browser tooling."
 ---
 
 # Using ro-crate-js

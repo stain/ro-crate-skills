@@ -1,6 +1,6 @@
 ---
 name: ro-crate-py
-description: Placeholder: use ro-crate-py (rocrate) CLI and library to create, read and modify RO-Crates instead of writing custom code. Use when scripting crate creation in Python.
+description: "Placeholder: use ro-crate-py (rocrate) CLI and library to create, read and modify RO-Crates instead of writing custom code. Use when scripting crate creation in Python."
 ---
 
 # Using ro-crate-py

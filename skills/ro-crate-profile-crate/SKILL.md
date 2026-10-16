@@ -1,6 +1,6 @@
 ---
 name: ro-crate-profile-crate
-description: Placeholder: handle the Profile Crate specifics - an RO-Crate that describes and packages an RO-Crate profile (Profile, resource descriptors, schema/vocabulary files). Use when creating or reading a Profile Crate.
+description: "Placeholder: handle the Profile Crate specifics - an RO-Crate that describes and packages an RO-Crate profile (Profile, resource descriptors, schema/vocabulary files). Use when creating or reading a Profile Crate."
 ---
 
 # Profile Crate

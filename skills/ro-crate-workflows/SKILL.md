@@ -1,6 +1,6 @@
 ---
 name: ro-crate-workflows
-description: Placeholder: workflows and software in RO-Crate - Workflow Crate, Workflow Run Crate, Process Run Crate, ComputationalWorkflow, test suites. Use for workflow packaging and run provenance.
+description: "Placeholder: workflows and software in RO-Crate - Workflow Crate, Workflow Run Crate, Process Run Crate, ComputationalWorkflow, test suites. Use for workflow packaging and run provenance."
 ---
 
 # Workflows, software and run crates

@@ -1,6 +1,6 @@
 ---
 name: ro-crate-data-entities
-description: Placeholder: model data entities (File, Dataset, web-based, directories) and the root data entity in an RO-Crate. Use when adding or fixing files/datasets in a crate.
+description: "Placeholder: model data entities (File, Dataset, web-based, directories) and the root data entity in an RO-Crate. Use when adding or fixing files/datasets in a crate."
 ---
 
 # RO-Crate data entities and root data entity

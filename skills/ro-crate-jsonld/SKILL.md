@@ -1,6 +1,6 @@
 ---
 name: ro-crate-jsonld
-description: Placeholder: JSON-LD aspects of RO-Crate - context, flattened graph, terms, extending the context, relative URIs, and the metadata descriptor. Use when debugging JSON-LD or adding terms.
+description: "Placeholder: JSON-LD aspects of RO-Crate - context, flattened graph, terms, extending the context, relative URIs, and the metadata descriptor. Use when debugging JSON-LD or adding terms."
 ---
 
 # RO-Crate JSON-LD, context and relative URIs

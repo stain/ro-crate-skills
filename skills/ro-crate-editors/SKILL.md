@@ -1,6 +1,6 @@
 ---
 name: ro-crate-editors
-description: Placeholder: edit crates with Describo, Crate-O and similar editors; choose between GUI editors and scripting. Use when the user wants interactive editing.
+description: "Placeholder: edit crates with Describo, Crate-O and similar editors; choose between GUI editors and scripting. Use when the user wants interactive editing."
 ---
 
 # RO-Crate editors (Describo, Crate-O)

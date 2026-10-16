@@ -1,6 +1,6 @@
 ---
 name: ro-crate-provenance
-description: Placeholder: describe provenance and actions (CreateAction, instruments, objects, results) in an RO-Crate. Use when recording how data was produced.
+description: "Placeholder: describe provenance and actions (CreateAction, instruments, objects, results) in an RO-Crate. Use when recording how data was produced."
 ---
 
 # RO-Crate provenance

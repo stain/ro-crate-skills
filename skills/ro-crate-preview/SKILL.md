@@ -1,6 +1,6 @@
 ---
 name: ro-crate-preview
-description: Placeholder: generate ro-crate-preview.html with ro-crate-html-js / ro-crate-html-lite. Use when a human-readable crate preview is needed.
+description: "Placeholder: generate ro-crate-preview.html with ro-crate-html-js / ro-crate-html-lite. Use when a human-readable crate preview is needed."
 ---
 
 # Generating HTML previews

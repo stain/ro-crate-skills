@@ -1,6 +1,6 @@
 ---
 name: fair-signposting
-description: Placeholder: discover and publish FAIR Signposting (typed HTTP Link headers / linksets) to find landing pages, metadata, RO-Crates and data from a persistent identifier or URL. Use when resolving DOIs/URLs to crates or making a repository crate-discoverable.
+description: "Placeholder: discover and publish FAIR Signposting (typed HTTP Link headers / linksets) to find landing pages, metadata, RO-Crates and data from a persistent identifier or URL. Use when resolving DOIs/URLs to crates or making a repository crate-discoverable."
 ---
 
 # FAIR Signposting
