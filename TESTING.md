@@ -6,7 +6,7 @@ Skills are prose for agents, so testing has three layers.
 ```bash
 python tests/check_repo.py
 ```
-Checks that manifests parse and share one version, and that each `skills/*/SKILL.md` and `skills-wip/*/SKILL.md` has frontmatter `name` (equal to its directory) and `description` and is listed in the README, that shipped skills contain no placeholder text, and that no skill uses a `-DRAFT` spec/profile URI.
+Checks that manifests parse and share one version, and that each `skills/*/SKILL.md` has portable frontmatter (`name` equal to its directory, `description` up to 1024 characters, no Claude-only keys), is listed in the README, has no placeholder text, stays under 500 lines, has working relative links and a valid `evals/evals.json`, and that no skill file uses a `-DRAFT` spec/profile URI. Unit tests for the lint script: `python -m unittest tests.test_lint`.
 
 ## 2. Fixtures
 `tests/fixtures/` holds tiny crates:
@@ -15,7 +15,10 @@ Checks that manifests parse and share one version, and that each `skills/*/SKILL
 
 (The validator needs network access to fetch the JSON-LD context. The expected results above are not yet confirmed by a run.)
 
-## 3. Behavioural tests with example crates
+## 3. Evals (per skill)
+Each skill has `evals/evals.json` (prompts with `expectations`, the format used by the skill-creator plugin). Any agent can run the prompts by hand or in CI and compare the answer with the expectations; Claude Code users can also use the skill-creator plugin's viewer, benchmark and description optimiser (these need Claude Code). Prompts that name `tests/fixtures/...` expect to run from the repository root.
+
+## 4. Behavioural tests with example crates
 Give an agent a prompt with the skill installed, then check the answer against the crate (consume skills) or validate the output (create skills). Suggested prompts:
 - Consume: "Summarise this crate: title, authors, license, files, and which profiles it conforms to." Compare with the metadata.
 - Consume a failing crate: the agent must validate first and report failures and cautions.

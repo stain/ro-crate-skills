@@ -1,0 +1,16 @@
+{
+  "skill_name": "ro-crate-publish",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Package my finished crate as a BagIt zip I can hand to the archive.",
+      "expected_output": "bagit.txt, manifest listing every payload file including the metadata, crate under data/.",
+      "files": [],
+      "expectations": [
+        "Crate files are placed under data/",
+        "manifest-sha512.txt includes data/ro-crate-metadata.json",
+        "Asks before uploading anywhere"
+      ]
+    }
+  ]
+}

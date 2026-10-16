@@ -41,7 +41,7 @@ Version detection: read the descriptor's `conformsTo`, not `@context`.
 | Focus of a crate | n/a | n/a | **New**: `mainEntity`, `mentions` | same |
 | File extras | `encodingFormat` | same | media-type string and/or format entity (PRONOM, `Standard`); `conformsTo` file-format profiles; `contentSize` SHOULD | same |
 | Places | `latitude`/`longitude` (`GeoCoordinates`) | same | WKT `Geometry`/`asWKT`, `contentLocation` or `spatialCoverage` | same |
-| Workflows | `@type` `File` + `Workflow`/`Script` (+ `SoftwareSourceCode`) | `File`, `SoftwareSourceCode`, `ComputationalWorkflow`; Bioschemas 0.5-DRAFT/0.1-DRAFT profiles | same types; Bioschemas profiles 1.0-RELEASE / FormalParameter 1.0-RELEASE | same; new Bioschemas IRIs (below) |
+| Workflows | `@type` `File` + `Workflow`/`Script` (+ `SoftwareSourceCode`) | `File`, `SoftwareSourceCode`, `ComputationalWorkflow`; pre-release Bioschemas profiles (ComputationalWorkflow 0.5, FormalParameter 0.1; do not use for new crates) | same types; Bioschemas profiles 1.0-RELEASE / FormalParameter 1.0-RELEASE | same; new Bioschemas IRIs (below) |
 | Bioschemas term IRIs | n/a | `bioschemas.org/ComputationalWorkflow`, `/FormalParameter`, `…/ComputationalWorkflow#input`, `#output` | `bioschemas.org/ComputationalWorkflow`, `/FormalParameter`, `bioschemas.org/properties/input`, `/output` | `bioschemas.org/terms/ComputationalWorkflow`, `FormalParameter`, `input`, `output` |
 | `@base: null` in the context | present | removed (see relative-URI appendix) | not present | not present |
 | schema.org snapshot | 5.0 | 10.0 | 22.0 | 30.0 (adds terms, removes none) |

@@ -5,7 +5,7 @@ Companion to [`ro-crate-1.3.0.md`](ro-crate-1.3.0.md), the all-in-one Markdown o
 skills in this repository. This is a navigation aid, **not normative**: check the spec text before quoting a
 MUST/SHOULD. Line numbers refer to `ro-crate-1.3.0.md` (read with `offset`/`limit`; the file is ~5500 lines).
 Rendered pages: https://www.researchobject.org/ro-crate/specification/1.3/ (permalink https://w3id.org/ro/crate/1.3).
-See [README.md](README.md) for licence and provenance. Version differences: [ro-crate-version-differences.md](ro-crate-version-differences.md).
+See [README.md](README.md) for licence and provenance. Version differences: [ro-crate-version-differences.md](../skills/ro-crate-compatibility/references/version-differences.md).
 
 ## General principles
 

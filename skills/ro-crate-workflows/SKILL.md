@@ -1,6 +1,6 @@
 ---
 name: ro-crate-workflows
-description: Describe workflows, scripts and their executions in RO-Crate - ComputationalWorkflow entities, Workflow RO-Crate, Workflow Testing RO-Crate, and Process/Workflow/Provenance Run Crates (CreateAction provenance). Use when packaging a workflow or script, recording how tools or a workflow produced files, or reading a WorkflowHub or run crate.
+description: Describe workflows, scripts and their executions in RO-Crate: ComputationalWorkflow entities, Workflow RO-Crate (WorkflowHub), Workflow Testing RO-Crate, and Process/Workflow/Provenance Run Crates with CreateAction provenance. Use when packaging a workflow or script, recording how tools or a workflow produced files (provenance), or reading a workflow or run crate from WorkflowHub, Nextflow, Galaxy or CWL.
 ---
 
 # Workflows, scripts and run provenance in RO-Crate

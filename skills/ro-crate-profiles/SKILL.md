@@ -1,6 +1,6 @@
 ---
 name: ro-crate-profiles
-description: Find, declare, apply and author RO-Crate profiles and Profile Crates. Use when a crate should conform to a domain profile (Workflow RO-Crate, Workflow Run Crate, ARC/ISA, ELN, ...), when reading conformsTo on a root, when defining a new profile, or when creating a machine-readable Profile Crate.
+description: Find, declare, apply and author RO-Crate profiles and Profile Crates. Use when a crate should conform to a domain profile (Workflow RO-Crate, Workflow Run Crate, ARC/ISA, ELN, ...), when reading or writing conformsTo on a root data entity, when defining a new profile, or when creating a machine-readable Profile Crate (hasResource, ResourceDescriptor, isProfileOf).
 ---
 
 # RO-Crate profiles (RO-Crate 1.2+)

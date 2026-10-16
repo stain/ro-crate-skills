@@ -1,6 +1,6 @@
 ---
 name: ro-crate-validator
-description: Validate RO-Crates with rocrate-validator (PyPI roc-validator) - before consuming an unknown crate and after generating one - and interpret the results against the RO-Crate spec and profiles. Use when checking conformance, debugging validator failures, or deciding whether to trust a crate.
+description: Validate RO-Crates: run rocrate-validator (PyPI roc-validator) and the bundled offline lint script, interpret failures against the RO-Crate spec and profiles, and review semantic quality (compliance versus usefulness, fixes as add/replace/remove). Use before trusting an unknown crate, after generating or editing one, when asked 'is this crate valid/compliant', or when a validator reports errors. Not for creating metadata (ro-crate-create).
 ---
 
 # Validating RO-Crates with roc-validator
@@ -25,6 +25,9 @@ rocrate-validator validate --output-format json <crate dir>
 - Omit `-p` for automatic profile detection from the root's `conformsTo`; give `-p` to force a profile.
 - Check `profiles list` matches the version the crate claims (e.g. a profile built on RO-Crate 1.1 fails a 1.3 crate's `conformsTo`: a version mismatch, not a crate error).
 - JSON output may be followed by log text; parse the first JSON value only.
+
+## Offline lint (no network, no install)
+`python scripts/lint_crate.py <crate dir | ro-crate-metadata.json> [--json]` (path relative to this skill folder; Python 3, standard library only). It checks: JSON validity, flat `@graph`, `@id`/`@type` on every entity, unique `@id`s, released `@context`/`conformsTo` (flags any `-DRAFT` URI), descriptor and root found via `about`, root `name`/`description`/`datePublished`/`license`, ISO 8601 `datePublished`, entities unreachable from the root, `hasPart` targets and data entities present on disk, preview not in `hasPart`, no `../` ids. Exit 1 on errors. Run it first (it is fast and works offline), then `rocrate-validator` for profile/SHACL checks, then the semantic review below. It does not check profiles or content quality.
 
 ## Before consuming (precaution)
 1. Validate the crate you were given.

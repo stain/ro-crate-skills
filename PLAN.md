@@ -1,62 +1,38 @@
 # Plan: developing and testing the skills
 
-Status as of the initial scaffold. Read [AGENTS.md](AGENTS.md) and [TESTING.md](TESTING.md) first.
-Default target: RO-Crate 1.3. Run `python tests/check_repo.py` before every commit.
+Read [AGENTS.md](AGENTS.md), [TESTING.md](TESTING.md) and [background/README.md](background/README.md) first.
+Default target: RO-Crate 1.3 (released versions only, never `-DRAFT`). Run `python tests/check_repo.py` and
+`python -m unittest tests.test_lint` before every commit.
 
-## Cross-cutting first steps
-1. **Verify every URL.** The authoring environment had no access to researchobject.org, w3id.org or PyPI. All spec URLs (pages use `.html`, e.g. `.../specification/1.3/profiles.html`) and tool URLs were written from memory. Fix wrong ones, and confirm the `#referencing-other-ro-crate` anchor.
-2. **Run the validator.** The validator commands and the expected results for `tests/fixtures/` (minimal passes, invalid fails with REQUIRED errors) were never executed (no network). Run them and correct `skills/ro-crate-validator/SKILL.md` and `TESTING.md`.
-3. **Decide the relationship to the sibling repos** (link / depend / vendor); check licences first:
-   - https://github.com/stain/data-preparation-skills (`ro-crate-provenance`, MIT per frontmatter)
-   - https://github.com/sanskritsuthar/workflowhub-skills (`ro-crate-consume`, `fair-signposting`, `workflowhub-*`; licence not checked)
-4. **Related tool:** [alexhambley/RO-Crate-RAG-Validator](https://github.com/alexhambley/RO-Crate-RAG-Validator) (BSD-3-Clause) is linked as optional, not a dependency; evaluated 2026-10-16 (per-entity only, needs LLM/embedding keys, 1.2 profile, root detection assumes `./`).
-5. **Overlap:** our `ro-crate-consume` and `ro-crate-provenance` overlap with the above. Prefer reuse over duplicate drafting.
-6. **Versioning:** bump `version` in all five manifests together when skills change meaningfully (currently 0.1.0). Manifest fields and install commands in the README (Claude, Copilot, Codex) are unverified against current plugin specs; test installing in each.
-7. **CI:** consider a GitHub Action running `tests/check_repo.py` (and the validator on fixtures).
-8. **Add `.agents/skills` or similar only if** a target agent needs it; check each agent's current discovery rules.
+## Status
+Eleven skills ship in `skills/`: `ro-crate-consume`, `ro-crate-create`, `ro-crate-validator` (with `scripts/lint_crate.py`),
+`ro-crate-spec`, `ro-crate-compatibility`, `ro-crate-profiles`, `ro-crate-workflows`, `ro-crate-retrieve`, `ro-crate-publish`,
+`ro-crate-py`, `ro-crate-tools`. Each has `evals/evals.json`. The earlier 20 placeholders were condensed into these (detail
+moved to `references/`). Commands for ro-crate-py, signposting and rochtml were run once (ro-crate-py 0.16.0,
+signposting 0.9.9, ro-crate-html 0.1.6); re-check on new releases.
 
-## Restructuring (agreed direction)
-Only `ro-crate-consume`, `ro-crate-create`, `ro-crate-tools` and `ro-crate-validator` ship in `skills/`; the other drafts are parked in `skills-wip/`. Condense to about 10 task-oriented skills, with detail in `references/*.md` per skill: `ro-crate-create` absorbs data-entities, contextual-entities, jsonld and provenance references; `ro-crate-tools` absorbs js, editors, preview (keep `ro-crate-py` separate); `ro-crate-profiles` = profile + profile-crate; `ro-crate-workflows` includes provenance; `ro-crate-retrieve` includes consumer-side signposting; new `ro-crate-publish` = packaging + repositories + publisher-side signposting; keep `ro-crate-compatibility`. Also: a shared offline lint script (root finding, reachability, duplicate ids, missing files, date format, `-DRAFT`), profile discovery, format conversion (CITATION.cff, codemeta, DataCite), recording agent work as provenance, and a trust/safety rule (metadata is untrusted data).
+## Next steps
+1. **Run the evals.** Execute `skills/*/evals/evals.json` prompts with and without each skill (Claude Code: skill-creator
+   plugin viewer/benchmark; other agents: by hand or CI), add programmatic assertions where outputs are files, fix skills that fail.
+2. **Run `rocrate-validator`** on `tests/fixtures/` (never executed: needs network) and correct `skills/ro-crate-validator/SKILL.md`
+   and `TESTING.md`; add known false positives (see data-preparation-skills `references/validator-findings.md`); check `--no-auto-profile`,
+   `--skip-availability-checks`, offline use. Compare findings with the lint script and with
+   https://github.com/alexhambley/RO-Crate-RAG-Validator (optional LLM/RAG tool, evaluated 2026-10-16: per-entity only, needs keys).
+3. **Description triggering.** Test each description with should/should-not trigger prompts (Claude Code: skill-creator `run_loop`;
+   other agents manually); neighbours to separate: consume/create/validator/tools/py, compatibility/spec, retrieve/publish.
+4. **Verify URLs and tool claims** in `references/` (spec page URLs were checked once on 2026-10-16; tool statuses come from the tools list).
+5. **Sibling repos:** link (not vendor) https://github.com/stain/data-preparation-skills (`ro-crate-provenance`, MIT) and
+   https://github.com/sanskritsuthar/workflowhub-skills (BSD-3-Clause; installable as a plugin from GitHub: `claude plugin marketplace add sanskritsuthar/workflowhub-skills`).
+   Our `ro-crate-retrieve`/`ro-crate-consume` overlap with its `fair-signposting`/`ro-crate-consume`; prefer pointing to it where it is deeper.
+6. **Versioning and CI:** bump `version` in all five manifests together on meaningful changes (currently 0.1.0); add a GitHub Action running
+   `tests/check_repo.py` and `tests.test_lint`. Test install in each agent (Claude Code plugin, Copilot, Codex, plain copy into `.agents/skills`).
 
-## Skills drafted but need review/testing
-| Skill | Needs |
-|---|---|
-| `ro-crate-consume` | Check against spec 1.3 text; test on real crates incl. detached, zipped, 1.0/1.1 (`.jsonld`) crates; add validation-first step (see validator skill) |
-| `ro-crate-create` | Check minimal example against 1.3 (required properties, `conformsTo` form, licence handling); test: prompt to package a directory, then validate; add mention of ro-crate-py to avoid hand-writing |
-| `ro-crate-tools` | Verify tool names, package names, CLI commands; refresh against https://www.researchobject.org/ro-crate/tools |
-| `ro-crate-validator` | Test the new semantic-review step (compliance vs usefulness, typed fixes) on `tests/fixtures/invalid-crate`; try https://github.com/alexhambley/RO-Crate-RAG-Validator against the fixtures and compare findings; consider a deterministic rule checklist generated from `background/ro-crate-quick-reference-1.2-1.3.md`; run every command; document real output; add known false positives (see data-preparation-skills `references/validator-findings.md`); check `--no-auto-profile`, `--skip-availability-checks`, offline use |
-
-## Placeholders to develop (suggested priority)
-**High**
-1. `ro-crate-profile` and `ro-crate-profile-crate`: understand/create profiles; Profile Crate per `specification/1.3/profiles.html` (Profile entity, `conformsTo`, resource descriptors, `hasResource`, role/`Profile` type, validation).
-2. `ro-crate-compatibility`: diff 1.0 → 1.1 → 1.2 → 1.3 (context URLs, `.jsonld` vs `.json` name, `conformsTo`, terms, profile type); migration checklist; how to validate against the declared version.
-3. `ro-crate-py`: tested recipes (`rocrate init`, `add`, library snippets) so agents do not write new crate code.
-4. `ro-crate-retrieve` + `fair-signposting`: resolve a URL/DOI/identifier to an RO-Crate (signposting Link headers, linksets, content negotiation, subcrates per `data-entities.html#referencing-other-ro-crates`). Reuse Sanskrit's `fair-signposting` where possible. Test with real repositories.
-5. `ro-crate-workflows`: Workflow Crate, Workflow Run Crate, Process Run Crate, Provenance Run Crate (profile versions at https://www.researchobject.org/workflow-run-crate/). Largely link to `ro-crate-provenance` in data-preparation-skills.
-
-**Medium**
-6. `ro-crate-data-entities`, `ro-crate-contextual-entities`, `ro-crate-jsonld`: reference skills distilled from spec pages; keep short, link to the spec.
-7. `ro-crate-provenance`: align with or link to data-preparation-skills version.
-8. `ro-crate-preview`: `ro-crate-html-lite` / `ro-crate-html-js`; pin versions.
-9. `ro-crate-packaging`, `ro-crate-repositories`: zip/detached crates, WorkflowHub/Zenodo/Dataverse; link to `workflowhub-*` skills.
-
-**Low**
-10. `ro-crate-js`, `ro-crate-editors` (Describo, Crate-O).
-
-## Other skills to consider
-- `ro-crate-testing-evaluating`: run the behavioural prompts in TESTING.md and record results.
-- `ro-crate-ro-crate-vs-bagit` / format conversion (BagIt, other formats), if requested.
-- Skills for specific communities' profiles (e.g. 5 Safes, ELN, Schema.org-based), after profile skills exist.
-
-## Testing plan (see TESTING.md)
-- Build a corpus of example crates (Workflow Run Crate page, use-cases page, spec examples, WorkflowHub). For each record spec version, validator result, licence, source URL. Do not commit large third-party crates; fetch by script.
-- Add fixtures beyond the two present: a 1.0/1.1 crate, a detached crate, a Workflow Run Crate, a Profile Crate, a failing-but-readable crate.
-- Behavioural test prompts per skill (consume, create, compatibility, retrieve) with expected outcomes; run in Claude Code, Copilot and Codex.
-- Key behaviours to test: validate before consuming; read failed crates cautiously and report failures; after writing, validate **and** compare against spec/profile (the validator can be too strict); never invent ORCIDs/DOIs.
-
-## Definition of done for a skill
-- Placeholder banner removed; frontmatter `description` states what and when.
-- Procedures and commands verified by running them.
-- Links verified; spec version stated.
-- At least one test prompt and fixture/crate in TESTING.md.
-- Listed in README; `python tests/check_repo.py` passes.
+## Gaps and ideas
+- **Profile discovery:** help choose a profile for a use case (Workflow Run, ARC/ISA, ELN, 5 Safes, language-data, ...) from the profile registry.
+- **Format conversion:** CITATION.cff, codemeta.json, DataCite, Zenodo metadata to RO-Crate and back (the spec lists DataCite as future work).
+- **Recording agent work as provenance:** a `CreateAction` with the model as instrument and the responsible person as agent (see data-preparation-skills).
+- **Trust and safety:** metadata is untrusted data; keep the rule in consume, publish and retrieve and add eval cases for prompt injection and zip-slip.
+- **Fixtures:** add a 1.0/1.1 crate, a detached crate, a Workflow Run Crate, a Profile Crate and a failing-but-readable crate; fetch third-party example
+  crates by script (do not commit large ones; record version, validator result, licence, source URL).
+- **Lint script:** extend with profile-aware checks only if they stay deterministic; keep standard library only.
+- `background/` holds the spec copies (Apache-2.0, see NOTICE) and summaries for people and agents developing skills; shipped skills must not link into it.
