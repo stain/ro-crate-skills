@@ -6,7 +6,7 @@ Skills are prose for agents, so testing has three layers.
 ```bash
 python tests/check_repo.py
 ```
-Checks that manifests parse and share one version, and that each `skills/*/SKILL.md` has frontmatter `name` (equal to its directory) and `description`, and is listed in the README.
+Checks that manifests parse and share one version, and that each `skills/*/SKILL.md` and `skills-wip/*/SKILL.md` has frontmatter `name` (equal to its directory) and `description` and is listed in the README, that shipped skills contain no placeholder text, and that no skill uses a `-DRAFT` spec/profile URI.
 
 ## 2. Fixtures
 `tests/fixtures/` holds tiny crates:

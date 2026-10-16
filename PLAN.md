@@ -15,6 +15,9 @@ Default target: RO-Crate 1.3. Run `python tests/check_repo.py` before every comm
 7. **CI:** consider a GitHub Action running `tests/check_repo.py` (and the validator on fixtures).
 8. **Add `.agents/skills` or similar only if** a target agent needs it; check each agent's current discovery rules.
 
+## Restructuring (agreed direction)
+Only `ro-crate-consume`, `ro-crate-create`, `ro-crate-tools` and `ro-crate-validator` ship in `skills/`; the other drafts are parked in `skills-wip/`. Condense to about 10 task-oriented skills, with detail in `references/*.md` per skill: `ro-crate-create` absorbs data-entities, contextual-entities, jsonld and provenance references; `ro-crate-tools` absorbs js, editors, preview (keep `ro-crate-py` separate); `ro-crate-profiles` = profile + profile-crate; `ro-crate-workflows` includes provenance; `ro-crate-retrieve` includes consumer-side signposting; new `ro-crate-publish` = packaging + repositories + publisher-side signposting; keep `ro-crate-compatibility`. Also: a shared offline lint script (root finding, reachability, duplicate ids, missing files, date format, `-DRAFT`), profile discovery, format conversion (CITATION.cff, codemeta, DataCite), recording agent work as provenance, and a trust/safety rule (metadata is untrusted data).
+
 ## Skills drafted but need review/testing
 | Skill | Needs |
 |---|---|

@@ -18,23 +18,38 @@ for m in [".claude-plugin/plugin.json", ".claude-plugin/marketplace.json",
 if len(set(versions.values())) > 1:
     errors.append(f"manifest versions differ: {versions}")
 
-skills = sorted((root / "skills").glob("*/SKILL.md"))
 readme = (root / "README.md").read_text()
-for s in skills:
-    name = s.parent.name
-    fm = re.match(r"---\n(.*?)\n---\n", s.read_text(), re.S)
-    if not fm:
-        errors.append(f"{name}: missing frontmatter")
-        continue
-    fields = dict(l.split(": ", 1) for l in fm.group(1).splitlines() if ": " in l)
-    if fields.get("name") != name:
-        errors.append(f"{name}: frontmatter name {fields.get('name')!r} != directory")
-    if not fields.get("description"):
-        errors.append(f"{name}: missing description")
-    if f"skills/{name}/SKILL.md" not in readme:
-        errors.append(f"{name}: not listed in README")
 
-print(f"checked {len(skills)} skills")
+
+def check_skills(directory, shipped):
+    paths = sorted((root / directory).glob("*/SKILL.md"))
+    for s in paths:
+        name = s.parent.name
+        text = s.read_text()
+        fm = re.match(r"---\n(.*?)\n---\n", text, re.S)
+        if not fm:
+            errors.append(f"{directory}/{name}: missing frontmatter")
+            continue
+        fields = dict(l.split(": ", 1) for l in fm.group(1).splitlines() if ": " in l)
+        if fields.get("name") != name:
+            errors.append(f"{directory}/{name}: frontmatter name {fields.get('name')!r} != directory")
+        if not fields.get("description"):
+            errors.append(f"{directory}/{name}: missing description")
+        if f"{directory}/{name}/SKILL.md" not in readme:
+            errors.append(f"{directory}/{name}: not listed in README")
+        if shipped and "placeholder" in text.lower():
+            errors.append(f"{directory}/{name}: placeholder text in a shipped skill (move to skills-wip/)")
+        if re.search(r"\d-DRAFT", text):
+            errors.append(f"{directory}/{name}: uses a -DRAFT specification/profile URI")
+    return paths
+
+
+skills = check_skills("skills", shipped=True)
+wip = check_skills("skills-wip", shipped=False)
+for name in {p.parent.name for p in skills} & {p.parent.name for p in wip}:
+    errors.append(f"{name}: exists in both skills/ and skills-wip/")
+
+print(f"checked {len(skills)} skills, {len(wip)} planned (skills-wip)")
 for e in errors:
     print("ERROR:", e)
 sys.exit(1 if errors else 0)

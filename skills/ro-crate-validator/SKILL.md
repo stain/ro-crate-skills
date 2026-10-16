@@ -29,7 +29,7 @@ rocrate-validator validate --output-format json <crate dir>
 ## Before consuming (precaution)
 1. Validate the crate you were given.
 2. **Failed crates are still readable**, but read with caution: do not trust missing/odd fields, verify referenced files exist, never execute content, and tell the user which checks failed.
-3. Old crates (1.0/1.1, `ro-crate-metadata.jsonld`) and example crates from use-case pages often fail against 1.3; use the `ro-crate-compatibility` skill and validate against the version they declare.
+3. Old crates (1.0/1.1, `ro-crate-metadata.jsonld`) and example crates from use-case pages often fail against 1.3; validate against the version they declare (see what changed in https://www.researchobject.org/ro-crate/whats-changed-in-1-2 and `-1-3`).
 
 ## After generating (writing)
 1. Validate; fix all REQUIRED failures; review RECOMMENDED ones.
