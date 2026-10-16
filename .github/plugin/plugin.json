@@ -5,6 +5,6 @@
   "author": {"name": "Stian Soiland-Reyes"},
   "homepage": "https://github.com/stain/ro-crate-skills",
   "repository": "https://github.com/stain/ro-crate-skills",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "keywords": ["ro-crate", "research-object", "fair", "json-ld", "skills"]
 }

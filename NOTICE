@@ -1,0 +1,12 @@
+ro-crate-skills
+Copyright 2026 Stian Soiland-Reyes and contributors
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+This repository derives from the RO-Crate specification and related documents
+(https://w3id.org/ro/crate), Copyright 2017-2025 University of Technology Sydney,
+The University of Manchester UK and the RO-Crate contributors, licensed under the
+Apache License, Version 2.0. Copies of the specification versions 1.0-1.3 and the
+project's quick reference and migration guides are included unmodified (apart from
+format conversion) under background/. The RO-Crate JSON-LD contexts and the JSON-LD
+examples in the specification are distributed under CC0 1.0.

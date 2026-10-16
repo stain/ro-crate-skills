@@ -69,3 +69,7 @@ Skills are picked up automatically when your request matches a skill's `descript
 ## Testing
 
 See [TESTING.md](TESTING.md). Remaining work: see [PLAN.md](PLAN.md).
+
+## License
+
+Apache-2.0, see [LICENSE](LICENSE) and [NOTICE](NOTICE). This repository derives from the RO-Crate specification (Apache-2.0).
