@@ -24,5 +24,5 @@ Catalogue: https://www.researchobject.org/ro-crate/tools — check it for the cu
 - Always parse generated JSON (`python -m json.tool ro-crate-metadata.json`) as a basic sanity check when no validator is available.
 
 ## Tool-specific skills
-Prefer these over writing new code: `ro-crate-py`, `ro-crate-validator`, `ro-crate-preview`, `ro-crate-js`, `ro-crate-editors`, `ro-crate-repositories`.
+Use the `ro-crate-validator` skill for validation; for other tools use the existing tool (see the table) instead of writing new RO-Crate code.
 Related external skills: https://github.com/stain/data-preparation-skills (ro-crate-provenance), https://github.com/sanskritsuthar/workflowhub-skills (workflowhub-*, ro-crate-consume).
