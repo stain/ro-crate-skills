@@ -47,4 +47,4 @@ Skills follow the open Agent Skills layout (`skills/<name>/SKILL.md`), shared by
 
 ## Testing
 
-See [TESTING.md](TESTING.md).
+See [TESTING.md](TESTING.md). Remaining work: see [PLAN.md](PLAN.md).
