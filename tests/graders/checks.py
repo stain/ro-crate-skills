@@ -197,6 +197,9 @@ def bag_valid(run, zip_rel="bag.zip", must_list="data/ro-crate-metadata.json"):
     prefix = (next(iter(top)) + "/") if len(top) == 1 and "bagit.txt" not in top else ""
     if prefix + "bagit.txt" not in names:
         return fail(f"no bagit.txt in {sorted(top)}")
+    with zipfile.ZipFile(z) as zf0:
+        if "BagIt-Version:" not in zf0.read(prefix + "bagit.txt").decode():
+            return fail("bagit.txt lacks the tag 'BagIt-Version:' (capital V, as RFC 8493 requires)")
     manifests = [n for n in names if re.match(re.escape(prefix) + r"manifest-\w+\.txt$", n)]
     if not manifests:
         return fail("no manifest-<algorithm>.txt")

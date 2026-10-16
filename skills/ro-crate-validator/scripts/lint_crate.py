@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Offline structural lint for an RO-Crate (versions 1.0-1.3). Standard library only.
 
-Usage: lint_crate.py <crate-dir | ro-crate-metadata.json> [--json]
+Usage: lint_crate.py <crate dir | ro-crate-metadata.json | crate.zip> [--json]
 Exit status: 0 no errors, 1 errors found, 2 not readable.
 
 Complements `rocrate-validator` (which needs network access and does not check everything
@@ -35,16 +35,35 @@ def lint(path):
     out = []  # (level, message)
     add = lambda lvl, msg: out.append((lvl, msg))
     path = Path(path)
-    base = path.parent if path.is_file() else path
-    meta = path if path.is_file() else next(
-        (base / n for n in ("ro-crate-metadata.json", "ro-crate-metadata.jsonld") if (base / n).exists()), None)
-    if meta is None and path.is_dir():  # detached crate: <prefix>-ro-crate-metadata.json
-        cands = sorted(path.glob("*-ro-crate-metadata.json"))
-        meta = cands[0] if len(cands) == 1 else None
-    if meta is None:
-        return [("ERROR", "no ro-crate-metadata.json (or .jsonld) found")], None
-    attached = path.is_dir() or meta.name in ("ro-crate-metadata.json", "ro-crate-metadata.jsonld")
-    text = meta.read_text(encoding="utf-8")
+    exists = None  # exists(rel) -> bool: is a crate-relative path present?
+    if path.is_file() and path.suffix == ".zip":
+        import zipfile
+        try:
+            zf = zipfile.ZipFile(path)
+        except zipfile.BadZipFile as e:
+            return [("ERROR", f"not a readable zip: {e}")], None
+        names = zf.namelist()
+        member = next((n for n in sorted(names, key=len)
+                       if re.fullmatch(r"([^/]+/)?ro-crate-metadata\.json(ld)?", n)), None)
+        if member is None:
+            return [("ERROR", "no ro-crate-metadata.json at the zip root or in its single top-level folder")], None
+        prefix = member[: -len("ro-crate-metadata.json")] if member.endswith(".json") else member[: -len("ro-crate-metadata.jsonld")]
+        text = zf.read(member).decode("utf-8")
+        attached = True
+        exists = lambda rel: (prefix + rel) in names or any(n.startswith(prefix + rel.rstrip("/") + "/") for n in names)
+        meta = Path(member)
+    else:
+        base = path.parent if path.is_file() else path
+        meta = path if path.is_file() else next(
+            (base / n for n in ("ro-crate-metadata.json", "ro-crate-metadata.jsonld") if (base / n).exists()), None)
+        if meta is None and path.is_dir():  # detached crate: <prefix>-ro-crate-metadata.json
+            cands = sorted(path.glob("*-ro-crate-metadata.json"))
+            meta = cands[0] if len(cands) == 1 else None
+        if meta is None:
+            return [("ERROR", "no ro-crate-metadata.json (or .jsonld) found")], None
+        attached = path.is_dir() or meta.name in ("ro-crate-metadata.json", "ro-crate-metadata.jsonld")
+        text = meta.read_text(encoding="utf-8")
+        exists = lambda rel: (base / rel).exists()
     if re.search(r"\d-DRAFT", text):
         add("ERROR", "uses a -DRAFT (unreleased) specification, context or profile URI")
     try:
@@ -130,7 +149,7 @@ def lint(path):
         for prop, r in refs(e):
             if prop == "hasPart" and r not in emap:
                 add("WARN", f"{e['@id']} hasPart {r}: no entity describes it")
-                if attached and not ABS.match(r) and not r.startswith(("#", "_:")) and not (base / unquote(r)).exists():
+                if attached and not ABS.match(r) and not r.startswith(("#", "_:")) and not exists(unquote(r)):
                     add("ERROR", f"{r}: listed in hasPart but not present in the crate")
             if prop == "hasPart" and r.startswith("ro-crate-preview"):
                 add("ERROR", f"{e['@id']} lists {r} in hasPart (the preview is not payload)")
@@ -146,8 +165,7 @@ def lint(path):
         if "Dataset" in types and not i.endswith("/"):
             add("WARN", f"{i}: directory @id should end with '/'")
         if attached:
-            target = base / unquote(i)
-            if not target.exists():
+            if not exists(unquote(i)):
                 add("ERROR", f"{i}: data entity not present in the crate at that path")
     return out, ver
 

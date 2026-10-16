@@ -111,7 +111,7 @@ class UnchangedAndZipTests(unittest.TestCase):
         meta = (FIX / "minimal-crate/ro-crate-metadata.json").read_bytes()
         lines = []
         with zipfile.ZipFile(d / "bag.zip", "w") as z:
-            z.writestr("bag/bagit.txt", "BagIt-version: 1.0\nTag-File-Character-Encoding: UTF-8\n")
+            z.writestr("bag/bagit.txt", "BagIt-Version: 1.0\nTag-File-Character-Encoding: UTF-8\n")
             z.writestr("bag/bag-info.txt", "Bagging-Date: 2026-10-16\n" + extra_info)
             z.writestr("bag/data/ro-crate-metadata.json", meta)
             if list_metadata:

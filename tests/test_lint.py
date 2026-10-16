@@ -56,6 +56,21 @@ class LintTests(unittest.TestCase):
         self.assertEqual(code, 0)
         self.assertTrue(any("placeholder" in f["message"] and f["level"] == "WARN" for f in out["findings"]))
 
+    def test_zip_input(self):
+        import zipfile
+        with tempfile.TemporaryDirectory() as d:
+            z = Path(d) / "c.zip"
+            with zipfile.ZipFile(z, "w") as zf:
+                zf.write(FIX / "minimal-crate/ro-crate-metadata.json", "ro-crate-metadata.json")
+                zf.write(FIX / "minimal-crate/data.csv", "data.csv")
+            code, out = run(z)
+            self.assertEqual((code, out["errors"]), (0, 0))
+            with zipfile.ZipFile(z, "w") as zf:  # data file missing from the zip
+                zf.write(FIX / "minimal-crate/ro-crate-metadata.json", "ro-crate-metadata.json")
+            code, out = run(z)
+            self.assertEqual(code, 1)
+            self.assertTrue(any("not present" in f["message"] for f in out["findings"]))
+
 
 if __name__ == "__main__":
     unittest.main()
