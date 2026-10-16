@@ -1,0 +1,9 @@
+{
+  "@context": "https://w3id.org/ro/crate/1.3/context",
+  "@graph": [
+    {"@id": "ro-crate-metadata.json", "@type": "CreativeWork",
+     "about": {"@id": "./"}, "conformsTo": {"@id": "https://w3id.org/ro/crate/1.3"}},
+    {"@id": "./", "@type": "Dataset", "name": "Invalid crate: no description, datePublished or license",
+     "hasPart": [{"@id": "missing.txt"}]}
+  ]
+}
