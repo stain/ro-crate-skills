@@ -81,9 +81,15 @@ Requirement tables with severities: https://www.researchobject.org/ro-crate/quic
 
 **Contextual entities:** describe everything referenced (people, organisations, licences, places, funders, publications) with at least `name`; persons/organisations prefer ORCID/ROR; licences are `CreativeWork` with a URL `@id`; every contextual entity should be referenced from another entity.
 
+## Detail files (read the one you need)
+- [references/data-entities.md](references/data-entities.md): directories, web-based files, `contentUrl`/`localPath`, distributions, file formats, path encoding.
+- [references/contextual-entities.md](references/contextual-entities.md): people, organisations, licences, funding, citations, places, keywords, identifiers.
+- [references/jsonld.md](references/jsonld.md): `@context`, extending with new terms, relative URIs and `@base`.
+- [references/provenance.md](references/provenance.md): software, equipment, change history actions.
+
 ## Workflow
 1. Inspect the directory (or the existing crate) and list files.
 2. Ask for or derive title, description, authors, licence, dates; mark unknowns as questions, not guesses.
 3. Write or edit the metadata; keep existing content you were not asked to change.
-4. Validate with the `ro-crate-validator` skill (`rocrate-validator`), fix failures against the spec, then do its semantic review (usefulness for the intended audience).
+4. Validate with the `ro-crate-validator` skill (or `pip install roc-validator` and `rocrate-validator validate <dir>`), fix failures against the spec, then do its semantic review (usefulness for the intended audience).
 5. Report what was added, assumptions made, and anything left for the user to supply.
