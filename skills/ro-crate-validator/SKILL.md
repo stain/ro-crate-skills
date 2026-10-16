@@ -13,7 +13,7 @@ Spec: https://www.researchobject.org/ro-crate/specification/1.3/ (default target
 python -m venv /tmp/rocval && /tmp/rocval/bin/pip install roc-validator
 /tmp/rocval/bin/rocrate-validator profiles list   # profiles/versions this release knows
 ```
-The validator needs network access (it fetches the JSON-LD context, e.g. `https://w3id.org/ro/crate/1.3/context`). Run with `< /dev/null` to avoid prompts.
+Run with `< /dev/null` to avoid prompts. Network access: with HTTP(S) proxies set to a dead address `rocrate-validator -p ro-crate-1.3` still validated a minimal crate (so it did not need to fetch the JSON-LD context for that crate); installing it needs the network.
 
 ## Checked behaviour (roc-validator 0.12.2)
 - Profiles known: `ro-crate-1.1`, `ro-crate-1.2`, `ro-crate-1.3` (built on 1.2), `isa-ro-crate`, `workflow-ro-crate-1.0`, `workflow-testing-ro-crate-0.1`, `process-run-crate-0.5`, `workflow-run-crate-0.5`, `provenance-run-crate-0.5`. The run-crate profiles lag the project's current 0.6 pages; a crate declaring 0.6 is not necessarily wrong.

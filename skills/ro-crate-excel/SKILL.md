@@ -5,15 +5,26 @@ description: Create or update an RO-Crate from a folder of files via an Excel sp
 
 # ro-crate-excel (`rocxl`, `xlro`)
 
-Source https://github.com/Language-Research-Technology/ro-crate-excel (npm `ro-crate-excel` 1.2.1; beta on the tools list). Help output was checked; a full run was **not completed** here because the tool needs Siegfried (`sf`), which was not installed: it prints `File identification error ... Have you installed Siegfried?`. Install Siegfried (https://github.com/richardlehane/siegfried/wiki/Getting-started) first, and test on a copy.
+Source https://github.com/Language-Research-Technology/ro-crate-excel (npm `ro-crate-excel` 1.2.1; beta on the tools list). Tested end to end by two agents on a sample folder once Siegfried was installed.
 
+## Install
 ```bash
-npm install ro-crate-excel            # provides rocxl and xlro (same tool)
-rocxl [options] <directories...>
+npm install ro-crate-excel                 # provides rocxl and xlro (same tool)
 ```
-Per its help: generates an Excel spreadsheet and RO-Crate metadata from a set of files and updates the RO-Crate with data filled into the spreadsheet; whichever of spreadsheet and `ro-crate-metadata.json` is newer wins; the file system is always traversed and file information merged in. Options: `-b/--bag [dir]` create BagIt bag(s), `-z/--zip` zip the bagged crate (with `--bag`), `-a/--add` merge `additional-ro-crate-metadata.xlsx` into an existing crate, `-j/--JSON` use the JSON file rather than the spreadsheet, `-p/--partOf` part of another crate, `-r/--recurse`, `-d/--depth`, `-m/--maxfiles`, `-u/--url` distribution URL, `-c/--cratescript`.
+It needs **Siegfried** (`sf`, file-format identification): download the binary from https://github.com/richardlehane/siegfried/releases, put `sf` on `PATH`, run `sf -update` once (the signature file `default.sig` goes in `~/siegfried/`). Without it the tool prints `File identification error ... Have you installed Siegfried?` and writes nothing.
 
-## Guidance
-- Run it on a copy of the folder; it writes files into the directories you give it.
-- The spreadsheet gets the people's names, licences and descriptions: review the generated crate and complete the root (`name`, `description`, `datePublished`, `license`), then validate (`ro-crate-validator`). Check which RO-Crate version the output declares: the Language Data Commons tools lag the spec.
-- An alternative with a GUI is `chaos2crate` or Crate-O (see `ro-crate-tools`).
+## Use
+```bash
+cp -r folder folder-work && rocxl -r folder-work       # first run: spreadsheet + crate
+# collaborators fill in ro-crate-metadata.xlsx
+rocxl -r folder-work                                   # second run: merge the edited sheet into ro-crate-metadata.json
+```
+- Use `-r` (recurse): without it files in subfolders are skipped. First run writes `ro-crate-metadata.xlsx`, `ro-crate-metadata.json` and `ro-crate-preview.html` **in the folder**; sheets: `RootDataset` (Name/Value list for the crate), `@type=File`, `@type=Dataset` (one row per file/folder with `@id`, `name`, `description`, size, date, format; extra columns allowed), `@type=DigitalFormat` (PRONOM-identified formats).
+- Whichever of the spreadsheet and the JSON is newer wins; the folder is re-scanned on every run and file information is merged in. Other options: `-b/--bag [dir]` BagIt bag(s), `-z/--zip` (with `--bag`), `-a/--add` merge `additional-ro-crate-metadata.xlsx`, `-j/--JSON` use the JSON rather than the spreadsheet, `-p/--partOf`, `-d/--depth`, `-m/--maxfiles`, `-u/--url`, `-c/--cratescript`.
+
+## Checked output and cautions
+- It declares **RO-Crate 1.2**, writes `license` as a plain string (give a licence URL or a licence entity), and in one round trip dropped `contentSize` of an edited file: compare before and after.
+- It rewrites files in place: work on a copy or under version control.
+- Multi-valued cells are JSON-like arrays (`["a","b"]`); brief the people filling the sheet.
+- Review the generated crate, complete the root (`name`, `description`, `datePublished`, `license`), validate (`ro-crate-validator`; not done in the test runs).
+- GUI alternatives without Excel: Crate-O, `chaos2crate` (see `ro-crate-tools`).
