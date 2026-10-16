@@ -1,6 +1,6 @@
 ---
 name: ro-crate-validator
-description: "Validate RO-Crates: run rocrate-validator (PyPI roc-validator) and the bundled offline lint script, interpret failures against the RO-Crate spec and profiles, and review semantic quality (compliance versus usefulness, fixes as add/replace/remove). Use before trusting an unknown crate, after generating or editing one, when asked 'is this crate valid/compliant', or when a validator reports errors. Not for creating metadata (ro-crate-create)."
+description: "Validate RO-Crates: run rocrate-validator (PyPI roc-validator) and the bundled offline lint script, interpret failures against the RO-Crate spec and profiles, and review semantic quality (compliance versus usefulness, fixes as add/replace/remove). Use before trusting an unknown crate, after generating or editing one, when asked 'is this crate valid/compliant', or when a validator reports errors. Not for creating metadata (ro-crate-create). Also use it to explain or judge validator messages, including known false positives and version mismatches."
 ---
 
 # Validating RO-Crates with roc-validator

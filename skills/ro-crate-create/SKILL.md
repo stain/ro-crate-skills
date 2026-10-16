@@ -1,6 +1,6 @@
 ---
 name: ro-crate-create
-description: "Create or edit an RO-Crate: write or repair ro-crate-metadata.json for a directory of data, code or a workflow; add files, people, licences, funders, publications, profiles or provenance to a crate. Use whenever the user wants to package research data with metadata, make a folder an RO-Crate, describe a dataset for FAIR sharing, or fix a crate's metadata. Defaults to RO-Crate 1.3 for new crates and keeps the declared version when editing. Not for validating alone (ro-crate-validator) or reading crates (ro-crate-consume)."
+description: "Create or edit an RO-Crate: write or repair ro-crate-metadata.json for a directory of data, code or a workflow; add files, people, licences, funders, publications, profiles or provenance to a crate. Use whenever the user wants to package research data with metadata, make a folder an RO-Crate, describe a dataset for FAIR sharing, or fix a crate's metadata. Defaults to RO-Crate 1.3 for new crates and keeps the declared version when editing. Not for validating alone (ro-crate-validator) or reading crates (ro-crate-consume). Also use it for small edits to an existing ro-crate-metadata.json, such as adding a contributor, ORCID, affiliation, funder, licence or file, even if the user does not mention RO-Crate."
 ---
 
 # Creating or editing an RO-Crate

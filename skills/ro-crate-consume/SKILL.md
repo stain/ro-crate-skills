@@ -1,6 +1,6 @@
 ---
 name: ro-crate-consume
-description: "Read, summarise, check or query an existing RO-Crate (Research Object Crate): a directory, zip, .crate.zip, .eln file, URL or bare ro-crate-metadata.json, of any version 1.0-1.3 (including WorkflowHub and Workflow Run Crates). Use whenever a crate or ro-crate-metadata.json file is mentioned and the task is to inspect it or find files, authors, licences, provenance or profiles in it, even if the user does not say 'RO-Crate'. Not for writing crates (ro-crate-create), validating (ro-crate-validator) or turning a DOI/URL into a crate (ro-crate-retrieve)."
+description: "Read, summarise, check or query an existing RO-Crate (Research Object Crate): a directory, zip, .crate.zip, .eln file, URL or bare ro-crate-metadata.json, of any version 1.0-1.3 (including WorkflowHub and Workflow Run Crates). Use whenever a crate or ro-crate-metadata.json file is mentioned and the task is to inspect it or find files, authors, licences, provenance or profiles in it, even if the user does not say 'RO-Crate'. Not for writing crates (ro-crate-create), validating (ro-crate-validator) or turning a DOI/URL into a crate (ro-crate-retrieve). Also for listing entities (files, people, licences) of a crate directory."
 ---
 
 # Consuming an RO-Crate
