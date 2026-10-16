@@ -18,7 +18,7 @@ Agentic skills for RO-Crate
 | [`ro-crate-jsonld`](skills/ro-crate-jsonld/SKILL.md) | JSON-LD, context, relative URIs *(placeholder)* |
 | [`ro-crate-packaging`](skills/ro-crate-packaging/SKILL.md) | Packaging, distribution, publishing *(placeholder)* |
 | [`ro-crate-py`](skills/ro-crate-py/SKILL.md) | Use ro-crate-py instead of writing code *(placeholder)* |
-| [`ro-crate-validator`](skills/ro-crate-validator/SKILL.md) | Validate with rocrate-validator *(placeholder)* |
+| [`ro-crate-validator`](skills/ro-crate-validator/SKILL.md) | Validate with rocrate-validator before consuming and after generating |
 | [`ro-crate-preview`](skills/ro-crate-preview/SKILL.md) | Generate HTML previews *(placeholder)* |
 | [`ro-crate-js`](skills/ro-crate-js/SKILL.md) | JavaScript tooling *(placeholder)* |
 | [`ro-crate-editors`](skills/ro-crate-editors/SKILL.md) | Describo, Crate-O *(placeholder)* |
@@ -44,3 +44,7 @@ Skills follow the open Agent Skills layout (`skills/<name>/SKILL.md`), shared by
 - **Claude Code**: `/plugin marketplace add stain/ro-crate-skills` then `/plugin install ro-crate-skills@ro-crate-skills` (`.claude-plugin/`)
 - **GitHub Copilot CLI**: `copilot plugin marketplace add stain/ro-crate-skills` (`.github/plugin/`), or copy `skills/` into `.github/skills/`
 - **Codex**: plugin manifest in `.codex-plugin/`; or copy skills to `.agents/skills/`
+
+## Testing
+
+See [TESTING.md](TESTING.md).
