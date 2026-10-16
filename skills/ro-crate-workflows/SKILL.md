@@ -27,5 +27,12 @@ Details and requirement tables: [references/run-crates.md](references/run-crates
 
 Related skill repo with fuller tested recipes for data files: https://github.com/stain/data-preparation-skills (`ro-crate-provenance`, Process Run Crate).
 
+## Do not guess
+- Versions (workflow engine, language, tools) come from the user or from running the tool (`snakemake --version`, `nextflow -version`, `cwltool --version`); never write an assumed version into metadata. If unknown, omit it and say so (the Workflow RO-Crate profile wants `version` on language entities, so ask the user).
+- Licence, authors and dates are the user's to supply; use a clearly labelled placeholder only if you cannot ask, and tell the user.
+
+## Validating
+`rocrate-validator` has `workflow-ro-crate-1.0`, `workflow-run-crate-0.5` etc., but these are built on the RO-Crate **1.1** profile and older (0.5) run-crate versions. A correct 1.3 crate declaring Workflow RO-Crate 1.0 or run crate 0.6 can fail them with descriptor `conformsTo` and "Main Workflow" errors that are version mismatches, not crate errors (checked: the same crate passed `workflow-ro-crate-1.0` when its context and descriptor `conformsTo` were swapped to 1.1). Validate against `ro-crate-1.3` and read the profile page for the profile's own rules.
+
 ## Tools
 Report on, replay or convert run crates: `runcrate` (`ro-crate-runcrate` skill). Record runs of your own Python CLIs: `ro-crate-action-recorder`. `nf-core` RO-Crate tool and `nf-prov` (Nextflow), `galaxy2cwl`, PyCOMPSs CLI, `rocrate-action-recorder` (see `ro-crate-tools`); `ro-crate-py` can add workflows (`rocrate add workflow`). Review generated crates for missing root `name`/`description`/`license`.

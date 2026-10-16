@@ -7,6 +7,8 @@ description: Package, distribute and publish an RO-Crate: zip, BagIt, .eln, atta
 
 Spec: https://www.researchobject.org/ro-crate/specification/1.3/structure and `/appendix/implementation-notes`, `/appendix/relative-uris`.
 
+Do not add organisation, contact or identifier details the user did not give (for example inferred from their email address or domain): put nothing rather than a guess.
+
 Before publishing: validate (`ro-crate-validator`), check there is no private or unlicensed content, that `license`, `author` and `datePublished` are real, and that no identifier (DOI, ORCID) was invented. Publishing is hard to undo, so confirm the destination with the user before uploading anything.
 
 ## Package forms

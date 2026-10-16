@@ -21,6 +21,7 @@ Run with `< /dev/null` to avoid prompts. Network access: with HTTP(S) proxies se
 - Fixtures: a minimal 1.3 crate passes at REQUIRED (66 checks, 63 passed, 3 skipped); a crate lacking `description`, `license` and `datePublished` fails with exactly those three REQUIRED issues. At RECOMMENDED the same crate also reports missing `name`s, `publisher` and `hasPart` shape. The validator did **not** flag a `hasPart` entry whose file is missing: the offline lint script does.
 - Automatic profile detection (no `-p`) worked for a crate declaring 1.3.
 - Known mismatches (checked on fixtures): a legacy 1.0 crate (`.jsonld` descriptor) fails the 1.1 profile; a correct Process Run Crate 0.6 (`softwareVersion`) fails `process-run-crate-0.5`; a Profile Crate whose root `@id` is an absolute URI fails 1.3 with "Data Entity ... has a local identifier but the Root Data Entity does not..." which looks over-strict against the spec. Decide by reading the spec and profile text, not by the failure alone.
+- The workflow/run-crate profiles (`workflow-ro-crate-1.0`, `workflow-run-crate-0.5`, ...) are built on RO-Crate 1.1: a correct 1.3 crate fails them with descriptor `conformsTo` or "Main Workflow" errors (version mismatch). Validate against `ro-crate-1.3` and read the profile page.
 - A detached crate: pass the metadata file (`validate -p ro-crate-1.3 path/to/<prefix>-ro-crate-metadata.json`).
 
 ## Validate

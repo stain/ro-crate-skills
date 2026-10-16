@@ -12,6 +12,7 @@ Requirement tables with severities: https://www.researchobject.org/ro-crate/quic
 - **New crate:** target 1.3. **Existing crate:** read its declared version (descriptor `conformsTo`) and keep it; upgrade only if asked (changes: https://www.researchobject.org/ro-crate/whats-changed-in-1-2 and `-1-3`).
 - **Only released versions.** Never write `-DRAFT` specs, contexts, `conformsTo` or profile URIs.
 - If the Python tool is available, prefer `pip install rocrate` and `rocrate init` to bootstrap from a directory, then edit by hand; do not write RO-Crate libraries yourself.
+- **Do not infer who the user is.** Author, publisher, organisation, ORCID and affiliation come from what the user told you, not from their email address, username, git config or machine. Licence is a legal choice: ask; if you cannot, use a clearly labelled placeholder and say so in your answer. Do not guess versions of tools either.
 - **Never invent identifiers** (ORCIDs, DOIs, RORs, licence URLs). Ask the user, or use a `#local-id` entity until they supply one. The ORCID `https://orcid.org/0000-0002-1825-0097` (fictional Josiah Carberry) is a deliberate example record, fine for examples and tests only.
 
 ## Minimal crate

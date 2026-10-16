@@ -35,6 +35,7 @@ crate.write("out-dir")                # or crate.write_zip("out.zip")
 In a test with 0.16.0 `write` added `datePublished` automatically, wrote `ro-crate-metadata.json` and copied the file; `license` given as a URL string became a plain value (add a licence entity yourself when you want a described licence). Add people with `crate.add(Person(crate, "https://orcid.org/...", properties={"name": "..."}))` (import `Person` from `rocrate.model`).
 
 ## Guidance
+- Ask for, do not guess, the licence, author and publisher; if you cannot ask, use a clearly labelled placeholder and tell the user in your answer.
 - Use this instead of writing JSON serialisation; hand-edit only what the library does not cover, and keep `ro-crate-create` rules (reachability, contextual entities, no invented identifiers).
 - Check what the tool wrote: `python -m json.tool ro-crate-metadata.json`, then validate. Don't trust defaults for descriptions, licences or authors.
 - Loading a crate preserves its existing entities; confirm the declared version before saving over it.

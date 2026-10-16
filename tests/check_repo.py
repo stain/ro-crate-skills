@@ -60,7 +60,7 @@ for s in skills:
             rel = f.relative_to(root)
             if re.search(r"\d-DRAFT", body):
                 errors.append(f"{rel}: uses a -DRAFT specification/profile URI")
-            if "placeholder" in body.lower() and f.name == "SKILL.md":
+            if f.name == "SKILL.md" and re.search(r"(?im)^>\s*\*\*placeholder\*\*|^description:\s*placeholder|\bTODO\b", body):
                 errors.append(f"{rel}: placeholder text in a shipped skill")
             if f.suffix == ".md":
                 for link in re.findall(r"\]\(([^)#\s]+)(?:#[^)]*)?\)", body):
