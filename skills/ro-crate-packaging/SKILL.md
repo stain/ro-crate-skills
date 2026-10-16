@@ -8,8 +8,8 @@ description: Placeholder: package, distribute and publish RO-Crates - structure,
 > **Placeholder** - to be written. Default version: RO-Crate 1.3.
 
 ## References (verify URLs when populating)
-- https://www.researchobject.org/ro-crate/specification/1.3/structure
-- https://www.researchobject.org/ro-crate/specification/1.3/appendix/implementation-notes
+- https://www.researchobject.org/ro-crate/specification/1.3/structure.html
+- https://www.researchobject.org/ro-crate/specification/1.3/appendix/implementation-notes.html
 
 ## TODO
 - Outline procedure, rules and pitfalls from the references above.

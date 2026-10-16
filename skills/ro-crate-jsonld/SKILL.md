@@ -8,9 +8,9 @@ description: Placeholder: JSON-LD aspects of RO-Crate - context, flattened graph
 > **Placeholder** - to be written. Default version: RO-Crate 1.3.
 
 ## References (verify URLs when populating)
-- https://www.researchobject.org/ro-crate/specification/1.3/appendix/jsonld
-- https://www.researchobject.org/ro-crate/specification/1.3/appendix/relative-uris
-- https://www.researchobject.org/ro-crate/specification/1.3/metadata
+- https://www.researchobject.org/ro-crate/specification/1.3/appendix/jsonld.html
+- https://www.researchobject.org/ro-crate/specification/1.3/appendix/relative-uris.html
+- https://www.researchobject.org/ro-crate/specification/1.3/metadata.html
 
 ## TODO
 - Outline procedure, rules and pitfalls from the references above.

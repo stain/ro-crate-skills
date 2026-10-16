@@ -9,7 +9,8 @@ description: Placeholder: handle the Profile Crate specifics - an RO-Crate that 
 
 ## References (verify URLs when populating)
 - https://www.researchobject.org/ro-crate/profiles
-- https://www.researchobject.org/ro-crate/specification/1.3/profiles
+- https://www.researchobject.org/ro-crate/specification/1.3/profiles.html (Profile Crate, normative)
+- https://www.researchobject.org/ro-crate/specification/1.3/profiles.html
 
 ## TODO
 - Outline procedure, rules and pitfalls from the references above.

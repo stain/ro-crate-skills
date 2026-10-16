@@ -8,8 +8,8 @@ description: Placeholder: model data entities (File, Dataset, web-based, directo
 > **Placeholder** - to be written. Default version: RO-Crate 1.3.
 
 ## References (verify URLs when populating)
-- https://www.researchobject.org/ro-crate/specification/1.3/root-data-entity
-- https://www.researchobject.org/ro-crate/specification/1.3/data-entities
+- https://www.researchobject.org/ro-crate/specification/1.3/root-data-entity.html
+- https://www.researchobject.org/ro-crate/specification/1.3/data-entities.html
 
 ## TODO
 - Outline procedure, rules and pitfalls from the references above.

@@ -9,7 +9,7 @@ description: Placeholder: understand differences between RO-Crate versions (1.0,
 
 ## References (verify URLs when populating)
 - https://www.researchobject.org/ro-crate/specification/1.3/
-- https://www.researchobject.org/ro-crate/specification/1.3/appendix/changelog
+- https://www.researchobject.org/ro-crate/specification/1.3/appendix/changelog.html
 - https://www.researchobject.org/ro-crate/specification/
 
 ## TODO

@@ -23,6 +23,8 @@ Agentic skills for RO-Crate
 | [`ro-crate-js`](skills/ro-crate-js/SKILL.md) | JavaScript tooling *(placeholder)* |
 | [`ro-crate-editors`](skills/ro-crate-editors/SKILL.md) | Describo, Crate-O *(placeholder)* |
 | [`ro-crate-repositories`](skills/ro-crate-repositories/SKILL.md) | WorkflowHub, Zenodo, Dataverse *(placeholder)* |
+| [`ro-crate-retrieve`](skills/ro-crate-retrieve/SKILL.md) | Retrieve referenced RO-Crates *(placeholder)* |
+| [`fair-signposting`](skills/fair-signposting/SKILL.md) | FAIR Signposting discovery/publishing *(placeholder)* |
 
 ## Related skill repositories
 
