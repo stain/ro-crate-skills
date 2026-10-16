@@ -1,6 +1,6 @@
 ---
 name: ro-crate-tools
-description: Choose and use RO-Crate tools - libraries (Python, JavaScript, Java, R, ...), editors (Describo, Crate-O, NovaCrate), validators, HTML preview generators, workflow-run exporters, repository uploaders. Use when asked which tool fits a task, how to preview a crate, or how to edit, convert or publish crates with existing tooling.
+description: Choose and use RO-Crate tools: libraries for Python, JavaScript, Java, R and others; editors (Describo, Crate-O, NovaCrate); HTML preview generators (rochtml); workflow-run exporters (Nextflow, Galaxy); repository uploaders. Use when the user asks which tool fits, how to preview or edit a crate in a GUI, or how to convert, export or deposit crates with existing tooling instead of writing code. For Python scripting see ro-crate-py; for validation see ro-crate-validator.
 ---
 
 # RO-Crate tools

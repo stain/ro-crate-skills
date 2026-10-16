@@ -24,7 +24,7 @@ How the full texts were obtained:
 
 | File | What |
 |---|---|
-| [ro-crate-version-differences.md](ro-crate-version-differences.md) | Permalinks, comparison table 1.0 → 1.3, migration checklists |
+| [ro-crate-version-differences.md](../skills/ro-crate-compatibility/references/version-differences.md) | Permalinks, comparison table 1.0 → 1.3, migration checklists |
 | [ro-crate-whats-changed-in-1.2.md](ro-crate-whats-changed-in-1.2.md) | Project guide, https://www.researchobject.org/ro-crate/whats-changed-in-1-2 |
 | [ro-crate-whats-changed-in-1.3.md](ro-crate-whats-changed-in-1.3.md) | Project guide, https://www.researchobject.org/ro-crate/whats-changed-in-1-3 |
 | [ro-crate-quick-reference-1.2-1.3.md](ro-crate-quick-reference-1.2-1.3.md) | All explicit requirements with severities, https://www.researchobject.org/ro-crate/quick-reference |
