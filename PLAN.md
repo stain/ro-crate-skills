@@ -12,10 +12,9 @@ moved to `references/`). Commands for ro-crate-py, signposting and rochtml were 
 signposting 0.9.9, ro-crate-html 0.1.6); re-check on new releases.
 
 ## Next steps
-1. **Run the evals.** Execute `skills/*/evals/evals.json` prompts with and without each skill (Claude Code: skill-creator
+1. **Run the evals.** Iteration 1 (5 of 15 evals, with/without skill) is in `tests/eval-results/iteration-1.md`; run the rest and repeat with a weaker model. Execute `skills/*/evals/evals.json` prompts with and without each skill (Claude Code: skill-creator
    plugin viewer/benchmark; other agents: by hand or CI), add programmatic assertions where outputs are files, fix skills that fail.
-2. **Run `rocrate-validator`** on `tests/fixtures/` (never executed: needs network) and correct `skills/ro-crate-validator/SKILL.md`
-   and `TESTING.md`; add known false positives (see data-preparation-skills `references/validator-findings.md`); check `--no-auto-profile`,
+2. **Validator** was run on all fixtures (results in `TESTING.md` and the validator skill); still open: offline behaviour, `--no-auto-profile`, `--skip-availability-checks`, reporting the over-strict Profile Crate check upstream; add known false positives (see data-preparation-skills `references/validator-findings.md`); check `--no-auto-profile`,
    `--skip-availability-checks`, offline use. Compare findings with the lint script and with
    https://github.com/alexhambley/RO-Crate-RAG-Validator (optional LLM/RAG tool, evaluated 2026-10-16: per-entity only, needs keys).
 3. **Description triggering.** Test each description with should/should-not trigger prompts (Claude Code: skill-creator `run_loop`;

@@ -8,7 +8,7 @@ description: Find, declare, apply and author RO-Crate profiles and Profile Crate
 Spec: https://www.researchobject.org/ro-crate/specification/1.3/profiles . A profile is a set of conventions (types, properties, versions, packaging) a subset of crates follows; a Profile Crate is an RO-Crate that describes one. Profiles are conventions, not strict inheritance.
 
 ## Find a profile
-Reuse before inventing: registry https://profiles.ro-crate.org/ , overview https://www.researchobject.org/ro-crate/profiles . Known families: Workflow RO-Crate (+ Workflow Testing), Workflow Run Crate (Process / Workflow / Provenance, see `ro-crate-workflows`), Common Provenance Model, ARC/ISA profiles, ELN (`.eln`), RELIANCE, Describo profiles, RO-Crates-and-Excel. Use the profile's own page for its requirements and current version.
+Reuse before inventing: registry https://profiles.ro-crate.org/ , overview https://www.researchobject.org/ro-crate/profiles . Known families: Workflow RO-Crate (+ Workflow Testing), Workflow Run Crate (Process / Workflow / Provenance, see `ro-crate-workflows`), Common Provenance Model, ARC/ISA profiles, ELN (`.eln`), RELIANCE, Describo profiles, RO-Crates-and-Excel. Use the profile's own page for its requirements and current version. Use-case table with permalinks and validator support: [references/known-profiles.md](references/known-profiles.md).
 
 ## Declare conformance
 On the **root data entity** (not the descriptor), one entry per profile:

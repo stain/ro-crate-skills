@@ -33,6 +33,18 @@ class LintTests(unittest.TestCase):
         self.assertEqual(code, 1)
         self.assertTrue(any("DRAFT" in f["message"] for f in out["findings"]))
 
+    def test_legacy_and_detached_fixtures(self):
+        code, out = run(FIX / "crate-1.0")
+        self.assertEqual((code, out["version"]), (0, "1.0"))
+        self.assertTrue(any("legacy" in f["message"] for f in out["findings"]))
+        code, out = run(FIX / "detached-crate")
+        self.assertEqual((code, out["errors"]), (0, 0))
+
+    def test_run_profile_and_injection_fixtures_are_structurally_valid(self):
+        for name in ("process-run-crate", "profile-crate", "injection-crate", "crate-1.1"):
+            with self.subTest(name):
+                self.assertEqual(run(FIX / name)[0], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

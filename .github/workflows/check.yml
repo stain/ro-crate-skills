@@ -1,0 +1,25 @@
+name: check
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Repository structure checks
+        run: python tests/check_repo.py
+      - name: Lint script tests
+        run: python -m unittest tests.test_lint -v
+      - name: Validate fixtures with rocrate-validator
+        run: |
+          python -m pip install roc-validator
+          rocrate-validator validate -p ro-crate-1.3 --requirement-severity REQUIRED tests/fixtures/minimal-crate
+          if rocrate-validator validate -p ro-crate-1.3 --requirement-severity REQUIRED tests/fixtures/invalid-crate; then
+            echo "invalid-crate unexpectedly passed"; exit 1
+          fi

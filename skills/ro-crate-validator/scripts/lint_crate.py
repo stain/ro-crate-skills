@@ -38,6 +38,9 @@ def lint(path):
     base = path.parent if path.is_file() else path
     meta = path if path.is_file() else next(
         (base / n for n in ("ro-crate-metadata.json", "ro-crate-metadata.jsonld") if (base / n).exists()), None)
+    if meta is None and path.is_dir():  # detached crate: <prefix>-ro-crate-metadata.json
+        cands = sorted(path.glob("*-ro-crate-metadata.json"))
+        meta = cands[0] if len(cands) == 1 else None
     if meta is None:
         return [("ERROR", "no ro-crate-metadata.json (or .jsonld) found")], None
     attached = path.is_dir() or meta.name in ("ro-crate-metadata.json", "ro-crate-metadata.jsonld")
@@ -101,7 +104,7 @@ def lint(path):
     if rid != "./" and not ABS.match(rid):
         add("WARN", f"root @id {rid!r} is neither './' nor an absolute URI")
     # reachability and dangling references
-    reach, todo = {desc["@id"], rid}, [rid]
+    reach, todo = {desc["@id"], rid}, [rid, desc["@id"]]
     while todo:
         for _, r in refs(emap[todo.pop()]):
             if r in emap and r not in reach:
