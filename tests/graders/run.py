@@ -26,6 +26,9 @@ def grade_run(name, outputs, repo):
     run = Run.open(outputs, repo)
     crate = run.find_crate(spec.get("crate_hint"))
     results = []
+    if not (Path(outputs) / "answer.md").exists():
+        results.append({"text": "answer.md was written (the run harness asked for it)", "passed": False,
+                        "evidence": "answer.md is missing: text checks ran against an empty answer", "kind": "script"})
     for e in spec["expectations"]:
         params = inspect.signature(e.check).parameters
         args = [run] + ([crate] if "crate" in params else [])

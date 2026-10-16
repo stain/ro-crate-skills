@@ -18,9 +18,12 @@ Programs that check what an eval run produced, so results can be scored and comp
 ```bash
 python tests/graders/run.py <iteration dir> [--verbose] [--json] [--no-write]
 python tests/graders/run.py <iteration dir>/eval-create-basic
+python tests/graders/summarize.py <iter-r1> <iter-r2> <iter-r3>   # repeats side by side + failed expectations
 python -m unittest tests.test_graders      # tests of the graders themselves
 ```
 It prints passed/total per eval for each variant and, unless `--no-write`, writes `grading.json` (fields `text`, `passed`, `evidence`, `kind`) next to each `outputs/`, the format the skill-creator viewer reads.
+
+`crate_hint` in `evals.py` is a subdirectory of `outputs/`, or `zip:<name>.zip` to grade the crate inside a zip. A missing `answer.md` is reported as a failed expectation.
 
 ## What is checked
 - **Crate checks** (`checks.py`): crate found (also inside a zip), root properties, declared version, single descriptor `conformsTo`, profiles on the root typed `Profile`, no `-DRAFT`, no ORCID other than the fictional example, license given by the user or an explicit `TODO:`, author local/absent, no software version without evidence in `commands.md`, `TODO:` values reported in the answer, workflow `mainEntity`, action completeness, actions mentioned by the root, input crate not modified.

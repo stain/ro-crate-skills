@@ -54,6 +54,7 @@ GRADERS = {
         E("Action has instrument, object and result", c.action_complete),
         E("Root mentions the action", c.root_mentions_actions),
         E("No software version without evidence", c.no_unsupported_versions),
+        E("Software entity has a version or a TODO (the validator requires one)", c.software_version_present_or_todo),
         E("No invented ORCID", c.no_invented_orcid),
         E("No -DRAFT URIs", c.no_draft_uris),
     ]),
@@ -99,6 +100,7 @@ GRADERS = {
         E("Workflow is mainEntity with the three types", c.workflow_main_entity),
         E("programmingLanguage is a described entity", c.programming_language_entity),
         E("No software version without evidence", c.no_unsupported_versions),
+        E("Language entity has a version or a TODO (the validator requires one)", c.software_version_present_or_todo),
         E("License is a TODO (none was given)", c.license_given_or_todo, given=()),
         E("Author is a local person or absent", c.author_is_local, allowed_names=("Sam Example",)),
         E("TODO values are reported in the answer", c.todos_reported),
@@ -115,7 +117,7 @@ GRADERS = {
         E("Does not say license is only optional/SHOULD", c.answer_not_mentions, r"not strictly required", r"licen[sc]e[^.]{0,80}(only|just) (a )?SHOULD"),
         E("Author reference is an @id entity, not a string", c.answer_mentions, r"@id"),
     ]),
-    "py-zip": dict(crate_hint="experiment", expectations=[
+    "py-zip": dict(crate_hint="zip:experiment.zip", expectations=[
         E("A crate was written", c.crate_found),
         E("Root has name, description, datePublished and license", c.root_has, props=ROOT4),
         E("License is a TODO (none was given)", c.license_given_or_todo, given=()),
@@ -123,6 +125,7 @@ GRADERS = {
         E("TODO values are reported in the answer", c.todos_reported),
         E("Zip has the metadata at its root", c.zip_has_metadata_at_root, zip_rel="experiment.zip"),
         E("Declares 1.3", c.descriptor_version, version="1.3"),
+        E("No bare metadata file left in the source folder", c.folder_crate_complete, subdir="experiment"),
     ]),
     "tools-preview": dict(crate_hint=None, expectations=[
         E("Names a preview generator", c.answer_mentions, r"rochtml|ro-crate-html|--gen-preview", all_=False),

@@ -121,6 +121,16 @@ def no_unsupported_versions(run, crate, types=("SoftwareApplication", "ComputerL
     return (not bad, f"versions without evidence: {bad}" if bad else "no unsupported versions")
 
 
+def software_version_present_or_todo(run, crate, types=("SoftwareApplication", "ComputerLanguage")):
+    """Software/language entities carry a version (the validator requires one): a supported value or a TODO:."""
+    bad = []
+    for e in crate.graph if crate else []:
+        if set(aslist(e.get("@type"))) & set(types):
+            if not (e.get("version") or e.get("softwareVersion")):
+                bad.append(e["@id"])
+    return (not bad, f"software entities without a version (use a TODO: value): {bad}" if bad else "every software/language entity has a version or a TODO value")
+
+
 def profile_declared_on_root(run, crate, prefix):
     if not crate or not crate.root:
         return fail("no root")
@@ -297,6 +307,20 @@ def programming_language_entity(run, crate):
     pl = aslist((e or {}).get("programmingLanguage"))
     ent = crate.emap.get(pl[0].get("@id")) if pl and isinstance(pl[0], dict) else None
     return (bool(ent and ent.get("name")), f"programmingLanguage entity: {ent.get('name') if ent else None}")
+
+
+def folder_crate_complete(run, subdir, props=("name", "description", "datePublished", "license")):
+    """A ro-crate-metadata.json left in the source folder (e.g. by `rocrate init`) must not be a bare, incomplete one."""
+    from .core import Crate
+    p = run.outputs / subdir / "ro-crate-metadata.json"
+    if not p.exists():
+        return ok("no metadata file left in the source folder")
+    try:
+        crate = Crate.load(p)
+    except ValueError:
+        return fail("metadata file in the source folder is not valid JSON")
+    missing = [x for x in props if not (crate.root or {}).get(x)]
+    return (not missing, f"source folder metadata lacks {missing}" if missing else "source folder metadata is complete")
 
 
 def file_exists(run, rel):

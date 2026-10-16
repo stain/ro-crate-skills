@@ -28,5 +28,5 @@ If you cannot ask: leave optional properties out. For what the root data entity 
 - A new `ROCrate()` writes the RO-Crate **1.2** context plus `{"@vocab": "http://schema.org/"}` and a 1.2 descriptor `conformsTo`; it also adds `identifier` to the descriptor. To target 1.3 set `@context` and the descriptor's `conformsTo` yourself (the 1.2 to 1.3 step in `ro-crate-compatibility`), and check the result against `ro-crate-create`. `@vocab` is not part of the RO-Crate 1.3 context.
 - It does not set `name`, `description`, `datePublished` or `license`: set them (the root must have all four).
 - Modifying an array property in place is not supported: assign a new array.
-- `roccheck <dir>` is a simple check, "not a full validation". The package's `rocval` command crashed in this install (`program.version is not a function`); use `rocrate-validator` (`ro-crate-validator`).
+- `roccheck <dir>` is a simple check, "not a full validation", and looks for the old `ro-crate-metadata.jsonld` filename (it failed with ENOENT on a `.json` crate in one run). The package's `rocval` command crashed in this install (`program.version is not a function`); use `rocrate-validator` (`ro-crate-validator`).
 - Related packages from the same group: `ro-crate-html` (`rochtml`, preview), `ro-crate-excel` (`ro-crate-excel` skill).

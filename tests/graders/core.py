@@ -92,6 +92,8 @@ class Run:
 
     def find_crate(self, hint=None):
         """Locate the crate: hint is a subdirectory (relative to outputs) or None for the shallowest match."""
+        if hint and hint.startswith("zip:"):
+            return self._crate_from_zip(hint[4:])
         roots = [self.outputs / hint] if hint else [self.outputs]
         cands = []
         for r in roots:
@@ -107,7 +109,8 @@ class Run:
 
     def _crate_from_zip(self, hint=None):
         """A crate that only exists inside a zip written by the agent (metadata at the zip root or in one folder)."""
-        for z in sorted(self.outputs.rglob("*.zip")):
+        zips = [self.outputs / hint] if hint and (self.outputs / hint).suffix == ".zip" else sorted(self.outputs.rglob("*.zip"))
+        for z in zips:
             try:
                 with zipfile.ZipFile(z) as zf:
                     names = zf.namelist()
