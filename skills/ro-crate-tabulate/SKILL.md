@@ -1,6 +1,6 @@
 ---
 name: ro-crate-tabulate
-description: Turn an RO-Crate into an SQLite database or CSV tables with the rocrate-tabular `tabulator` CLI so entities and properties can be queried with SQL or loaded in pandas. Use when the user wants to analyse, count, filter or export the metadata of one or many RO-Crates as tables, instead of writing JSON-LD traversal code.
+description: "Turn an RO-Crate into an SQLite database or CSV tables with the rocrate-tabular `tabulator` CLI so entities and properties can be queried with SQL or loaded in pandas. Use when the user wants to analyse, count, filter or export the metadata of one or many RO-Crates as tables, instead of writing JSON-LD traversal code."
 ---
 
 # rocrate-tabular (`tabulator`)

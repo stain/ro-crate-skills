@@ -1,6 +1,6 @@
 ---
 name: ro-crate-excel
-description: Create or update an RO-Crate from a folder of files via an Excel spreadsheet with the ro-crate-excel tools (rocxl / xlro): generate a spreadsheet of the files, let people fill in metadata, and merge it back into ro-crate-metadata.json. Use when metadata is gathered by non-programmers in spreadsheets, or the user asks to go from Excel or a folder listing to an RO-Crate. Requires Siegfried.
+description: "Create or update an RO-Crate from a folder of files via an Excel spreadsheet with the ro-crate-excel tools (rocxl / xlro): generate a spreadsheet of the files, let people fill in metadata, and merge it back into ro-crate-metadata.json. Use when metadata is gathered by non-programmers in spreadsheets, or the user asks to go from Excel or a folder listing to an RO-Crate. Requires Siegfried."
 ---
 
 # ro-crate-excel (`rocxl`, `xlro`)

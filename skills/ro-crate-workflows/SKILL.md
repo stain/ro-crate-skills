@@ -1,6 +1,6 @@
 ---
 name: ro-crate-workflows
-description: Describe workflows, scripts and their executions in RO-Crate: ComputationalWorkflow entities, Workflow RO-Crate (WorkflowHub), Workflow Testing RO-Crate, and Process/Workflow/Provenance Run Crates with CreateAction provenance. Use when packaging a workflow or script, recording how tools or a workflow produced files (provenance), or reading a workflow or run crate from WorkflowHub, Nextflow, Galaxy or CWL. To report on or replay run crates see ro-crate-runcrate; to record runs of a Python CLI see ro-crate-action-recorder.
+description: "Describe workflows, scripts and their executions in RO-Crate: ComputationalWorkflow entities, Workflow RO-Crate (WorkflowHub), Workflow Testing RO-Crate, and Process/Workflow/Provenance Run Crates with CreateAction provenance. Use when packaging a workflow or script, recording how tools or a workflow produced files (provenance), or reading a workflow or run crate from WorkflowHub, Nextflow, Galaxy or CWL. To report on or replay run crates see ro-crate-runcrate; to record runs of a Python CLI see ro-crate-action-recorder."
 ---
 
 # Workflows, scripts and run provenance in RO-Crate

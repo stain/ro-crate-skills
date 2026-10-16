@@ -1,6 +1,6 @@
 ---
 name: ro-crate-runcrate
-description: Use the `runcrate` CLI to report on, replay or convert Workflow Run RO-Crates (Process, Workflow and Provenance Run Crates): list the actions, tools, inputs and outputs of a crate, re-run its workflow, or convert a CWLProv research object. Use whenever the user has a run crate and asks what was run, wants to re-execute it, or has a cwltool --provenance bundle to turn into a crate. Do not hand-parse run crates when this tool answers the question.
+description: "Use the `runcrate` CLI to report on, replay or convert Workflow Run RO-Crates (Process, Workflow and Provenance Run Crates): list the actions, tools, inputs and outputs of a crate, re-run its workflow, or convert a CWLProv research object. Use whenever the user has a run crate and asks what was run, wants to re-execute it, or has a cwltool --provenance bundle to turn into a crate. Do not hand-parse run crates when this tool answers the question."
 ---
 
 # runcrate

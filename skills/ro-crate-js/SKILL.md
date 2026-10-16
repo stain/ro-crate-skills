@@ -1,6 +1,6 @@
 ---
 name: ro-crate-js
-description: Use the ro-crate JavaScript library (npm `ro-crate`) and its roccheck CLI to read, create and modify RO-Crates in Node.js or the browser. Use when the user works in JavaScript/TypeScript or asks for a Node script that builds or edits ro-crate-metadata.json, instead of writing JSON-LD handling from scratch.
+description: "Use the ro-crate JavaScript library (npm `ro-crate`) and its roccheck CLI to read, create and modify RO-Crates in Node.js or the browser. Use when the user works in JavaScript/TypeScript or asks for a Node script that builds or edits ro-crate-metadata.json, instead of writing JSON-LD handling from scratch."
 ---
 
 # ro-crate-js (`npm install ro-crate`)

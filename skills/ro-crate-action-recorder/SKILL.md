@@ -1,6 +1,6 @@
 ---
 name: ro-crate-action-recorder
-description: Record runs of Python command-line tools into an RO-Crate (Process Run Crate provenance) with the rocrate-action-recorder library for argparse, click or cyclopts CLIs, instead of hand-writing CreateAction entities. Use when the user maintains a Python CLI and wants each invocation's inputs, outputs, software version and time captured as RO-Crate provenance, or asks how to automate provenance capture.
+description: "Record runs of Python command-line tools into an RO-Crate (Process Run Crate provenance) with the rocrate-action-recorder library for argparse, click or cyclopts CLIs, instead of hand-writing CreateAction entities. Use when the user maintains a Python CLI and wants each invocation's inputs, outputs, software version and time captured as RO-Crate provenance, or asks how to automate provenance capture."
 ---
 
 # rocrate-action-recorder

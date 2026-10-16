@@ -14,5 +14,6 @@ accurate to the RO-Crate 1.3 specification. Plugin manifests: `.claude-plugin/`,
 - Keep skills short, procedural and spec-accurate; link to https://www.researchobject.org/ro-crate/specification/1.3/ rather than copying it. Never invent identifiers (ORCIDs, DOIs) in examples that look real.
 - Bump `version` identically in `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `.codex-plugin/plugin.json`, `.github/plugin/plugin.json` and `.github/plugin/marketplace.json`.
 - Validate: every manifest must parse (`python -m json.tool <file>`), and each `SKILL.md` must have frontmatter `name` and `description`.
+- **Frontmatter must be valid YAML.** Always wrap `description` in double quotes (escape `\"` and `\\`): an unquoted value containing `: ` or ` #` breaks parsers and Markdown rendering (GitHub shows a front-matter error and agents may skip the skill). Keep the keys to `name` and `description`. `tests/check_repo.py` fails on unquoted risky values and, when PyYAML is installed, parses the frontmatter with it.
 - Run `python tests/check_repo.py` before committing; see [TESTING.md](TESTING.md).
 - License is Apache-2.0 (the repository derives from the Apache-2.0 RO-Crate specification; see NOTICE); do not add content you cannot license that way.
