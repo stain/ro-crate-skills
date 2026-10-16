@@ -1,0 +1,36 @@
+---
+name: ro-crate-action-recorder
+description: Record runs of Python command-line tools into an RO-Crate (Process Run Crate provenance) with the rocrate-action-recorder library for argparse, click or cyclopts CLIs, instead of hand-writing CreateAction entities. Use when the user maintains a Python CLI and wants each invocation's inputs, outputs, software version and time captured as RO-Crate provenance, or asks how to automate provenance capture.
+---
+
+# rocrate-action-recorder
+
+Source https://github.com/i-VRESSE/rocrate-action-recorder (PyPI `rocrate-action-recorder` 0.7.1 tested; Apache-2.0; beta). It is a library you add to **a Python CLI you control**; it does not wrap arbitrary shell commands. For other tools write the Process Run Crate yourself (`ro-crate-workflows`) or use an engine exporter (`ro-crate-tools`).
+
+## Install (own environment, Python 3.13+)
+```bash
+python -m venv /tmp/rar && /tmp/rar/bin/pip install rocrate-action-recorder      # extras: [click], [cyclopts]
+```
+It pins `rocrate==0.15.0`: do not install it into an environment you share with other RO-Crate tools.
+
+## Use (argparse, tested)
+```python
+import argparse, sys
+from pathlib import Path
+from rocrate_action_recorder import recorded_argparse
+
+parser = argparse.ArgumentParser(prog="example-cli", description="Example CLI")
+parser.add_argument("--version", action="version", version="%(prog)s 1.2.3")
+parser.add_argument("input", type=Path); parser.add_argument("output", type=Path)
+
+@recorded_argparse(parser=parser, input_files=["input"], output_files=["output"],
+                   dataset_license="CC-BY-4.0")        # `enabled_argument=` adds an opt-out flag
+def handler(args):
+    args.output.write_text(args.input.read_text().upper())
+
+handler(parser.parse_args())
+```
+Each run adds to `ro-crate-metadata.json` in the working directory: the input/output files, a `SoftwareApplication` (name, version from `--version`), and a `CreateAction` with `instrument`, `object`, `result`, `agent`, start/end times, under the Process Run Crate profile. Lower level: `rocrate_action_recorder.record(...)`, `record_click`, `record_argparse`.
+
+## Check and fix its output
+What it wrote in a test: RO-Crate **1.1** context and `conformsTo`, Process Run Crate **0.5**, agent `root` taken from the OS user, licence as a string. `rocrate-validator -p ro-crate-1.3` failed it (descriptor/`conformsTo` references, `SoftwareApplication` needs a `url`), and the offline lint script warned that the action, software and person are not reachable from the root. So: add `mentions` from the root to the action, a `url` for the software, a real person for `agent`, `name`/`description`, and update the version only deliberately. Decide whether the recorded user name is acceptable to publish.

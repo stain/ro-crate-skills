@@ -16,6 +16,12 @@ Agentic skills for RO-Crate
 | [`ro-crate-publish`](skills/ro-crate-publish/SKILL.md) | Zip/BagIt/.eln, attached vs detached, serving, PIDs, deposit |
 | [`ro-crate-py`](skills/ro-crate-py/SKILL.md) | Use `rocrate` (ro-crate-py) CLI and library |
 | [`ro-crate-tools`](skills/ro-crate-tools/SKILL.md) | Pick tools: libraries, editors, preview, exporters, uploaders |
+| [`ro-crate-runcrate`](skills/ro-crate-runcrate/SKILL.md) | Report on, replay or convert Workflow Run Crates with `runcrate` |
+| [`ro-crate-action-recorder`](skills/ro-crate-action-recorder/SKILL.md) | Record Python CLI runs as Process Run Crate provenance |
+| [`ro-crate-tabulate`](skills/ro-crate-tabulate/SKILL.md) | Crate to SQLite/CSV with `rocrate-tabular` |
+| [`ro-crate-js`](skills/ro-crate-js/SKILL.md) | `ro-crate` npm library for Node.js |
+| [`ro-crate-excel`](skills/ro-crate-excel/SKILL.md) | Folder or spreadsheet to crate with `rocxl` (needs Siegfried) |
+| [`ro-crate-deposit`](skills/ro-crate-deposit/SKILL.md) | Deposit to Zenodo/InvenioRDM with `rocrate-zenodo` / `rocrate-inveniordm` |
 
 Each skill folder holds `SKILL.md` (frontmatter `name` and `description` only, so any Agent Skills reader works), optional `references/` (read on demand), optional `scripts/` (standard-library Python) and `evals/evals.json` (test prompts with expectations). Ideas for further skills (profile discovery, format conversion, recording agent work as provenance) are in [PLAN.md](PLAN.md).
 

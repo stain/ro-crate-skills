@@ -30,6 +30,6 @@ Root `identifier` (`PropertyValue` for a DOI; or use the DOI URL as root `@id`) 
 
 ## Repositories and tools (check the tools list for status)
 - WorkflowHub accepts Workflow RO-Crates (`*.crate.zip`) and serves one per workflow with Signposting.
-- `ro-crate-zenodo` (alpha): upload to Zenodo and fill its metadata from the crate. `ro-crate-inveniordm` (alpha): InvenioRDM. `ro-crates-deposit` is inactive.
+- `rocrate-zenodo` (Zenodo legacy API) and `rocrate-inveniordm` (InvenioRDM) fill the repository metadata from the crate: see the `ro-crate-deposit` skill (sandbox first, review the derived metadata, confirm before publishing). `ro-crates-deposit` is inactive.
 - Static sites: `ro-crate-preview` GitHub Action, `rocrate-to-pages`.
 Details and current status: https://www.researchobject.org/ro-crate/tools . Run a tool against a test/sandbox record first when one exists.

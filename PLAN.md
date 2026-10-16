@@ -5,7 +5,7 @@ Default target: RO-Crate 1.3 (released versions only, never `-DRAFT`). Run `pyth
 `python -m unittest tests.test_lint` before every commit.
 
 ## Status
-Eleven skills ship in `skills/`: `ro-crate-consume`, `ro-crate-create`, `ro-crate-validator` (with `scripts/lint_crate.py`),
+Seventeen skills ship in `skills/` (eleven core skills plus six small tool skills: `ro-crate-runcrate`, `ro-crate-action-recorder`, `ro-crate-tabulate`, `ro-crate-js`, `ro-crate-excel`, `ro-crate-deposit`; tools tested in isolated environments as noted in each skill): `ro-crate-consume`, `ro-crate-create`, `ro-crate-validator` (with `scripts/lint_crate.py`),
 `ro-crate-spec`, `ro-crate-compatibility`, `ro-crate-profiles`, `ro-crate-workflows`, `ro-crate-retrieve`, `ro-crate-publish`,
 `ro-crate-py`, `ro-crate-tools`. Each has `evals/evals.json`. The earlier 20 placeholders were condensed into these (detail
 moved to `references/`). Commands for ro-crate-py, signposting and rochtml were run once (ro-crate-py 0.16.0,

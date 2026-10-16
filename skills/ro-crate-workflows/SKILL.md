@@ -28,4 +28,4 @@ Details and requirement tables: [references/run-crates.md](references/run-crates
 Related skill repo with fuller tested recipes for data files: https://github.com/stain/data-preparation-skills (`ro-crate-provenance`, Process Run Crate).
 
 ## Tools
-`nf-core` RO-Crate tool and `nf-prov` (Nextflow), `galaxy2cwl`, PyCOMPSs CLI, `rocrate-action-recorder` (see `ro-crate-tools`); `ro-crate-py` can add workflows (`rocrate add workflow`). Review generated crates for missing root `name`/`description`/`license`.
+Report on, replay or convert run crates: `runcrate` (`ro-crate-runcrate` skill). Record runs of your own Python CLIs: `ro-crate-action-recorder`. `nf-core` RO-Crate tool and `nf-prov` (Nextflow), `galaxy2cwl`, PyCOMPSs CLI, `rocrate-action-recorder` (see `ro-crate-tools`); `ro-crate-py` can add workflows (`rocrate add workflow`). Review generated crates for missing root `name`/`description`/`license`.
