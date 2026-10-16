@@ -24,6 +24,7 @@ Authoritative, changing list with status labels: https://www.researchobject.org/
 | Profiles | RO-Crate Profile Portal https://profiles.ro-crate.org/ , Profile Crate Creator (ROCratePCC, beta) |
 
 ## Guidance
+- What was actually tested (versions, strengths, weaknesses, when a tool is out of scope): [references/tool-evaluation.md](references/tool-evaluation.md). Read it before recommending or running a tool.
 - Prefer an existing tool over new code, then **review its output**: tools often emit crates that lack `name`, `description`, `license` or authors.
 - Always validate after any generation or edit and report failures verbatim. Without network: `python -m json.tool ro-crate-metadata.json` is only a syntax check.
 - Deprecated per the tools list: CheckMyCrate, ro-crate-validator-py; inactive: ro-crates-deposit (use ro-crate-inveniordm).
