@@ -1,0 +1,12 @@
+{
+  "name": "ro-crate-skills",
+  "owner": {"name": "Stian Soiland-Reyes"},
+  "plugins": [
+    {
+      "name": "ro-crate-skills",
+      "source": "./",
+      "description": "Agent skills for consuming, creating and tooling RO-Crate",
+      "version": "0.1.0"
+    }
+  ]
+}
