@@ -17,6 +17,21 @@ Agentic skills for RO-Crate
 | [`ro-crate-workflows`](skills/ro-crate-workflows/SKILL.md) | Workflow and run crates *(placeholder)* |
 | [`ro-crate-jsonld`](skills/ro-crate-jsonld/SKILL.md) | JSON-LD, context, relative URIs *(placeholder)* |
 | [`ro-crate-packaging`](skills/ro-crate-packaging/SKILL.md) | Packaging, distribution, publishing *(placeholder)* |
+| [`ro-crate-py`](skills/ro-crate-py/SKILL.md) | Use ro-crate-py instead of writing code *(placeholder)* |
+| [`ro-crate-validator`](skills/ro-crate-validator/SKILL.md) | Validate with rocrate-validator *(placeholder)* |
+| [`ro-crate-preview`](skills/ro-crate-preview/SKILL.md) | Generate HTML previews *(placeholder)* |
+| [`ro-crate-js`](skills/ro-crate-js/SKILL.md) | JavaScript tooling *(placeholder)* |
+| [`ro-crate-editors`](skills/ro-crate-editors/SKILL.md) | Describo, Crate-O *(placeholder)* |
+| [`ro-crate-repositories`](skills/ro-crate-repositories/SKILL.md) | WorkflowHub, Zenodo, Dataverse *(placeholder)* |
+
+## Related skill repositories
+
+Existing drafts to link to or align with rather than duplicate:
+
+- [stain/data-preparation-skills](https://github.com/stain/data-preparation-skills): `ro-crate-provenance` (RO-Crate 1.3 + Process Run Crate for data files; fuller than our placeholder, so our `ro-crate-provenance` should link to it), `reproducible-data-preparation`, `data-license-investigation`, `snakemake-data-pipeline`.
+- [sanskritsuthar/workflowhub-skills](https://github.com/sanskritsuthar/workflowhub-skills): `ro-crate-consume`, `workflowhub-find`, `workflowhub-inspect`, `workflowhub-explain`, `workflowhub-evaluate`, `workflowhub-cite`, `fair-signposting`. Overlaps with our `ro-crate-consume`, `ro-crate-workflows` and `ro-crate-repositories`.
+
+Open question: whether to depend on, vendor, or only link to these skills.
 
 Based on the [RO-Crate 1.3 specification](https://www.researchobject.org/ro-crate/specification/1.3/) and the [tools list](https://www.researchobject.org/ro-crate/tools).
 

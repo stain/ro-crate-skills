@@ -13,3 +13,4 @@ description: Placeholder: workflows and software in RO-Crate - Workflow Crate, W
 
 ## TODO
 - Outline procedure, rules and pitfalls from the references above.
+- Related existing skills: https://github.com/sanskritsuthar/workflowhub-skills/tree/main/skills (workflowhub-*)

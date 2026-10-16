@@ -12,3 +12,4 @@ description: Placeholder: describe provenance and actions (CreateAction, instrum
 
 ## TODO
 - Outline procedure, rules and pitfalls from the references above.
+- Related existing skill: https://github.com/stain/data-preparation-skills/tree/main/skills/ro-crate-provenance
