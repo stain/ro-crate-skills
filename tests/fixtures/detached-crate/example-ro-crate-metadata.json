@@ -1,0 +1,14 @@
+{
+  "@context": "https://w3id.org/ro/crate/1.3/context",
+  "@graph": [
+    {"@id": "ro-crate-metadata.json", "@type": "CreativeWork", "about": {"@id": "https://example.org/crates/example/"},
+     "conformsTo": {"@id": "https://w3id.org/ro/crate/1.3"}},
+    {"@id": "https://example.org/crates/example/", "@type": "Dataset", "name": "Detached example crate",
+     "description": "Metadata only; the data entity is a web file.", "datePublished": "2025-03-01",
+     "license": {"@id": "https://creativecommons.org/licenses/by/4.0/"},
+     "hasPart": [{"@id": "https://example.org/files/report.pdf"}]},
+    {"@id": "https://example.org/files/report.pdf", "@type": "File", "name": "Report",
+     "encodingFormat": "application/pdf", "contentSize": "310691", "sdDatePublished": "2025-03-01T10:00:00+00:00"},
+    {"@id": "https://creativecommons.org/licenses/by/4.0/", "@type": "CreativeWork", "name": "CC BY 4.0"}
+  ]
+}

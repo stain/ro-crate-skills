@@ -20,6 +20,8 @@ The validator needs network access (it fetches the JSON-LD context, e.g. `https:
 - Exit status 0 = valid, 1 = invalid. The default output is a wide terminal UI; use `--output-format json` for parsing (`issues[].severity/message`, `statistics`, `passed`).
 - Fixtures: a minimal 1.3 crate passes at REQUIRED (66 checks, 63 passed, 3 skipped); a crate lacking `description`, `license` and `datePublished` fails with exactly those three REQUIRED issues. At RECOMMENDED the same crate also reports missing `name`s, `publisher` and `hasPart` shape. The validator did **not** flag a `hasPart` entry whose file is missing: the offline lint script does.
 - Automatic profile detection (no `-p`) worked for a crate declaring 1.3.
+- Known mismatches (checked on fixtures): a legacy 1.0 crate (`.jsonld` descriptor) fails the 1.1 profile; a correct Process Run Crate 0.6 (`softwareVersion`) fails `process-run-crate-0.5`; a Profile Crate whose root `@id` is an absolute URI fails 1.3 with "Data Entity ... has a local identifier but the Root Data Entity does not..." which looks over-strict against the spec. Decide by reading the spec and profile text, not by the failure alone.
+- A detached crate: pass the metadata file (`validate -p ro-crate-1.3 path/to/<prefix>-ro-crate-metadata.json`).
 
 ## Validate
 ```bash

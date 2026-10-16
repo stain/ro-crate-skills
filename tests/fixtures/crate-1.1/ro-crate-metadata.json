@@ -1,0 +1,15 @@
+{
+  "@context": "https://w3id.org/ro/crate/1.1/context",
+  "@graph": [
+    {"@id": "ro-crate-metadata.json", "@type": "CreativeWork", "about": {"@id": "./"},
+     "conformsTo": [{"@id": "https://w3id.org/ro/crate/1.1"}, {"@id": "https://w3id.org/workflowhub/workflow-ro-crate/1.0"}]},
+    {"@id": "./", "@type": "Dataset", "name": "Legacy 1.1 crate",
+     "description": "A small RO-Crate 1.1 example that declares a profile on the metadata descriptor, as 1.1 allowed.",
+     "datePublished": "2021-06-01", "license": "https://creativecommons.org/licenses/by/4.0/",
+     "mainEntity": {"@id": "wf.cwl"}, "hasPart": [{"@id": "wf.cwl"}]},
+    {"@id": "wf.cwl", "@type": ["File", "SoftwareSourceCode", "ComputationalWorkflow"], "name": "Workflow",
+     "programmingLanguage": {"@id": "#cwl"}},
+    {"@id": "#cwl", "@type": "ComputerLanguage", "name": "Common Workflow Language", "url": "https://www.commonwl.org/", "version": "v1.0"},
+    {"@id": "https://w3id.org/workflowhub/workflow-ro-crate/1.0", "@type": "CreativeWork", "name": "Workflow RO-Crate", "version": "1.0"}
+  ]
+}
