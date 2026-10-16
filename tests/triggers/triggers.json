@@ -1,0 +1,1079 @@
+[
+ {
+  "id": "p001",
+  "skill": "ro-crate-consume",
+  "kind": "positive",
+  "split": "dev",
+  "query": "I got results-2025.crate.zip from a collaborator with a ro-crate-metadata.json inside. Who are the authors and what licence are the files under?",
+  "accept": [
+   "ro-crate-consume"
+  ]
+ },
+ {
+  "id": "p002",
+  "skill": "ro-crate-consume",
+  "kind": "positive",
+  "split": "dev",
+  "query": "What does the ro-crate-metadata.json in ./data/sample-run say about where this dataset came from? I mainly care about provenance.",
+  "accept": [
+   "ro-crate-consume"
+  ]
+ },
+ {
+  "id": "p003",
+  "skill": "ro-crate-consume",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Open ./crates/sample-1 and list every File entity with its encodingFormat and size.",
+  "accept": [
+   "ro-crate-consume"
+  ]
+ },
+ {
+  "id": "p004",
+  "skill": "ro-crate-consume",
+  "kind": "positive",
+  "split": "test",
+  "query": "Find every person with an ORCID in this RO-Crate's metadata and give me their affiliations.",
+  "accept": [
+   "ro-crate-consume"
+  ]
+ },
+ {
+  "id": "p005",
+  "skill": "ro-crate-consume",
+  "kind": "positive",
+  "split": "test",
+  "query": "This ro-crate-metadata.jsonld is from 2019 and I have no idea what is in it. Can you tell me?",
+  "accept": [
+   "ro-crate-consume"
+  ]
+ },
+ {
+  "id": "p006",
+  "skill": "ro-crate-create",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Package the folder ./experiment-7 (CSV files, a notebook and a README) as an RO-Crate. I'm the author and the licence is CC BY 4.0.",
+  "accept": [
+   "ro-crate-create",
+   "ro-crate-py"
+  ]
+ },
+ {
+  "id": "p007",
+  "skill": "ro-crate-create",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Write the ro-crate-metadata.json for my bird observation dataset in /data/birds so it follows FAIR practice.",
+  "accept": [
+   "ro-crate-create",
+   "ro-crate-py"
+  ]
+ },
+ {
+  "id": "p008",
+  "skill": "ro-crate-create",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Add Dr Jane Smith (https://orcid.org/0000-0002-1825-0097, University of Example) as a contributor in my crate's metadata.",
+  "accept": [
+   "ro-crate-create"
+  ]
+ },
+ {
+  "id": "p009",
+  "skill": "ro-crate-create",
+  "kind": "positive",
+  "split": "test",
+  "query": "My ro-crate-metadata.json is missing the license and datePublished on the root dataset. Please fix it.",
+  "accept": [
+   "ro-crate-create"
+  ]
+ },
+ {
+  "id": "p010",
+  "skill": "ro-crate-create",
+  "kind": "positive",
+  "split": "test",
+  "query": "Describe the funding from grant ABC123 (funder: Example Research Council) in my crate metadata.",
+  "accept": [
+   "ro-crate-create"
+  ]
+ },
+ {
+  "id": "p011",
+  "skill": "ro-crate-validator",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Is the crate in ./mycrate valid? Run the validator and tell me what's wrong.",
+  "accept": [
+   "ro-crate-validator"
+  ]
+ },
+ {
+  "id": "p012",
+  "skill": "ro-crate-validator",
+  "kind": "positive",
+  "split": "dev",
+  "query": "rocrate-validator says an entity 'has a local identifier' but my root has an absolute @id. Is this a real problem?",
+  "accept": [
+   "ro-crate-validator",
+   "ro-crate-profiles"
+  ]
+ },
+ {
+  "id": "p013",
+  "skill": "ro-crate-validator",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Before I send this RO-Crate to the archive, check it has everything required and tell me where the metadata is weak.",
+  "accept": [
+   "ro-crate-validator"
+  ]
+ },
+ {
+  "id": "p014",
+  "skill": "ro-crate-validator",
+  "kind": "positive",
+  "split": "test",
+  "query": "I have no internet on this machine. Can you still check whether this crate is structurally OK?",
+  "accept": [
+   "ro-crate-validator"
+  ]
+ },
+ {
+  "id": "p015",
+  "skill": "ro-crate-validator",
+  "kind": "positive",
+  "split": "test",
+  "query": "Review the quality of the metadata in ./ml-dataset-crate for someone who wants to reuse it for machine learning.",
+  "accept": [
+   "ro-crate-validator",
+   "ro-crate-consume"
+  ]
+ },
+ {
+  "id": "p016",
+  "skill": "ro-crate-spec",
+  "kind": "positive",
+  "split": "dev",
+  "query": "In RO-Crate 1.3, is license required on the root data entity?",
+  "accept": [
+   "ro-crate-spec"
+  ]
+ },
+ {
+  "id": "p017",
+  "skill": "ro-crate-spec",
+  "kind": "positive",
+  "split": "dev",
+  "query": "What is the difference between contextual entities and data entities in RO-Crate?",
+  "accept": [
+   "ro-crate-spec"
+  ]
+ },
+ {
+  "id": "p018",
+  "skill": "ro-crate-spec",
+  "kind": "positive",
+  "split": "dev",
+  "query": "According to the RO-Crate specification, should author be a plain string or an @id reference?",
+  "accept": [
+   "ro-crate-spec"
+  ]
+ },
+ {
+  "id": "p019",
+  "skill": "ro-crate-spec",
+  "kind": "positive",
+  "split": "test",
+  "query": "Where does the RO-Crate spec say how one crate may reference another crate?",
+  "accept": [
+   "ro-crate-spec",
+   "ro-crate-retrieve"
+  ]
+ },
+ {
+  "id": "p020",
+  "skill": "ro-crate-spec",
+  "kind": "positive",
+  "split": "test",
+  "query": "Can a File entity in an RO-Crate have a #local identifier, and what does that mean?",
+  "accept": [
+   "ro-crate-spec"
+  ]
+ },
+ {
+  "id": "p021",
+  "skill": "ro-crate-compatibility",
+  "kind": "positive",
+  "split": "dev",
+  "query": "This crate declares https://w3id.org/ro/crate/1.0. What do I have to change to bring it to 1.3?",
+  "accept": [
+   "ro-crate-compatibility"
+  ]
+ },
+ {
+  "id": "p022",
+  "skill": "ro-crate-compatibility",
+  "kind": "positive",
+  "split": "dev",
+  "query": "What changed between RO-Crate 1.1 and 1.2?",
+  "accept": [
+   "ro-crate-compatibility",
+   "ro-crate-spec"
+  ]
+ },
+ {
+  "id": "p023",
+  "skill": "ro-crate-compatibility",
+  "kind": "positive",
+  "split": "dev",
+  "query": "The validator reports a version mismatch for my 1.1 crate that lists a profile in the descriptor's conformsTo. What now?",
+  "accept": [
+   "ro-crate-compatibility",
+   "ro-crate-validator"
+  ]
+ },
+ {
+  "id": "p024",
+  "skill": "ro-crate-compatibility",
+  "kind": "positive",
+  "split": "test",
+  "query": "We have 200 crates on 1.2. Should we upgrade to 1.3 and what would break?",
+  "accept": [
+   "ro-crate-compatibility"
+  ]
+ },
+ {
+  "id": "p025",
+  "skill": "ro-crate-compatibility",
+  "kind": "positive",
+  "split": "test",
+  "query": "Should the metadata file be called ro-crate-metadata.json or ro-crate-metadata.jsonld?",
+  "accept": [
+   "ro-crate-compatibility",
+   "ro-crate-spec"
+  ]
+ },
+ {
+  "id": "p026",
+  "skill": "ro-crate-profiles",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Make our lab's crates declare conformance to the Workflow Run Crate profile.",
+  "accept": [
+   "ro-crate-profiles",
+   "ro-crate-workflows"
+  ]
+ },
+ {
+  "id": "p027",
+  "skill": "ro-crate-profiles",
+  "kind": "positive",
+  "split": "dev",
+  "query": "We want a Profile Crate that describes our group's metadata conventions at https://example.org/profile/1.0. How do I build it?",
+  "accept": [
+   "ro-crate-profiles"
+  ]
+ },
+ {
+  "id": "p028",
+  "skill": "ro-crate-profiles",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Which RO-Crate profile should I use for exports from an electronic lab notebook?",
+  "accept": [
+   "ro-crate-profiles"
+  ]
+ },
+ {
+  "id": "p029",
+  "skill": "ro-crate-profiles",
+  "kind": "positive",
+  "split": "test",
+  "query": "What is the difference between conformsTo on the metadata descriptor and on the root data entity?",
+  "accept": [
+   "ro-crate-profiles",
+   "ro-crate-spec"
+  ]
+ },
+ {
+  "id": "p030",
+  "skill": "ro-crate-profiles",
+  "kind": "positive",
+  "split": "test",
+  "query": "Is there a registry of RO-Crate profiles for earth observation data cubes?",
+  "accept": [
+   "ro-crate-profiles"
+  ]
+ },
+ {
+  "id": "p031",
+  "skill": "ro-crate-workflows",
+  "kind": "positive",
+  "split": "dev",
+  "query": "I have a Nextflow pipeline in ./pipeline. Package it as a Workflow RO-Crate I can upload to WorkflowHub.",
+  "accept": [
+   "ro-crate-workflows"
+  ]
+ },
+ {
+  "id": "p032",
+  "skill": "ro-crate-workflows",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Record in an RO-Crate that I ran samtools sort on input.bam to produce sorted.bam, with the command line and the time it finished.",
+  "accept": [
+   "ro-crate-workflows",
+   "ro-crate-create"
+  ]
+ },
+ {
+  "id": "p033",
+  "skill": "ro-crate-workflows",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Add the CWL workflow's diagram and its inputs and outputs as FormalParameters in the crate.",
+  "accept": [
+   "ro-crate-workflows"
+  ]
+ },
+ {
+  "id": "p034",
+  "skill": "ro-crate-workflows",
+  "kind": "positive",
+  "split": "test",
+  "query": "What is the difference between a Process Run Crate, a Workflow Run Crate and a Provenance Run Crate?",
+  "accept": [
+   "ro-crate-workflows",
+   "ro-crate-profiles"
+  ]
+ },
+ {
+  "id": "p035",
+  "skill": "ro-crate-workflows",
+  "kind": "positive",
+  "split": "test",
+  "query": "Describe my Python script analyse.py as SoftwareSourceCode in my crate, with its language and version.",
+  "accept": [
+   "ro-crate-workflows",
+   "ro-crate-create"
+  ]
+ },
+ {
+  "id": "p036",
+  "skill": "ro-crate-retrieve",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Get me the RO-Crate behind https://doi.org/10.48546/workflowhub.workflow.120.5.",
+  "accept": [
+   "ro-crate-retrieve"
+  ]
+ },
+ {
+  "id": "p037",
+  "skill": "ro-crate-retrieve",
+  "kind": "positive",
+  "split": "dev",
+  "query": "This crate has a Dataset with conformsTo https://w3id.org/ro/crate pointing at another crate. How do I fetch the referenced one?",
+  "accept": [
+   "ro-crate-retrieve"
+  ]
+ },
+ {
+  "id": "p038",
+  "skill": "ro-crate-retrieve",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Does https://zenodo.org/records/1234567 offer an RO-Crate I can download programmatically? Check the Signposting links.",
+  "accept": [
+   "ro-crate-retrieve"
+  ]
+ },
+ {
+  "id": "p039",
+  "skill": "ro-crate-retrieve",
+  "kind": "positive",
+  "split": "test",
+  "query": "Resolve this DOI to its metadata document using content negotiation or Link headers.",
+  "accept": [
+   "ro-crate-retrieve"
+  ]
+ },
+ {
+  "id": "p040",
+  "skill": "ro-crate-retrieve",
+  "kind": "positive",
+  "split": "test",
+  "query": "Download the RO-Crate from this WorkflowHub workflow page and unzip its metadata.",
+  "accept": [
+   "ro-crate-retrieve"
+  ]
+ },
+ {
+  "id": "p041",
+  "skill": "ro-crate-publish",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Zip my finished crate as a BagIt bag for the university archive.",
+  "accept": [
+   "ro-crate-publish"
+  ]
+ },
+ {
+  "id": "p042",
+  "skill": "ro-crate-publish",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Convert this detached crate into an attached one by downloading the files it lists.",
+  "accept": [
+   "ro-crate-publish"
+  ]
+ },
+ {
+  "id": "p043",
+  "skill": "ro-crate-publish",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Serve my ro-crate-metadata.json from nginx so that browsers read it with the right content type and CORS.",
+  "accept": [
+   "ro-crate-publish"
+  ]
+ },
+ {
+  "id": "p044",
+  "skill": "ro-crate-publish",
+  "kind": "positive",
+  "split": "test",
+  "query": "How do I make my crate citable with a DOI and discoverable through Signposting headers?",
+  "accept": [
+   "ro-crate-publish",
+   "ro-crate-retrieve"
+  ]
+ },
+ {
+  "id": "p045",
+  "skill": "ro-crate-publish",
+  "kind": "positive",
+  "split": "test",
+  "query": "Turn this crate into an .eln file for our lab notebook system.",
+  "accept": [
+   "ro-crate-publish",
+   "ro-crate-profiles"
+  ]
+ },
+ {
+  "id": "p046",
+  "skill": "ro-crate-deposit",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Upload ./mycrate to Zenodo (sandbox first) and fill in the repository metadata from the crate.",
+  "accept": [
+   "ro-crate-deposit"
+  ]
+ },
+ {
+  "id": "p047",
+  "skill": "ro-crate-deposit",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Deposit this crate to our InvenioRDM repository as a draft, don't publish it.",
+  "accept": [
+   "ro-crate-deposit"
+  ]
+ },
+ {
+  "id": "p048",
+  "skill": "ro-crate-deposit",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Publish my RO-Crate on Zenodo and get me a DOI.",
+  "accept": [
+   "ro-crate-deposit",
+   "ro-crate-publish"
+  ]
+ },
+ {
+  "id": "p049",
+  "skill": "ro-crate-deposit",
+  "kind": "positive",
+  "split": "test",
+  "query": "Run rocrate_inveniordm with --no-upload and show me the DataCite JSON it would send.",
+  "accept": [
+   "ro-crate-deposit"
+  ]
+ },
+ {
+  "id": "p050",
+  "skill": "ro-crate-deposit",
+  "kind": "positive",
+  "split": "test",
+  "query": "Which command-line tool uploads an RO-Crate to Zenodo?",
+  "accept": [
+   "ro-crate-deposit",
+   "ro-crate-tools"
+  ]
+ },
+ {
+  "id": "p051",
+  "skill": "ro-crate-py",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Write a Python script that creates an RO-Crate from ./data with ro-crate-py and zips it.",
+  "accept": [
+   "ro-crate-py"
+  ]
+ },
+ {
+  "id": "p052",
+  "skill": "ro-crate-py",
+  "kind": "positive",
+  "split": "dev",
+  "query": "rocrate init and then add a workflow file: what are the exact commands?",
+  "accept": [
+   "ro-crate-py"
+  ]
+ },
+ {
+  "id": "p053",
+  "skill": "ro-crate-py",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Load an existing crate in Python and add a Person as author using the rocrate library.",
+  "accept": [
+   "ro-crate-py",
+   "ro-crate-create"
+  ]
+ },
+ {
+  "id": "p054",
+  "skill": "ro-crate-py",
+  "kind": "positive",
+  "split": "test",
+  "query": "pip install rocrate and make a crate out of this folder for me.",
+  "accept": [
+   "ro-crate-py",
+   "ro-crate-create"
+  ]
+ },
+ {
+  "id": "p055",
+  "skill": "ro-crate-py",
+  "kind": "positive",
+  "split": "test",
+  "query": "How do I zip an RO-Crate using the rocrate command-line tool?",
+  "accept": [
+   "ro-crate-py"
+  ]
+ },
+ {
+  "id": "p056",
+  "skill": "ro-crate-js",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Write a Node script that builds an RO-Crate with the ro-crate npm package.",
+  "accept": [
+   "ro-crate-js"
+  ]
+ },
+ {
+  "id": "p057",
+  "skill": "ro-crate-js",
+  "kind": "positive",
+  "split": "dev",
+  "query": "In TypeScript, read ro-crate-metadata.json and list the File entities using ro-crate-js.",
+  "accept": [
+   "ro-crate-js"
+  ]
+ },
+ {
+  "id": "p058",
+  "skill": "ro-crate-js",
+  "kind": "positive",
+  "split": "dev",
+  "query": "In the browser I need to add an entity to a crate JSON: which JavaScript library should I use?",
+  "accept": [
+   "ro-crate-js",
+   "ro-crate-tools"
+  ]
+ },
+ {
+  "id": "p059",
+  "skill": "ro-crate-js",
+  "kind": "positive",
+  "split": "test",
+  "query": "roccheck says it cannot find my ro-crate-metadata.json.",
+  "accept": [
+   "ro-crate-js"
+  ]
+ },
+ {
+  "id": "p060",
+  "skill": "ro-crate-js",
+  "kind": "positive",
+  "split": "test",
+  "query": "How do I use the ROCrate class from the ro-crate package with link: true?",
+  "accept": [
+   "ro-crate-js"
+  ]
+ },
+ {
+  "id": "p061",
+  "skill": "ro-crate-excel",
+  "kind": "positive",
+  "split": "dev",
+  "query": "My collaborators only use Excel. How can they describe a folder of files and I get an RO-Crate out of it?",
+  "accept": [
+   "ro-crate-excel"
+  ]
+ },
+ {
+  "id": "p062",
+  "skill": "ro-crate-excel",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Run rocxl on this folder and tell me what it produced.",
+  "accept": [
+   "ro-crate-excel"
+  ]
+ },
+ {
+  "id": "p063",
+  "skill": "ro-crate-excel",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Generate a spreadsheet template of my files that people can fill in, then merge it into ro-crate-metadata.json.",
+  "accept": [
+   "ro-crate-excel"
+  ]
+ },
+ {
+  "id": "p064",
+  "skill": "ro-crate-excel",
+  "kind": "positive",
+  "split": "test",
+  "query": "ro-crate-excel complains about Siegfried. What is that and how do I install it?",
+  "accept": [
+   "ro-crate-excel"
+  ]
+ },
+ {
+  "id": "p065",
+  "skill": "ro-crate-excel",
+  "kind": "positive",
+  "split": "test",
+  "query": "I keep file descriptions in a spreadsheet, one row per file. Can you turn that into an RO-Crate?",
+  "accept": [
+   "ro-crate-excel",
+   "ro-crate-create"
+  ]
+ },
+ {
+  "id": "p066",
+  "skill": "ro-crate-tabulate",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Load this crate's metadata into SQLite so I can query authors and licences with SQL.",
+  "accept": [
+   "ro-crate-tabulate"
+  ]
+ },
+ {
+  "id": "p067",
+  "skill": "ro-crate-tabulate",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Turn ro-crate-metadata.json into CSV tables I can open in pandas.",
+  "accept": [
+   "ro-crate-tabulate"
+  ]
+ },
+ {
+  "id": "p068",
+  "skill": "ro-crate-tabulate",
+  "kind": "positive",
+  "split": "dev",
+  "query": "I have 300 crates in ./crates. Count how many use each licence.",
+  "accept": [
+   "ro-crate-tabulate",
+   "ro-crate-consume"
+  ]
+ },
+ {
+  "id": "p069",
+  "skill": "ro-crate-tabulate",
+  "kind": "positive",
+  "split": "test",
+  "query": "How do I configure tabulator's config.json to get one table per entity type?",
+  "accept": [
+   "ro-crate-tabulate"
+  ]
+ },
+ {
+  "id": "p070",
+  "skill": "ro-crate-tabulate",
+  "kind": "positive",
+  "split": "test",
+  "query": "Export all the Person entities of this crate into a spreadsheet.",
+  "accept": [
+   "ro-crate-tabulate",
+   "ro-crate-consume"
+  ]
+ },
+ {
+  "id": "p071",
+  "skill": "ro-crate-runcrate",
+  "kind": "positive",
+  "split": "dev",
+  "query": "What commands were run in this Workflow Run Crate? List the tools, inputs and outputs.",
+  "accept": [
+   "ro-crate-runcrate",
+   "ro-crate-consume"
+  ]
+ },
+ {
+  "id": "p072",
+  "skill": "ro-crate-runcrate",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Re-run the workflow described in this run crate, but as a dry run first.",
+  "accept": [
+   "ro-crate-runcrate"
+  ]
+ },
+ {
+  "id": "p073",
+  "skill": "ro-crate-runcrate",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Convert this CWLProv research object from cwltool --provenance into a Workflow Run RO-Crate.",
+  "accept": [
+   "ro-crate-runcrate"
+  ]
+ },
+ {
+  "id": "p074",
+  "skill": "ro-crate-runcrate",
+  "kind": "positive",
+  "split": "test",
+  "query": "runcrate report prints nothing for my crate. Why?",
+  "accept": [
+   "ro-crate-runcrate"
+  ]
+ },
+ {
+  "id": "p075",
+  "skill": "ro-crate-runcrate",
+  "kind": "positive",
+  "split": "test",
+  "query": "Can I replay a Process Run Crate on my laptop?",
+  "accept": [
+   "ro-crate-runcrate"
+  ]
+ },
+ {
+  "id": "p076",
+  "skill": "ro-crate-action-recorder",
+  "kind": "positive",
+  "split": "dev",
+  "query": "I maintain a Python click CLI. Record every run of it as RO-Crate provenance automatically.",
+  "accept": [
+   "ro-crate-action-recorder"
+  ]
+ },
+ {
+  "id": "p077",
+  "skill": "ro-crate-action-recorder",
+  "kind": "positive",
+  "split": "dev",
+  "query": "How do I use rocrate-action-recorder with argparse?",
+  "accept": [
+   "ro-crate-action-recorder"
+  ]
+ },
+ {
+  "id": "p078",
+  "skill": "ro-crate-action-recorder",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Capture provenance for each invocation of our Python tool as a Process Run Crate.",
+  "accept": [
+   "ro-crate-action-recorder",
+   "ro-crate-workflows"
+  ]
+ },
+ {
+  "id": "p079",
+  "skill": "ro-crate-action-recorder",
+  "kind": "positive",
+  "split": "test",
+  "query": "I want a decorator that logs the inputs and outputs of my CLI into ro-crate-metadata.json.",
+  "accept": [
+   "ro-crate-action-recorder"
+  ]
+ },
+ {
+  "id": "p080",
+  "skill": "ro-crate-action-recorder",
+  "kind": "positive",
+  "split": "test",
+  "query": "The crate written by the recorder fails validation because the software has no url. What do I do?",
+  "accept": [
+   "ro-crate-action-recorder",
+   "ro-crate-validator"
+  ]
+ },
+ {
+  "id": "p081",
+  "skill": "ro-crate-tools",
+  "kind": "positive",
+  "split": "dev",
+  "query": "I need a nice HTML page for my crate and a GUI to edit its metadata. What tools exist?",
+  "accept": [
+   "ro-crate-tools"
+  ]
+ },
+ {
+  "id": "p082",
+  "skill": "ro-crate-tools",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Which RO-Crate tools are still maintained? I want to generate crates from Nextflow runs.",
+  "accept": [
+   "ro-crate-tools",
+   "ro-crate-workflows"
+  ]
+ },
+ {
+  "id": "p083",
+  "skill": "ro-crate-tools",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Is there a Java library for creating RO-Crates?",
+  "accept": [
+   "ro-crate-tools"
+  ]
+ },
+ {
+  "id": "p084",
+  "skill": "ro-crate-tools",
+  "kind": "positive",
+  "split": "test",
+  "query": "Render ro-crate-preview.html for my crate with rochtml.",
+  "accept": [
+   "ro-crate-tools"
+  ]
+ },
+ {
+  "id": "p085",
+  "skill": "ro-crate-tools",
+  "kind": "positive",
+  "split": "test",
+  "query": "Compare Describo and Crate-O for editing crate metadata.",
+  "accept": [
+   "ro-crate-tools"
+  ]
+ },
+ {
+  "id": "n001",
+  "skill": null,
+  "kind": "negative",
+  "split": "dev",
+  "query": "Make a bar chart of the species counts in data/results.csv.",
+  "accept": []
+ },
+ {
+  "id": "n002",
+  "skill": null,
+  "kind": "negative",
+  "split": "dev",
+  "query": "Convert this JSON-LD file to Turtle with rdflib.",
+  "accept": []
+ },
+ {
+  "id": "n003",
+  "skill": null,
+  "kind": "negative",
+  "split": "dev",
+  "query": "Validate config.json against this JSON Schema and list the errors.",
+  "accept": []
+ },
+ {
+  "id": "n004",
+  "skill": null,
+  "kind": "negative",
+  "split": "dev",
+  "query": "Zip the folder ./photos and upload the archive to our S3 bucket.",
+  "accept": []
+ },
+ {
+  "id": "n005",
+  "skill": null,
+  "kind": "negative",
+  "split": "dev",
+  "query": "Write a CITATION.cff for my software repository.",
+  "accept": []
+ },
+ {
+  "id": "n006",
+  "skill": null,
+  "kind": "negative",
+  "split": "dev",
+  "query": "Write a Python script that uploads any file to Zenodo with the requests library.",
+  "accept": []
+ },
+ {
+  "id": "n007",
+  "skill": null,
+  "kind": "negative",
+  "split": "dev",
+  "query": "How do I write a Dockerfile for my Flask app?",
+  "accept": []
+ },
+ {
+  "id": "n008",
+  "skill": null,
+  "kind": "negative",
+  "split": "dev",
+  "query": "Refactor this function to use pathlib instead of os.path.",
+  "accept": []
+ },
+ {
+  "id": "n009",
+  "skill": null,
+  "kind": "negative",
+  "split": "dev",
+  "query": "Summarise the attached PDF in five bullet points.",
+  "accept": []
+ },
+ {
+  "id": "n010",
+  "skill": null,
+  "kind": "negative",
+  "split": "dev",
+  "query": "What does this DataCite XML record say about the creators?",
+  "accept": []
+ },
+ {
+  "id": "n011",
+  "skill": null,
+  "kind": "negative",
+  "split": "dev",
+  "query": "Convert my Excel sheet to CSV.",
+  "accept": []
+ },
+ {
+  "id": "n012",
+  "skill": null,
+  "kind": "negative",
+  "split": "dev",
+  "query": "Review the diff of my pull request for bugs.",
+  "accept": []
+ },
+ {
+  "id": "n013",
+  "skill": null,
+  "kind": "negative",
+  "split": "dev",
+  "query": "Set up a GitHub Action that runs pytest on every push.",
+  "accept": []
+ },
+ {
+  "id": "n014",
+  "skill": null,
+  "kind": "negative",
+  "split": "dev",
+  "query": "What is the best database for storing ten million JSON documents?",
+  "accept": []
+ },
+ {
+  "id": "n015",
+  "skill": null,
+  "kind": "negative",
+  "split": "dev",
+  "query": "Write a Snakemake workflow that counts the lines in every file in a folder.",
+  "accept": []
+ },
+ {
+  "id": "n016",
+  "skill": null,
+  "kind": "negative",
+  "split": "test",
+  "query": "Install Node and run npm test in this project.",
+  "accept": []
+ },
+ {
+  "id": "n017",
+  "skill": null,
+  "kind": "negative",
+  "split": "test",
+  "query": "Create a Python package with a pyproject.toml.",
+  "accept": []
+ },
+ {
+  "id": "n018",
+  "skill": null,
+  "kind": "negative",
+  "split": "test",
+  "query": "What is the capital of France?",
+  "accept": []
+ },
+ {
+  "id": "n019",
+  "skill": null,
+  "kind": "negative",
+  "split": "test",
+  "query": "Help me write a README for my repository.",
+  "accept": []
+ },
+ {
+  "id": "n020",
+  "skill": null,
+  "kind": "negative",
+  "split": "test",
+  "query": "Squash my last three commits with git rebase.",
+  "accept": []
+ },
+ {
+  "id": "n021",
+  "skill": null,
+  "kind": "negative",
+  "split": "test",
+  "query": "Make a slide deck summarising our results.",
+  "accept": []
+ },
+ {
+  "id": "n022",
+  "skill": null,
+  "kind": "negative",
+  "split": "test",
+  "query": "Which licence should I choose for my open-source library?",
+  "accept": []
+ },
+ {
+  "id": "n023",
+  "skill": null,
+  "kind": "negative",
+  "split": "test",
+  "query": "Convert this Word document to PDF.",
+  "accept": []
+ },
+ {
+  "id": "n024",
+  "skill": null,
+  "kind": "negative",
+  "split": "test",
+  "query": "How do I parse JSON in Python?",
+  "accept": []
+ },
+ {
+  "id": "n025",
+  "skill": null,
+  "kind": "negative",
+  "split": "test",
+  "query": "Explain the FAIR data principles in two paragraphs.",
+  "accept": []
+ }
+]
