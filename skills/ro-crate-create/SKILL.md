@@ -8,11 +8,15 @@ description: Create or edit an RO-Crate: write or repair ro-crate-metadata.json 
 Spec 1.3: https://www.researchobject.org/ro-crate/specification/1.3/ (permalink https://w3id.org/ro/crate/1.3).
 Requirement tables with severities: https://www.researchobject.org/ro-crate/quick-reference
 
+## Do not guess
+Ask the user for facts about them and their project: authors, publisher, organisation, affiliation, ORCID/ROR/DOI, licence, funders, dates of events, and software or tool versions. Do not infer them from the user's email address, username, git config or machine, and never invent identifiers. You may derive what you can observe: file sizes and media types from the files, `tool --version` output, titles and descriptions from the content (say that you did).
+If you cannot ask: leave optional properties out. For what the root data entity must have (`license`, `name`, `description`, `datePublished`) use an obviously temporary value that starts with `TODO:` (for example `"license": "TODO: choose a licence"`; today's date is fine for the `datePublished` of a draft), and list every `TODO:` value in your answer. The lint script (`ro-crate-validator`) warns about `TODO:` values. Never publish, deposit or hand over a crate that still contains one.
+
 ## Before writing
 - **New crate:** target 1.3. **Existing crate:** read its declared version (descriptor `conformsTo`) and keep it; upgrade only if asked (changes: https://www.researchobject.org/ro-crate/whats-changed-in-1-2 and `-1-3`).
 - **Only released versions.** Never write `-DRAFT` specs, contexts, `conformsTo` or profile URIs.
 - If the Python tool is available, prefer `pip install rocrate` and `rocrate init` to bootstrap from a directory, then edit by hand; do not write RO-Crate libraries yourself.
-- **Never invent identifiers** (ORCIDs, DOIs, RORs, licence URLs). Ask the user, or use a `#local-id` entity until they supply one. The ORCID `https://orcid.org/0000-0002-1825-0097` (fictional Josiah Carberry) is a deliberate example record, fine for examples and tests only.
+- Example identifier: the ORCID `https://orcid.org/0000-0002-1825-0097` (fictional Josiah Carberry) is a deliberate example record, fine for examples and tests only.
 
 ## Minimal crate
 `ro-crate-metadata.json` in the root directory of the data:
@@ -85,7 +89,8 @@ Requirement tables with severities: https://www.researchobject.org/ro-crate/quic
 - [references/data-entities.md](references/data-entities.md): directories, web-based files, `contentUrl`/`localPath`, distributions, file formats, path encoding.
 - [references/contextual-entities.md](references/contextual-entities.md): people, organisations, licences, funding, citations, places, keywords, identifiers.
 - [references/jsonld.md](references/jsonld.md): `@context`, extending with new terms, relative URIs and `@base`.
-- [references/provenance.md](references/provenance.md): software, equipment, change history actions.
+- [references/provenance.md](references/provenance.md): software, equipment, change history actions, recording an AI agent's own work.
+- [references/from-other-metadata.md](references/from-other-metadata.md): starting from CITATION.cff, codemeta.json or other project metadata (cffconvert + JSON-LD flattening).
 
 ## Workflow
 1. Inspect the directory (or the existing crate) and list files.

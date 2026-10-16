@@ -1,0 +1,44 @@
+# Tool evaluation: what was tested, strengths, weaknesses, scope
+
+Use this to decide whether an existing tool is in scope for a task, instead of writing a new implementation. Evidence is from runs on 2026-10-16 (versions given); "tested" means the command was run, "help only" means only `--help`/README was read, "untested" means taken from the RO-Crate tools list (https://www.researchobject.org/ro-crate/tools) only. Statuses (alpha/beta/production) are the tools list's labels. Tools change quickly: re-check versions and flags.
+
+## Rules that apply to every tool
+- **One virtual environment (or npm prefix) per tool.** `rocrate-action-recorder` pins `rocrate==0.15.0`; installing it into an environment with ro-crate-py 0.16.0 downgraded it and made `runcrate report` fail on a 1.3 crate (`ValueError: version '1.3' not supported`). The same crate worked in a clean environment.
+- **Always review generated crates.** Most tools write a crate that lacks root `name`, `description`, `license`, authors, or declares an older RO-Crate version. Complete the root, then validate (`ro-crate-validator`).
+- **Never guess** licences, authors, organisations, versions or identifiers to satisfy a tool.
+- **Uploads and replays are outward actions**: confirm first (`ro-crate-deposit`, `ro-crate-runcrate`).
+
+## Summary table
+
+| Tool (version tested) | Task | Verdict | Use when | Avoid when |
+|---|---|---|---|---|
+| ro-crate-py `rocrate` 0.16.0 | create, load, modify, zip crates (Python) | **Use** | any Python crate scripting; `rocrate init`, library, `write-zip`; default RO-Crate 1.3 | you need the root fully described automatically (it does not set `name`, `description`, `license`) |
+| roc-validator `rocrate-validator` 0.12.2 | validate against spec and profiles | **Use first** for profile/SHACL checks | any final or incoming crate; JSON output; exit code 0/1; passed a minimal crate with HTTP(S) proxies pointed at a dead address, so no context fetch was needed there | judging 1.0 crates (no 1.0 profile), run-crate profiles newer than 0.5, workflow profiles on 1.3 crates (built on 1.1), Profile Crates with absolute root `@id` (over-strict); never treat a pass as proof of quality |
+| `lint_crate.py` (this repo, ro-crate-validator skill) | offline structural checks | **Use** as a fast first pass | no network, missing `hasPart` files, unreachable entities, `-DRAFT` URIs, descriptor/root properties | profile rules, semantics, SHACL |
+| signposting 0.9.9 | resolve a PID to crate links | **Use** | DOI/URL to crate (`CiteAs`, `DescribedBy`, `Item`) | you need the `profile` attribute of the link (the CLI output omits it: read the `Link` header with `curl -I`); the first call on a slow DOI timed out at 60 s, allow 120 s |
+| `rochtml` (`ro-crate-html` 0.1.6, beta) | write `ro-crate-preview.html` | **Use** | HTML preview next to `ro-crate-metadata.json` | you need a styled site (see `rocstatic`/`rocsite`, untested) |
+| `ro-crate-js` 3.7.2 (beta) | create/modify crates (Node) | **Use with care** | JavaScript projects | assuming it targets 1.3: a new `ROCrate()` writes the **1.2** context plus `@vocab` and ignores constructor options; its `rocval` CLI crashed (`program.version is not a function`), `roccheck` is "not a full validation" |
+| `rocrate-action-recorder` 0.7.1 (beta) | record Python CLI runs as provenance | **Use for CLIs you author**; not general | argparse/click/cyclopts tools you maintain (agent runs: worked after `scripts/link_actions.py` fix-up) | wrapping arbitrary shell commands; its output was RO-Crate 1.1 + Process Run Crate 0.5, failed `ro-crate-1.3` validation (software `url`, descriptor/`conformsTo`), recorded the OS user as agent, actions not linked from the root until fixed, needs Python 3.13+ and pins `rocrate==0.15.0` |
+| `runcrate` 0.6.2 | report on / replay / convert run crates | **Use** `report`; `run`/`convert` help only | "what was run here?" on a run crate; CWLProv conversion | executing untrusted crates; shared environments (see pin conflict) |
+| `rocrate-tabular` `tabulator` 0.2.0 (alpha) | crate to SQLite/CSV | **Use** for counting/filtering | many crates or SQL questions | per-type tables without editing `config.json` (default is one `property` table, 37 rows for a 9-entity crate; CSV dir empty); it writes `config.json` into the working directory; not on PyPI under that name (install from GitHub) |
+| `ro-crate-excel` (`rocxl`/`xlro` 1.2.1, beta) | folder + spreadsheet to crate | **Use with Siegfried** | collaborators supply metadata in Excel; folder to first-draft crate | Siegfried (`sf`) missing (fails with "Have you installed Siegfried?"); you cannot tolerate in-place rewrites (use a copy); output is RO-Crate 1.2, `license` as a plain string, and one round trip lost `contentSize`; not validated in the tests |
+| `rocrate-zenodo` 0.1.1 (alpha) | deposit to Zenodo (legacy API) | **Use with confirmation**; help only | draft uploads to Zenodo sandbox, then publish on instruction | InvenioRDM repositories; unattended publishing (irreversible DOI) |
+| `rocrate-inveniordm` 2.1.0 (alpha) | deposit to InvenioRDM / Zenodo | **Use with confirmation** | `--no-upload` writes `datacite-out.json` for review (tested, works with dummy credentials); then draft upload | publishing without review |
+| RO-Crate-RAG-Validator (alexhambley, unreleased, BSD-3) | per-entity LLM + RAG validation | **Optional / not recommended as a dependency** | extra usefulness review with your own LLM keys | structural validation (per entity only, root assumed `./`, non-deterministic, needs embeddings/chat API keys, bundled profile is the 1.2 quick reference) |
+| nf-core RO-Crate, `nf-prov`, `galaxy2cwl`, PyCOMPSs `inspect`, Describo, Crate-O, NovaCrate, RO-Crate Playground, `rocrateR`, ro-crate-java/-ruby/-rs | various | **Untested**: listed by the tools page | follow their docs; verify output with `ro-crate-validator` | claiming results you have not checked |
+
+## Evidence from agent evals (with vs without skill)
+- ro-crate-excel: both agents completed the round trip once Siegfried was installed; the skill supplied the install steps and the `-r` flag.
+- rocrate-action-recorder: the skill-guided agent used the library and fixed its output; the baseline wrote its own recorder (parameters, sha256, failure status) and did not validate it. That is the re-implementation these skills are meant to prevent, but note the library's output needed fix-ups too.
+- Run-crate examples: the official Process Run Crate 0.6 example (profile entity typed only `CreativeWork`, `softwareVersion`) fails `rocrate-validator -p ro-crate-1.3` 0.12.2; the fixture and skill example use `["CreativeWork", "Profile"]` and `version`.
+Details in `tests/eval-results/` of the repository. Summary relevant to tools:
+- ro-crate-js: both runs first lost root fields (options ignored), both ended with a valid **1.2** crate; the skill avoided the detour and stated the version.
+- rocrate-tabular and runcrate report: a no-skill agent solved the same small questions by reading the JSON, so these tools pay off for many crates or large crates, not for one tiny crate.
+- Deposit: the skill-guided agent kept tokens out of chat and used the sandbox-first, review-first flow; the no-skill agent asked the user to send the token and described raw API calls.
+- ro-crate-py: with the skill the agent filled `name`/`description`/`license` after `rocrate init`; both configurations produced valid 1.3 crates.
+
+## Scope guide
+1. A task a listed tool already does (preview, tables, validation, zip, deposit, run report): use the tool.
+2. The tool only partly fits (Python-only recorder, Excel needing Siegfried): use it if you control the inputs, otherwise write the metadata following `ro-crate-create` and say why.
+3. The tool is unreleased, unmaintained or a prototype (see the tools list status; RAG validator): mention it, do not depend on it.
+4. Tool output is always a draft for review, never a finished deliverable.

@@ -11,16 +11,16 @@ Source: https://www.researchobject.org/workflow-run-crate/profiles/ (Process Run
   "license": {"@id": "https://creativecommons.org/licenses/by/4.0/"},
   "conformsTo": {"@id": "https://w3id.org/ro/wfrun/process/0.6"},
   "hasPart": [{"@id": "in.jpg"}, {"@id": "out.jpg"}], "mentions": {"@id": "#run1"}},
- {"@id": "https://w3id.org/ro/wfrun/process/0.6", "@type": "CreativeWork", "name": "Process Run Crate", "version": "0.6"},
+ {"@id": "https://w3id.org/ro/wfrun/process/0.6", "@type": ["CreativeWork", "Profile"], "name": "Process Run Crate", "version": "0.6"},
  {"@id": "https://www.imagemagick.org/", "@type": "SoftwareApplication", "name": "ImageMagick",
-  "url": "https://www.imagemagick.org/", "softwareVersion": "6.9.7-4"},
+  "url": "https://www.imagemagick.org/", "version": "6.9.7-4"},
  {"@id": "#run1", "@type": "CreateAction", "name": "Convert to sepia",
   "description": "convert -sepia-tone 80% in.jpg out.jpg", "endTime": "2025-01-31T17:01:07+10:00",
   "instrument": {"@id": "https://www.imagemagick.org/"}, "object": {"@id": "in.jpg"}, "result": {"@id": "out.jpg"},
   "agent": {"@id": "https://orcid.org/0000-0002-1825-0097"}}
 ]}
 ```
-(`in.jpg`, `out.jpg` `File` entities and the agent `Person` omitted.) Requirements in short:
+(`in.jpg`, `out.jpg` `File` entities and the agent `Person` omitted.) Two points differ from the profile page's own example, which `rocrate-validator -p ro-crate-1.3` (0.12.2) rejects: the profile entity needs `Profile` in `@type` (RO-Crate 1.2+ requires it for every profile in the root `conformsTo`), and the software entity needs `version` (the profile accepts `version` or the more specific `softwareVersion`, not both; the validator wants `version`). Requirements in short:
 - Root `conformsTo` references a `CreativeWork` entity for the versioned profile permalink.
 - Tool: `SoftwareApplication`/`SoftwareSourceCode`/`ComputationalWorkflow`; `@id` absolute URI (or relative to a data entity, or `#local`); SHOULD have `name`, `url`, version (`softwareVersion` preferred for applications, not both).
 - Execution: `CreateAction` (or `ActivateAction` with no result, `UpdateAction` for in-place changes); unique `@id` (random UUID recommended), listed in the root's `mentions`; SHOULD have `name`, `description` (informational command line), `endTime`; MAY have `startTime`; `instrument` MUST name the tool; `object`/`result` the input/output data entities; `agent` the person or organisation.

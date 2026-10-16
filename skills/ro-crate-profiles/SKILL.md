@@ -1,11 +1,15 @@
 ---
 name: ro-crate-profiles
-description: Find, declare, apply and author RO-Crate profiles and Profile Crates. Use when a crate should conform to a domain profile (Workflow RO-Crate, Workflow Run Crate, ARC/ISA, ELN, ...), when reading or writing conformsTo on a root data entity, when defining a new profile, or when creating a machine-readable Profile Crate (hasResource, ResourceDescriptor, isProfileOf).
+description: Find, declare, apply and author RO-Crate profiles and Profile Crates. Use when a crate should conform to a domain profile (Workflow RO-Crate, Workflow Run Crate, ARC/ISA, ELN, ...), when reading or writing conformsTo on a root data entity, when defining a new profile, or when creating a machine-readable Profile Crate (hasResource, ResourceDescriptor, isProfileOf). For the full list of profile permalinks and validators see its references; for run-crate provenance see ro-crate-workflows.
 ---
 
 # RO-Crate profiles (RO-Crate 1.2+)
 
 Spec: https://www.researchobject.org/ro-crate/specification/1.3/profiles . A profile is a set of conventions (types, properties, versions, packaging) a subset of crates follows; a Profile Crate is an RO-Crate that describes one. Profiles are conventions, not strict inheritance.
+
+## Do not guess
+Ask the user for facts about them and their project: authors, publisher, organisation, affiliation, ORCID/ROR/DOI, licence, funders, dates of events, and software or tool versions. Do not infer them from the user's email address, username, git config or machine, and never invent identifiers. You may derive what you can observe: file sizes and media types from the files, `tool --version` output, titles and descriptions from the content (say that you did).
+If you cannot ask: leave optional properties out. For what the root data entity must have (`license`, `name`, `description`, `datePublished`) use an obviously temporary value that starts with `TODO:` (for example `"license": "TODO: choose a licence"`; today's date is fine for the `datePublished` of a draft), and list every `TODO:` value in your answer. The lint script (`ro-crate-validator`) warns about `TODO:` values. Never publish, deposit or hand over a crate that still contains one.
 
 ## Find a profile
 Reuse before inventing: registry https://profiles.ro-crate.org/ , overview https://www.researchobject.org/ro-crate/profiles . Known families: Workflow RO-Crate (+ Workflow Testing), Workflow Run Crate (Process / Workflow / Provenance, see `ro-crate-workflows`), Common Provenance Model, ARC/ISA profiles, ELN (`.eln`), RELIANCE, Describo profiles, RO-Crates-and-Excel. Use the profile's own page for its requirements and current version. Use-case table with permalinks and validator support: [references/known-profiles.md](references/known-profiles.md).

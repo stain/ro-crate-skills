@@ -13,7 +13,7 @@ Spec: https://www.researchobject.org/ro-crate/specification/1.3/ (default target
 python -m venv /tmp/rocval && /tmp/rocval/bin/pip install roc-validator
 /tmp/rocval/bin/rocrate-validator profiles list   # profiles/versions this release knows
 ```
-The validator needs network access (it fetches the JSON-LD context, e.g. `https://w3id.org/ro/crate/1.3/context`). Run with `< /dev/null` to avoid prompts.
+Run with `< /dev/null` to avoid prompts. Network access: with HTTP(S) proxies set to a dead address `rocrate-validator -p ro-crate-1.3` still validated a minimal crate (so it did not need to fetch the JSON-LD context for that crate); installing it needs the network.
 
 ## Checked behaviour (roc-validator 0.12.2)
 - Profiles known: `ro-crate-1.1`, `ro-crate-1.2`, `ro-crate-1.3` (built on 1.2), `isa-ro-crate`, `workflow-ro-crate-1.0`, `workflow-testing-ro-crate-0.1`, `process-run-crate-0.5`, `workflow-run-crate-0.5`, `provenance-run-crate-0.5`. The run-crate profiles lag the project's current 0.6 pages; a crate declaring 0.6 is not necessarily wrong.
@@ -21,6 +21,7 @@ The validator needs network access (it fetches the JSON-LD context, e.g. `https:
 - Fixtures: a minimal 1.3 crate passes at REQUIRED (66 checks, 63 passed, 3 skipped); a crate lacking `description`, `license` and `datePublished` fails with exactly those three REQUIRED issues. At RECOMMENDED the same crate also reports missing `name`s, `publisher` and `hasPart` shape. The validator did **not** flag a `hasPart` entry whose file is missing: the offline lint script does.
 - Automatic profile detection (no `-p`) worked for a crate declaring 1.3.
 - Known mismatches (checked on fixtures): a legacy 1.0 crate (`.jsonld` descriptor) fails the 1.1 profile; a correct Process Run Crate 0.6 (`softwareVersion`) fails `process-run-crate-0.5`; a Profile Crate whose root `@id` is an absolute URI fails 1.3 with "Data Entity ... has a local identifier but the Root Data Entity does not..." which looks over-strict against the spec. Decide by reading the spec and profile text, not by the failure alone.
+- The workflow/run-crate profiles (`workflow-ro-crate-1.0`, `workflow-run-crate-0.5`, ...) are built on RO-Crate 1.1: a correct 1.3 crate fails them with descriptor `conformsTo` or "Main Workflow" errors (version mismatch). Validate against `ro-crate-1.3` and read the profile page.
 - A detached crate: pass the metadata file (`validate -p ro-crate-1.3 path/to/<prefix>-ro-crate-metadata.json`).
 
 ## Validate
@@ -35,7 +36,7 @@ rocrate-validator validate --output-format json <crate dir>
 - JSON output may be followed by log text; parse the first JSON value only.
 
 ## Offline lint (no network, no install)
-`python scripts/lint_crate.py <crate dir | ro-crate-metadata.json> [--json]` (path relative to this skill folder; Python 3, standard library only). It checks: JSON validity, flat `@graph`, `@id`/`@type` on every entity, unique `@id`s, released `@context`/`conformsTo` (flags any `-DRAFT` URI), descriptor and root found via `about`, root `name`/`description`/`datePublished`/`license`, ISO 8601 `datePublished`, entities unreachable from the root, `hasPart` targets and data entities present on disk, preview not in `hasPart`, no `../` ids. Exit 1 on errors. Run it first (it is fast and works offline), then `rocrate-validator` for profile/SHACL checks, then the semantic review below. It does not check profiles or content quality.
+`python scripts/lint_crate.py <crate dir | ro-crate-metadata.json> [--json]` (path relative to this skill folder; Python 3, standard library only). It checks: JSON validity, flat `@graph`, `@id`/`@type` on every entity, unique `@id`s, released `@context`/`conformsTo` (flags any `-DRAFT` URI), descriptor and root found via `about`, root `name`/`description`/`datePublished`/`license`, ISO 8601 `datePublished`, entities unreachable from the root, `hasPart` targets and data entities present on disk, preview not in `hasPart`, no `../` ids, leftover `TODO:` placeholder values (warning; see the Do not guess rule). Exit 1 on errors. Run it first (it is fast and works offline), then `rocrate-validator` for profile/SHACL checks, then the semantic review below. It does not check profiles or content quality.
 
 ## Before consuming (precaution)
 1. Validate the crate you were given.

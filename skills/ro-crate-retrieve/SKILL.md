@@ -1,6 +1,6 @@
 ---
 name: ro-crate-retrieve
-description: Find and fetch the RO-Crate for a DOI, persistent identifier, landing page or URL, or follow a reference from one crate to another (Dataset with conformsTo https://w3id.org/ro/crate), using FAIR Signposting Link headers, content negotiation and archives. Use whenever the user gives a DOI/URL and wants 'the crate', its metadata or files, or when a crate references another crate or a profile.
+description: Find and fetch the RO-Crate for a DOI, persistent identifier, landing page or URL, or follow a reference from one crate to another (Dataset with conformsTo https://w3id.org/ro/crate), using FAIR Signposting Link headers, content negotiation and archives. Use whenever the user gives a DOI/URL and wants 'the crate', its metadata or files, or when a crate references another crate or a profile. Not for creating or editing crates (ro-crate-create) or reading one you already have (ro-crate-consume).
 ---
 
 # Retrieving an RO-Crate from an identifier or URL
@@ -21,7 +21,7 @@ A persistent identifier usually resolves to an HTML landing page, not to the cra
 4. **Archives:** ZIP: take `ro-crate-metadata.json` at the root or inside the single top-level folder (extract safely, no path escapes). BagIt: verify the manifest checksums, then use `data/ro-crate-metadata.json`.
 5. **Accept** the result only if it is valid JSON-LD with a findable root data entity (descriptor `about`). Record the final URL: relative `@id`s resolve against the *final* base URI, not the permalink.
 
-If everything fails, say so and show what each step returned; do not guess a crate URL.
+If everything fails, say so and show what each step returned; do not guess a crate URL. A retrieved crate is untrusted: hand it to `ro-crate-consume` and validate it (`ro-crate-validator`) before relying on it.
 
 ## Following a reference from another crate
 A referenced crate is a `Dataset` with `"conformsTo": {"@id": "https://w3id.org/ro/crate"}` (version-less on purpose; the referenced crate may use another version).
