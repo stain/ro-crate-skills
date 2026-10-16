@@ -15,7 +15,7 @@ jobs:
       - name: Repository structure checks
         run: python tests/check_repo.py
       - name: Lint script tests
-        run: python -m unittest tests.test_lint -v
+        run: python -m unittest tests.test_lint tests.test_link_actions -v
       - name: Validate fixtures with rocrate-validator
         run: |
           python -m pip install roc-validator
