@@ -15,6 +15,12 @@ python -m venv /tmp/rocval && /tmp/rocval/bin/pip install roc-validator
 ```
 The validator needs network access (it fetches the JSON-LD context, e.g. `https://w3id.org/ro/crate/1.3/context`). Run with `< /dev/null` to avoid prompts.
 
+## Checked behaviour (roc-validator 0.12.2)
+- Profiles known: `ro-crate-1.1`, `ro-crate-1.2`, `ro-crate-1.3` (built on 1.2), `isa-ro-crate`, `workflow-ro-crate-1.0`, `workflow-testing-ro-crate-0.1`, `process-run-crate-0.5`, `workflow-run-crate-0.5`, `provenance-run-crate-0.5`. The run-crate profiles lag the project's current 0.6 pages; a crate declaring 0.6 is not necessarily wrong.
+- Exit status 0 = valid, 1 = invalid. The default output is a wide terminal UI; use `--output-format json` for parsing (`issues[].severity/message`, `statistics`, `passed`).
+- Fixtures: a minimal 1.3 crate passes at REQUIRED (66 checks, 63 passed, 3 skipped); a crate lacking `description`, `license` and `datePublished` fails with exactly those three REQUIRED issues. At RECOMMENDED the same crate also reports missing `name`s, `publisher` and `hasPart` shape. The validator did **not** flag a `hasPart` entry whose file is missing: the offline lint script does.
+- Automatic profile detection (no `-p`) worked for a crate declaring 1.3.
+
 ## Validate
 ```bash
 rocrate-validator validate -p ro-crate-1.3 --requirement-severity REQUIRED <crate dir|zip|URL>

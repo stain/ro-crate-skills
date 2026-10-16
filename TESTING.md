@@ -13,7 +13,7 @@ Checks that manifests parse and share one version, and that each `skills/*/SKILL
 - `minimal-crate/`: should pass `rocrate-validator validate -p ro-crate-1.3` at REQUIRED level.
 - `invalid-crate/`: lacks `description`, `datePublished`, `license` and links a missing file; the validator should report REQUIRED failures.
 
-(The validator needs network access to fetch the JSON-LD context. The expected results above are not yet confirmed by a run.)
+Confirmed with roc-validator 0.12.2 (2026-10-16): `rocrate-validator validate -p ro-crate-1.3 --requirement-severity REQUIRED tests/fixtures/minimal-crate` exits 0 (63 checks passed, 3 skipped); the same on `invalid-crate` exits 1 with three REQUIRED failures (description, license, datePublished). It does not report the missing `missing.txt`; `skills/ro-crate-validator/scripts/lint_crate.py` does. Whether the validator works without network access is not yet confirmed.
 
 ## 3. Evals (per skill)
 Each skill has `evals/evals.json` (prompts with `expectations`, the format used by the skill-creator plugin). Any agent can run the prompts by hand or in CI and compare the answer with the expectations; Claude Code users can also use the skill-creator plugin's viewer, benchmark and description optimiser (these need Claude Code). Prompts that name `tests/fixtures/...` expect to run from the repository root.
