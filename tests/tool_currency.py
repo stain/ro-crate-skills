@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 """Print release and maintenance data for the RO-Crate tools evaluated in
-skills/ro-crate-tools/references/tool-evaluation.md, from PyPI, npm and GitHub (needs network).
+skills/ro-crate-tools/references/tool-evaluation.md (needs network and git).
 
 Usage: python tests/tool_currency.py [--today YYYY-MM-DD]
-Standard library only. GitHub's unauthenticated API allows about 60 requests per hour.
-Classes: active = release or push within 6 months; slow = 6-24 months; stale = over 24 months.
+Releases come from PyPI and npm; the last commit on the repository's default branch comes from a
+shallow `git clone` (no GitHub API, so there is no rate limit). Standard library plus git.
+Classes: active = release or last commit within 6 months; slow = 6-24 months; stale = over 24 months.
 """
 import json
+import subprocess
 import sys
+import tempfile
 import urllib.request
 from datetime import date
 
@@ -42,6 +45,23 @@ def get(url):
         return {"_err": str(e)[:60]}
 
 
+def last_commit(repo):
+    """(default branch, date of its last commit) via git; (None, None) if git or the clone fails."""
+    url = f"https://github.com/{repo}"
+    env = {"GIT_TERMINAL_PROMPT": "0", "PATH": __import__("os").environ.get("PATH", "")}
+    try:
+        out = subprocess.run(["git", "ls-remote", "--symref", url, "HEAD"], capture_output=True, text=True,
+                             timeout=60, env=env).stdout
+        branch = next(l.split()[1].replace("refs/heads/", "") for l in out.splitlines() if l.startswith("ref:"))
+        with tempfile.TemporaryDirectory() as d:
+            subprocess.run(["git", "clone", "-q", "--depth", "1", "--branch", branch, "--single-branch", url, d],
+                           check=True, capture_output=True, timeout=180, env=env)
+            day = subprocess.run(["git", "-C", d, "log", "-1", "--format=%cs"], capture_output=True, text=True).stdout.strip()
+        return branch, date.fromisoformat(day)
+    except (subprocess.SubprocessError, StopIteration, ValueError, OSError):
+        return None, None
+
+
 def months(d, today):
     return (today.year - d.year) * 12 + today.month - d.month
 
@@ -53,7 +73,7 @@ def klass(m):
 def main(argv):
     today = date.fromisoformat(argv[argv.index("--today") + 1]) if "--today" in argv else date.today()
     print(f"as of {today}")
-    print("| Tool | Latest release | Last push | Class |")
+    print("| Tool | Latest release | Last commit (default branch) | Class |")
     print("|---|---|---|---|")
     for name, pypi, npm, gh in TOOLS:
         rel = None
@@ -67,15 +87,10 @@ def main(argv):
             if "_err" not in d:
                 v = d["dist-tags"]["latest"]
                 rel = (v, date.fromisoformat(d["time"][v][:10]))
-        push = None
-        g = get(f"https://api.github.com/repos/{gh}")
-        if "_err" not in g and "pushed_at" in g:
-            push = date.fromisoformat(g["pushed_at"][:10])
-        newest = max([x for x in ((rel[1] if rel else None), push) if x], default=None)
+        branch, commit = last_commit(gh)
+        newest = max([x for x in ((rel[1] if rel else None), commit) if x], default=None)
         cls = klass(months(newest, today)) if newest else "unknown"
-        if g.get("archived"):
-            cls += " (archived)"
-        print(f"| {name} | {f'{rel[0]} ({rel[1]})' if rel else '-'} | {push or '-'} | {cls} |")
+        print(f"| {name} | {f'{rel[0]} ({rel[1]})' if rel else '-'} | {f'{commit} ({branch})' if commit else '-'} | {cls} |")
 
 
 if __name__ == "__main__":

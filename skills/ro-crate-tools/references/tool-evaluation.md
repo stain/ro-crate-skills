@@ -9,28 +9,28 @@ Use this to decide whether an existing tool is in scope for a task, instead of w
 - **Uploads and replays are outward actions**: confirm first (`ro-crate-deposit`, `ro-crate-runcrate`).
 
 ## Currency and RO-Crate version support (as of 2026-10-16)
-Maintenance: **active** = a release or push within 6 months, **slow** = 6-24 months, **stale** = over 24 months (dates from PyPI, npm and GitHub; `python tests/tool_currency.py` in the repository regenerates them). "Tools list" = the label on https://www.researchobject.org/ro-crate/tools . Versions: **writes** = what a new crate declares, **reads** = tested with the repository's 1.0, 1.1, 1.2 and 1.3 fixtures (`tests/fixtures`; the 1.0 crate has the legacy `ro-crate-metadata.jsonld` name).
+Maintenance: **active** = a release or a commit on the default branch within 6 months, **slow** = 6-24 months, **stale** = over 24 months (release dates from PyPI and npm, last commit on the default branch from `git`; `python tests/tool_currency.py` in the repository regenerates them). "Tools list" = the label on https://www.researchobject.org/ro-crate/tools . Versions: **writes** = what a new crate declares, **reads** = tested with the repository's 1.0, 1.1, 1.2 and 1.3 fixtures (`tests/fixtures`; the 1.0 crate has the legacy `ro-crate-metadata.jsonld` name).
 
-| Tool | Last release / push | Maintenance | Writes | Reads (tested) |
+| Tool | Last release / last commit (default branch) | Maintenance | Writes | Reads (tested) |
 |---|---|---|---|---|
-| ro-crate-py 0.16.0 | 2026-10-06 / 2026-10-14 | active | **1.3 by default**; `rocrate init --crate-version` accepts 1.0-1.3 (1.0 writes `.jsonld`); the code also accepts `-DRAFT` versions, never use them | 1.0, 1.1, 1.2, 1.3 |
-| rocrate-validator 0.12.2 | 2026-10-05 / 2026-10-14 | active | n/a | **profiles for 1.1, 1.2, 1.3 only** (a 1.0 crate fails the 1.1 profile on the `.jsonld` name); run-crate profiles 0.5 (current 0.6); workflow profiles built on 1.1 |
+| ro-crate-py 0.16.0 | 2026-10-06 / 2026-10-14 (master) | active | **1.3 by default**; `rocrate init --crate-version` accepts 1.0-1.3 (1.0 writes `.jsonld`); the code also accepts `-DRAFT` versions, never use them | 1.0, 1.1, 1.2, 1.3 |
+| rocrate-validator 0.12.2 | 2026-10-05 / 2026-10-14 (develop) | active | n/a | **profiles for 1.1, 1.2, 1.3 only** (a 1.0 crate fails the 1.1 profile on the `.jsonld` name); run-crate profiles 0.5 (current 0.6); workflow profiles built on 1.1 |
 | lint_crate.py (this repo) | n/a | maintained here | n/a | 1.0, 1.1, 1.2, 1.3, detached, zip |
-| signposting 0.9.9 | 2024-03-23 / 2024-08-29 | **stale** (works, but no release for over two years) | n/a (HTTP, not RO-Crate versions) | n/a |
-| ro-crate-html 0.1.6 (`rochtml`) | 2025-05-02 / 2025-05-02 | slow (the older `ro-crate-html-js` 1.4.19 was last published 2021-2022) | n/a | produced a preview for 1.0-1.3 (page content not inspected) |
-| ro-crate-js 3.7.2 | 2026-05-01 / 2026-05-01 | active | **1.2** (context + `@vocab`) | 1.0, 1.1, 1.2, 1.3 (keeps the declared context); `roccheck` expects the `.jsonld` name |
-| ro-crate-excel 1.2.1 | 2026-06-18 / 2026-07-01 | active | **1.2** | untested (it reads its own spreadsheet or JSON) |
-| rocrate-action-recorder 0.7.1 | 2026-08-04 / 2026-08-04 | active | **1.1** + Process Run Crate 0.5 only | its own crate (1.1); needs Python 3.13+ |
-| runcrate 0.6.2 | 2026-02-24 / 2026-07-02 | active | CWLProv conversion output version untested | 1.0, 1.1, 1.2, 1.3 with rocrate 0.16.0 (fails on 1.3 with rocrate 0.15.0) |
-| rocrate-tabular 0.2.0 | no release on PyPI / 2026-06-24 | active (install from GitHub) | n/a | 1.1, 1.2, 1.3; **fails on a 1.0 `.jsonld` crate** (needs `ro-crate-metadata.json`) |
-| rocrate-inveniordm 2.1.0 | 2025-12-03 / 2025-12-03 | slow | n/a | 1.1, 1.2, 1.3 (`--no-upload`); **needs `ro-crate-metadata.json`**, not `.jsonld` |
-| rocrate-zenodo 0.1.1 | 2024-08-23 / 2024-08-23 | **stale**; uses the legacy Zenodo API and is incompatible with InvenioRDM per its README | n/a | untested |
-| bagit-python 1.9.0 | 2025-06-13 / 2026-06-18 | active | n/a (BagIt 0.97 tags) | n/a |
-| RO-Crate-RAG-Validator | unreleased / 2026-06-14 | prototype (0 stars) | n/a | bundled profile is the 1.2 quick reference; assumes root `@id` `./` |
-| CheckMyCrate | - / 2021-06-30 | **unmaintained** (tools list: deprecated) | n/a | Workflow RO-Crate profile of that era |
-| ro-crate-validator-py | - / 2024-10-10 | **deprecated** (tools list), use rocrate-validator | n/a | untested |
-| ro-crates-deposit | - / 2024-06-21 | **inactive** (tools list), use rocrate-inveniordm | n/a | untested |
-| Crate-O, nf-prov | - / 2026-05-11, 2026-10-13 | active | untested | untested |
+| signposting 0.9.9 | 2024-03-23 / 2024-03-23 (main) | **stale** (works, but no release for over two years) | n/a (HTTP, not RO-Crate versions) | n/a |
+| ro-crate-html 0.1.6 (`rochtml`) | 2025-05-02 / 2025-05-02 (master) | slow (the older `ro-crate-html-js` 1.4.19 was last published 2021-2022) | n/a | produced a preview for 1.0-1.3 (page content not inspected) |
+| ro-crate-js 3.7.2 | 2026-05-01 / 2026-05-01 (master) | active | **1.2** (context + `@vocab`) | 1.0, 1.1, 1.2, 1.3 (keeps the declared context); `roccheck` expects the `.jsonld` name |
+| ro-crate-excel 1.2.1 | 2026-06-18 / 2026-06-18 (master) | active | **1.2** | untested (it reads its own spreadsheet or JSON) |
+| rocrate-action-recorder 0.7.1 | 2026-08-04 / 2026-08-04 (main) | active | **1.1** + Process Run Crate 0.5 only | its own crate (1.1); needs Python 3.13+ |
+| runcrate 0.6.2 | 2026-02-24 / 2026-07-02 (main) | active | CWLProv conversion output version untested | 1.0, 1.1, 1.2, 1.3 with rocrate 0.16.0 (fails on 1.3 with rocrate 0.15.0) |
+| rocrate-tabular 0.2.0 | no release on PyPI / 2026-06-24 (main) | active (install from GitHub) | n/a | 1.1, 1.2, 1.3; **fails on a 1.0 `.jsonld` crate** (needs `ro-crate-metadata.json`) |
+| rocrate-inveniordm 2.1.0 | 2025-12-03 / 2025-12-03 (main) | slow | n/a | 1.1, 1.2, 1.3 (`--no-upload`); **needs `ro-crate-metadata.json`**, not `.jsonld` |
+| rocrate-zenodo 0.1.1 | 2024-08-23 / 2024-08-23 (main) | **stale**; uses the legacy Zenodo API and is incompatible with InvenioRDM per its README | n/a | untested |
+| bagit-python 1.9.0 | 2025-06-13 / 2026-06-18 (master) | active | n/a (BagIt 0.97 tags) | n/a |
+| RO-Crate-RAG-Validator | unreleased / 2026-06-14 (main) | prototype (0 stars) | n/a | bundled profile is the 1.2 quick reference; assumes root `@id` `./` |
+| CheckMyCrate | - / 2021-06-30 (master) | **unmaintained** (tools list: deprecated) | n/a | Workflow RO-Crate profile of that era |
+| ro-crate-validator-py | - / 2024-10-10 (main) | **deprecated** (tools list), use rocrate-validator | n/a | untested |
+| ro-crates-deposit | - / 2023-07-09 (main) | **inactive** (tools list), use rocrate-inveniordm | n/a | untested |
+| Crate-O, nf-prov | - / 2026-04-14, 2026-10-12 (main) | active | untested | untested |
 
 Practical consequences: new crates should come from ro-crate-py (1.3) or be upgraded from the 1.2 output of ro-crate-js / ro-crate-excel and the 1.1 output of the recorder (`ro-crate-compatibility`); legacy 1.0 crates must be upgraded or renamed to `ro-crate-metadata.json` before tabulator, inveniordm or the validator will take them; prefer an active tool over a stale one, and say so when only a stale tool fits (signposting still works, rocrate-zenodo needs extra care and a sandbox test).
 
