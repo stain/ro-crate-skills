@@ -25,7 +25,7 @@ Ask the user for facts about them and their project: authors, publisher, organis
 If you cannot ask: leave optional properties out. For what the root data entity must have (`license`, `name`, `description`, `datePublished`) use an obviously temporary value that starts with `TODO:` (for example `"license": "TODO: choose a licence"`; today's date is fine for the `datePublished` of a draft), and list every `TODO:` value in your answer. The lint script (`ro-crate-validator`) warns about `TODO:` values. Never publish, deposit or hand over a crate that still contains one.
 
 ## Checked behaviour and cautions
-- A new `ROCrate()` writes the RO-Crate **1.2** context plus `{"@vocab": "http://schema.org/"}` and a 1.2 descriptor `conformsTo`; it also adds `identifier` to the descriptor. To target 1.3 set `@context` and the descriptor's `conformsTo` yourself, and check the result against `ro-crate-create`. `@vocab` is not part of the RO-Crate 1.3 context.
+- A new `ROCrate()` writes the RO-Crate **1.2** context plus `{"@vocab": "http://schema.org/"}` and a 1.2 descriptor `conformsTo`; it also adds `identifier` to the descriptor. To target 1.3 set `@context` and the descriptor's `conformsTo` yourself (the 1.2 to 1.3 step in `ro-crate-compatibility`), and check the result against `ro-crate-create`. `@vocab` is not part of the RO-Crate 1.3 context.
 - It does not set `name`, `description`, `datePublished` or `license`: set them (the root must have all four).
 - Modifying an array property in place is not supported: assign a new array.
 - `roccheck <dir>` is a simple check, "not a full validation". The package's `rocval` command crashed in this install (`program.version is not a function`); use `rocrate-validator` (`ro-crate-validator`).

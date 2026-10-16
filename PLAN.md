@@ -11,6 +11,9 @@ Seventeen skills ship in `skills/` (eleven core skills plus six small tool skill
 moved to `references/`). Commands for ro-crate-py, signposting and rochtml were run once (ro-crate-py 0.16.0,
 signposting 0.9.9, ro-crate-html 0.1.6); re-check on new releases.
 
+## v0.1 scope (this branch)
+Seventeen skills, one shared "Do not guess" rule enforced by `tests/check_repo.py`, scripts with unit tests (`lint_crate.py`, `link_actions.py`), 21 evals run once each (`tests/eval-results/`), tool evaluation in `skills/ro-crate-tools/references/tool-evaluation.md`. Not in v0.1: trigger-accuracy testing, weaker-model and other-agent runs, scripted expectation checks, repeat runs for variance.
+
 ## Next steps
 1. **Run the evals.** Iteration 1 (5 of 15 evals, with/without skill) is in `tests/eval-results/iteration-1.md`; run the rest and repeat with a weaker model. Execute `skills/*/evals/evals.json` prompts with and without each skill (Claude Code: skill-creator
    plugin viewer/benchmark; other agents: by hand or CI), add programmatic assertions where outputs are files, fix skills that fail.

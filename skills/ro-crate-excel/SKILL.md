@@ -27,7 +27,7 @@ rocxl -r folder-work                                   # second run: merge the e
 - Whichever of the spreadsheet and the JSON is newer wins; the folder is re-scanned on every run and file information is merged in. Other options: `-b/--bag [dir]` BagIt bag(s), `-z/--zip` (with `--bag`), `-a/--add` merge `additional-ro-crate-metadata.xlsx`, `-j/--JSON` use the JSON rather than the spreadsheet, `-p/--partOf`, `-d/--depth`, `-m/--maxfiles`, `-u/--url`, `-c/--cratescript`.
 
 ## Checked output and cautions
-- It declares **RO-Crate 1.2**, writes `license` as a plain string (give a licence URL or a licence entity), and in one round trip dropped `contentSize` of an edited file: compare before and after.
+- It declares **RO-Crate 1.2** (to move to 1.3 follow the 1.2 to 1.3 step in `ro-crate-compatibility`), writes `license` as a plain string (give a licence URL or a licence entity), and in one round trip dropped `contentSize` of an edited file: compare before and after.
 - It rewrites files in place: work on a copy or under version control.
 - Multi-valued cells are JSON-like arrays (`["a","b"]`); brief the people filling the sheet.
 - Review the generated crate, complete the root (`name`, `description`, `datePublished`, `license`), validate (`ro-crate-validator`; not done in the test runs).

@@ -1,6 +1,6 @@
 ---
 name: ro-crate-deposit
-description: Deposit an RO-Crate to Zenodo or an InvenioRDM repository with the rocrate-zenodo and rocrate-inveniordm command-line tools, which fill the repository metadata from the crate, with sandbox-first and review-before-publish steps. Use when the user wants to upload, archive, get a DOI for or publish a crate in Zenodo or InvenioRDM. Always confirm before uploading or publishing.
+description: Deposit an RO-Crate to Zenodo or an InvenioRDM repository with the rocrate-zenodo and rocrate-inveniordm command-line tools, which fill the repository metadata from the crate, with sandbox-first and review-before-publish steps. Use when the user wants to upload, archive, get a DOI for or publish a crate in Zenodo or InvenioRDM. Always confirm before uploading or publishing. For packaging, BagIt, hosting and identifiers see ro-crate-publish.
 ---
 
 # Depositing a crate to Zenodo / InvenioRDM

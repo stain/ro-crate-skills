@@ -25,6 +25,9 @@ Agentic skills for RO-Crate
 
 Each skill folder holds `SKILL.md` (frontmatter `name` and `description` only, so any Agent Skills reader works), optional `references/` (read on demand), optional `scripts/` (standard-library Python) and `evals/evals.json` (test prompts with expectations). Ideas for further skills (profile discovery, format conversion, recording agent work as provenance) are in [PLAN.md](PLAN.md).
 
+## Status (v0.1)
+Seventeen skills; tools were run and results recorded in `tests/eval-results/` and `skills/ro-crate-tools/references/tool-evaluation.md`. Evals are single runs graded by hand; trigger accuracy of the descriptions, other agents and weaker models are untested. All skills share one rule, [`tests/do_not_guess.txt`](tests/do_not_guess.txt): ask rather than guess facts about the user or project, never invent identifiers, use `TODO:` for unavoidable gaps.
+
 ## Related skill repositories
 
 Existing drafts to link to or align with rather than duplicate:

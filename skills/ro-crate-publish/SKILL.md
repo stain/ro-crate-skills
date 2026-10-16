@@ -1,6 +1,6 @@
 ---
 name: ro-crate-publish
-description: Package, distribute and publish an RO-Crate: zip, BagIt, .eln, attached versus detached crates and converting between them, serving ro-crate-metadata.json with the right media type, persistent identifiers with Signposting, and depositing to WorkflowHub, Zenodo or InvenioRDM. Use when the user wants to share, archive, upload, host, cite or hand over a finished crate.
+description: Package, distribute and publish an RO-Crate: zip, BagIt, .eln, attached versus detached crates and converting between them, serving ro-crate-metadata.json with the right media type, persistent identifiers with Signposting, and depositing to WorkflowHub, Zenodo or InvenioRDM. Use when the user wants to share, archive, upload, host, cite or hand over a finished crate. For tool-based uploads to Zenodo or InvenioRDM see ro-crate-deposit; for fetching a crate see ro-crate-retrieve.
 ---
 
 # Packaging and publishing RO-Crates

@@ -89,7 +89,8 @@ If you cannot ask: leave optional properties out. For what the root data entity 
 - [references/data-entities.md](references/data-entities.md): directories, web-based files, `contentUrl`/`localPath`, distributions, file formats, path encoding.
 - [references/contextual-entities.md](references/contextual-entities.md): people, organisations, licences, funding, citations, places, keywords, identifiers.
 - [references/jsonld.md](references/jsonld.md): `@context`, extending with new terms, relative URIs and `@base`.
-- [references/provenance.md](references/provenance.md): software, equipment, change history actions.
+- [references/provenance.md](references/provenance.md): software, equipment, change history actions, recording an AI agent's own work.
+- [references/from-other-metadata.md](references/from-other-metadata.md): starting from CITATION.cff, codemeta.json or other project metadata (cffconvert + JSON-LD flattening).
 
 ## Workflow
 1. Inspect the directory (or the existing crate) and list files.
