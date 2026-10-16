@@ -39,11 +39,32 @@ Based on the [RO-Crate 1.3 specification](https://www.researchobject.org/ro-crat
 
 ## Layout and installation
 
-Skills follow the open Agent Skills layout (`skills/<name>/SKILL.md`), shared by all agents:
+Skills follow the open Agent Skills layout (`skills/<name>/SKILL.md`), shared by all agents. Plugin manifests live in `.claude-plugin/`, `.codex-plugin/` and `.github/plugin/`.
 
-- **Claude Code**: `/plugin marketplace add stain/ro-crate-skills` then `/plugin install ro-crate-skills@ro-crate-skills` (`.claude-plugin/`)
-- **GitHub Copilot CLI**: `copilot plugin marketplace add stain/ro-crate-skills` (`.github/plugin/`), or copy `skills/` into `.github/skills/`
-- **Codex**: plugin manifest in `.codex-plugin/`; or copy skills to `.agents/skills/`
+> The commands below follow each agent's documented conventions but have not yet been tested against this repository (see [PLAN.md](PLAN.md)); agent CLIs change, so check their docs if a command fails.
+
+### Claude Code
+```text
+/plugin marketplace add stain/ro-crate-skills
+/plugin install ro-crate-skills@ro-crate-skills
+```
+Or, without the plugin, copy a skill folder into `~/.claude/skills/` (all projects) or `.claude/skills/` (one project).
+
+### GitHub Copilot (CLI and VS Code)
+```text
+copilot plugin marketplace add stain/ro-crate-skills
+copilot plugin install ro-crate-skills@ro-crate-skills
+```
+Or copy skill folders into `.github/skills/` in your repository (or `~/.copilot/skills/` for personal use).
+
+### OpenAI Codex
+Install via the plugin manifest in `.codex-plugin/`, or copy skill folders into `.agents/skills/` in your repository (or `~/.agents/skills/` for personal use).
+
+### Other agents
+Any agent supporting Agent Skills can use the folders in `skills/` directly: copy or symlink them into that agent's skills directory.
+
+### Using the skills
+Skills are picked up automatically when your request matches a skill's `description`, e.g. "validate this RO-Crate" or "create an RO-Crate for this folder". You can also name a skill explicitly in your prompt, for example "use the ro-crate-validator skill".
 
 ## Testing
 
