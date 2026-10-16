@@ -7,9 +7,11 @@ description: Package, distribute and publish an RO-Crate: zip, BagIt, .eln, atta
 
 Spec: https://www.researchobject.org/ro-crate/specification/1.3/structure and `/appendix/implementation-notes`, `/appendix/relative-uris`.
 
-Do not add organisation, contact or identifier details the user did not give (for example inferred from their email address or domain): put nothing rather than a guess.
+Before publishing: run the lint script and refuse while it reports errors or `TODO:` placeholders; validate (`ro-crate-validator`), check there is no private or unlicensed content, that `license`, `author` and `datePublished` are real, and that no identifier (DOI, ORCID) was invented. Publishing is hard to undo, so confirm the destination with the user before uploading anything.
 
-Before publishing: validate (`ro-crate-validator`), check there is no private or unlicensed content, that `license`, `author` and `datePublished` are real, and that no identifier (DOI, ORCID) was invented. Publishing is hard to undo, so confirm the destination with the user before uploading anything.
+## Do not guess
+Ask the user for facts about them and their project: authors, publisher, organisation, affiliation, ORCID/ROR/DOI, licence, funders, dates of events, and software or tool versions. Do not infer them from the user's email address, username, git config or machine, and never invent identifiers. You may derive what you can observe: file sizes and media types from the files, `tool --version` output, titles and descriptions from the content (say that you did).
+If you cannot ask: leave optional properties out. For what the root data entity must have (`license`, `name`, `description`, `datePublished`) use an obviously temporary value that starts with `TODO:` (for example `"license": "TODO: choose a licence"`; today's date is fine for the `datePublished` of a draft), and list every `TODO:` value in your answer. The lint script (`ro-crate-validator`) warns about `TODO:` values. Never publish, deposit or hand over a crate that still contains one.
 
 ## Package forms
 - **Attached crate** = a directory whose root holds `ro-crate-metadata.json` (+ optional `ro-crate-preview.html`, `ro-crate-preview_files/`, payload). Zip it with the crate files at the **zip root** (or in one top-level folder): `rocrate write-zip -c <dir> out.zip` (ro-crate-py) or `zip -r`.

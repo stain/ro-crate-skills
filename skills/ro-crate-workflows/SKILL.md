@@ -7,6 +7,10 @@ description: Describe workflows, scripts and their executions in RO-Crate: Compu
 
 Spec: https://www.researchobject.org/ro-crate/specification/1.3/workflows (and `/provenance`). Run provenance profiles: https://www.researchobject.org/workflow-run-crate/ . Never use `-DRAFT` profile URIs.
 
+## Do not guess
+Ask the user for facts about them and their project: authors, publisher, organisation, affiliation, ORCID/ROR/DOI, licence, funders, dates of events, and software or tool versions. Do not infer them from the user's email address, username, git config or machine, and never invent identifiers. You may derive what you can observe: file sizes and media types from the files, `tool --version` output, titles and descriptions from the content (say that you did).
+If you cannot ask: leave optional properties out. For what the root data entity must have (`license`, `name`, `description`, `datePublished`) use an obviously temporary value that starts with `TODO:` (for example `"license": "TODO: choose a licence"`; today's date is fine for the `datePublished` of a draft), and list every `TODO:` value in your answer. The lint script (`ro-crate-validator`) warns about `TODO:` values. Never publish, deposit or hand over a crate that still contains one.
+
 ## Describing a script or workflow (data entities)
 - Script: `@type` `["File", "SoftwareSourceCode"]`, `name`, `programmingLanguage`.
 - Workflow: `["File", "SoftwareSourceCode", "ComputationalWorkflow"]`, `@id` the entry-point file, `name`; add `author`/`creator`, `license`, `description`, `version`, `dateCreated`, `url`, `sdPublisher` as known.
@@ -26,10 +30,6 @@ Pick by how much you can say; all add the context `https://w3id.org/ro/terms/wor
 Details and requirement tables: [references/run-crates.md](references/run-crates.md). Examples in the spec's older text show profile version 0.4: use the current profile page's version.
 
 Related skill repo with fuller tested recipes for data files: https://github.com/stain/data-preparation-skills (`ro-crate-provenance`, Process Run Crate).
-
-## Do not guess
-- Versions (workflow engine, language, tools) come from the user or from running the tool (`snakemake --version`, `nextflow -version`, `cwltool --version`); never write an assumed version into metadata. If unknown, omit it and say so (the Workflow RO-Crate profile wants `version` on language entities, so ask the user).
-- Licence, authors and dates are the user's to supply; use a clearly labelled placeholder only if you cannot ask, and tell the user.
 
 ## Validating
 `rocrate-validator` has `workflow-ro-crate-1.0`, `workflow-run-crate-0.5` etc., but these are built on the RO-Crate **1.1** profile and older (0.5) run-crate versions. A correct 1.3 crate declaring Workflow RO-Crate 1.0 or run crate 0.6 can fail them with descriptor `conformsTo` and "Main Workflow" errors that are version mismatches, not crate errors (checked: the same crate passed `workflow-ro-crate-1.0` when its context and descriptor `conformsTo` were swapped to 1.1). Validate against `ro-crate-1.3` and read the profile page for the profile's own rules.

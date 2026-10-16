@@ -11,6 +11,10 @@ Source https://github.com/ResearchObject/ro-crate-py, PyPI `rocrate` (status "be
 python -m venv /tmp/rc && /tmp/rc/bin/pip install rocrate
 ```
 
+## Do not guess
+Ask the user for facts about them and their project: authors, publisher, organisation, affiliation, ORCID/ROR/DOI, licence, funders, dates of events, and software or tool versions. Do not infer them from the user's email address, username, git config or machine, and never invent identifiers. You may derive what you can observe: file sizes and media types from the files, `tool --version` output, titles and descriptions from the content (say that you did).
+If you cannot ask: leave optional properties out. For what the root data entity must have (`license`, `name`, `description`, `datePublished`) use an obviously temporary value that starts with `TODO:` (for example `"license": "TODO: choose a licence"`; today's date is fine for the `datePublished` of a draft), and list every `TODO:` value in your answer. The lint script (`ro-crate-validator`) warns about `TODO:` values. Never publish, deposit or hand over a crate that still contains one.
+
 ## CLI
 ```bash
 rocrate init -c <crate-dir>                 # scan the directory, write ro-crate-metadata.json
@@ -35,7 +39,6 @@ crate.write("out-dir")                # or crate.write_zip("out.zip")
 In a test with 0.16.0 `write` added `datePublished` automatically, wrote `ro-crate-metadata.json` and copied the file; `license` given as a URL string became a plain value (add a licence entity yourself when you want a described licence). Add people with `crate.add(Person(crate, "https://orcid.org/...", properties={"name": "..."}))` (import `Person` from `rocrate.model`).
 
 ## Guidance
-- Ask for, do not guess, the licence, author and publisher; if you cannot ask, use a clearly labelled placeholder and tell the user in your answer.
 - Use this instead of writing JSON serialisation; hand-edit only what the library does not cover, and keep `ro-crate-create` rules (reachability, contextual entities, no invented identifiers).
 - Check what the tool wrote: `python -m json.tool ro-crate-metadata.json`, then validate. Don't trust defaults for descriptions, licences or authors.
 - Loading a crate preserves its existing entities; confirm the declared version before saving over it.

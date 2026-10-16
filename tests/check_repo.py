@@ -26,6 +26,12 @@ if set(licenses.values()) - {"Apache-2.0"}:
     errors.append(f"manifest license is not Apache-2.0: {licenses}")
 
 # --- skills --------------------------------------------------------------
+DO_NOT_GUESS = (root / "tests/do_not_guess.txt").read_text().strip()
+# skills that write metadata or act for the user must carry the canonical rule verbatim
+MUST_CARRY_DO_NOT_GUESS = {"ro-crate-create", "ro-crate-py", "ro-crate-js", "ro-crate-workflows",
+                           "ro-crate-profiles", "ro-crate-publish", "ro-crate-deposit", "ro-crate-excel",
+                           "ro-crate-action-recorder", "ro-crate-runcrate"}
+skill_names = {p.parent.name for p in (root / "skills").glob("*/SKILL.md")}
 ALLOWED_KEYS = {"name", "description", "license", "compatibility", "metadata", "allowed-tools"}
 readme = (root / "README.md").read_text()
 skills = sorted((root / "skills").glob("*/SKILL.md"))
@@ -52,6 +58,8 @@ for s in skills:
         errors.append(f"{name}: non-portable frontmatter keys {sorted(extra)}")
     if f"skills/{name}/SKILL.md" not in readme:
         errors.append(f"{name}: not listed in README")
+    if name in MUST_CARRY_DO_NOT_GUESS and DO_NOT_GUESS not in text:
+        errors.append(f"{name}: missing the canonical 'Do not guess' section (tests/do_not_guess.txt)")
     if text.count("\n") > 500:
         errors.append(f"{name}: SKILL.md longer than 500 lines; move detail to references/")
     for f in d.rglob("*"):
@@ -60,9 +68,12 @@ for s in skills:
             rel = f.relative_to(root)
             if re.search(r"\d-DRAFT", body):
                 errors.append(f"{rel}: uses a -DRAFT specification/profile URI")
-            if f.name == "SKILL.md" and re.search(r"(?im)^>\s*\*\*placeholder\*\*|^description:\s*placeholder|\bTODO\b", body):
+            if f.name == "SKILL.md" and re.search(r"(?im)^>\s*\*\*placeholder\*\*|^description:\s*placeholder|^\s*(#+\s*|- )?TODO\b", body):
                 errors.append(f"{rel}: placeholder text in a shipped skill")
             if f.suffix == ".md":
+                for ref in re.findall(r"`(ro-crate-[a-z-]+)`(?: skill|-skill)", body):
+                    if ref not in skill_names:
+                        errors.append(f"{rel}: refers to the skill `{ref}` which does not exist")
                 for link in re.findall(r"\]\(([^)#\s]+)(?:#[^)]*)?\)", body):
                     if not re.match(r"[a-z]+:", link) and not (f.parent / link).exists():
                         errors.append(f"{rel}: broken relative link {link}")

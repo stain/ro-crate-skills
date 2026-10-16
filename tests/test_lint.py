@@ -45,6 +45,17 @@ class LintTests(unittest.TestCase):
             with self.subTest(name):
                 self.assertEqual(run(FIX / name)[0], 0)
 
+    def test_todo_placeholder_is_warned(self):
+        doc = json.loads((FIX / "minimal-crate/ro-crate-metadata.json").read_text())
+        root = next(e for e in doc["@graph"] if e["@id"] == "./")
+        root["license"] = "TODO: choose a licence"
+        with tempfile.TemporaryDirectory() as d:
+            (Path(d) / "ro-crate-metadata.json").write_text(json.dumps(doc))
+            (Path(d) / "data.csv").write_text("a,b\n")
+            code, out = run(d)
+        self.assertEqual(code, 0)
+        self.assertTrue(any("placeholder" in f["message"] and f["level"] == "WARN" for f in out["findings"]))
+
 
 if __name__ == "__main__":
     unittest.main()

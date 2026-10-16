@@ -103,6 +103,20 @@ def lint(path):
     rid = root["@id"]
     if rid != "./" and not ABS.match(rid):
         add("WARN", f"root @id {rid!r} is neither './' nor an absolute URI")
+    # leftover TODO: placeholders (see the "Do not guess" rule in the skills)
+    def todos(v, where):
+        if isinstance(v, str) and v.strip().upper().startswith("TODO"):
+            add("WARN", f"{where}: placeholder value {v[:40]!r} must be replaced before publishing")
+        elif isinstance(v, list):
+            for x in v:
+                todos(x, where)
+        elif isinstance(v, dict):
+            for k, x in v.items():
+                todos(x, where)
+    for e in emap.values():
+        for k, v in e.items():
+            if not k.startswith("@"):
+                todos(v, f"{e['@id']} {k}")
     # reachability and dangling references
     reach, todo = {desc["@id"], rid}, [rid, desc["@id"]]
     while todo:

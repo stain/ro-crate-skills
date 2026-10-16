@@ -20,6 +20,10 @@ fs.writeFileSync('ro-crate-metadata.json', JSON.stringify(crate.toJSON(), null, 
 ```
 The first constructor argument is **existing metadata**, not options: passing `{name: ...}` there does nothing (tested).
 
+## Do not guess
+Ask the user for facts about them and their project: authors, publisher, organisation, affiliation, ORCID/ROR/DOI, licence, funders, dates of events, and software or tool versions. Do not infer them from the user's email address, username, git config or machine, and never invent identifiers. You may derive what you can observe: file sizes and media types from the files, `tool --version` output, titles and descriptions from the content (say that you did).
+If you cannot ask: leave optional properties out. For what the root data entity must have (`license`, `name`, `description`, `datePublished`) use an obviously temporary value that starts with `TODO:` (for example `"license": "TODO: choose a licence"`; today's date is fine for the `datePublished` of a draft), and list every `TODO:` value in your answer. The lint script (`ro-crate-validator`) warns about `TODO:` values. Never publish, deposit or hand over a crate that still contains one.
+
 ## Checked behaviour and cautions
 - A new `ROCrate()` writes the RO-Crate **1.2** context plus `{"@vocab": "http://schema.org/"}` and a 1.2 descriptor `conformsTo`; it also adds `identifier` to the descriptor. To target 1.3 set `@context` and the descriptor's `conformsTo` yourself, and check the result against `ro-crate-create`. `@vocab` is not part of the RO-Crate 1.3 context.
 - It does not set `name`, `description`, `datePublished` or `license`: set them (the root must have all four).
