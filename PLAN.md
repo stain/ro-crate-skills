@@ -31,8 +31,16 @@ Done: `tests/graders/` and iteration 4 (3 repeats x 14 evals, `tests/eval-result
 5. **Sibling repos:** link (not vendor) https://github.com/stain/data-preparation-skills (`ro-crate-provenance`, MIT) and
    https://github.com/sanskritsuthar/workflowhub-skills (BSD-3-Clause; installable as a plugin from GitHub: `claude plugin marketplace add sanskritsuthar/workflowhub-skills`).
    Our `ro-crate-retrieve`/`ro-crate-consume` overlap with its `fair-signposting`/`ro-crate-consume`; prefer pointing to it where it is deeper.
-6. **Versioning and CI:** bump `version` in all five manifests together on meaningful changes (currently 0.1.0); add a GitHub Action running
+6. **Versioning and CI:** bump `version` in all five manifests together on meaningful changes (currently 0.2.1); add a GitHub Action running
    `tests/check_repo.py` and `tests.test_lint`. Test install in each agent (Claude Code plugin, Copilot, Codex, plain copy into `.agents/skills`).
+7. **Anthropic directory submission: on hold** (decided 2026-10-23). The plugin is prepared (v0.2.1: icon, listing fields in
+   `.claude-plugin/plugin.json`, README for the listing, every file under 256 KiB; `claude plugin validate .` reports no directory
+   findings), but submitting from the developer portal (https://claude.ai/directory/manage) needs a paid claude.ai plan, and the
+   listing belongs to the organization it is submitted from: the first organization to submit a repository folder holds the listing
+   long term. Decide which account or organization should own it before submitting. When submitting: Plugin bundle, repository
+   `stain/ro-crate-skills`, empty plugin path, track `main`; the icon is read only on the first save. See
+   https://claude.com/docs/plugins/submit and https://claude.com/docs/plugins/pre-submission-checklist. Expect a possible reviewer
+   hold for the "RO-Crate" name and for `rocrate-inveniordm` reading `INVENIORDM_API_KEY` from the environment.
 
 ## Gaps and ideas
 - **Profile discovery:** help choose a profile for a use case (Workflow Run, ARC/ISA, ELN, 5 Safes, language-data, ...) from the profile registry.
