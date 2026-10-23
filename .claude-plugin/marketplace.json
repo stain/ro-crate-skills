@@ -8,7 +8,7 @@
       "name": "ro-crate-skills",
       "source": "./",
       "description": "Agent skills for consuming, creating and tooling RO-Crate",
-      "version": "0.2.0"
+      "version": "0.2.1"
     }
   ],
   "description": "Agent skills for consuming, creating, validating and publishing RO-Crate (Research Object Crate) metadata"

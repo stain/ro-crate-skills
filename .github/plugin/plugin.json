@@ -1,7 +1,7 @@
 {
   "name": "ro-crate-skills",
   "description": "Agent skills for consuming, creating and tooling RO-Crate (Research Object Crate) metadata",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": {"name": "Stian Soiland-Reyes"},
   "homepage": "https://github.com/stain/ro-crate-skills",
   "repository": "https://github.com/stain/ro-crate-skills",
