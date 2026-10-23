@@ -7,9 +7,9 @@
     {
       "name": "ro-crate-skills",
       "source": "./",
-      "description": "Agent skills for consuming, creating and tooling RO-Crate",
+      "description": "Create, read, validate, publish and retrieve RO-Crates (Research Object Crates) with agent skills for the RO-Crate 1.3 specification",
       "version": "0.2.1"
     }
   ],
-  "description": "Agent skills for consuming, creating, validating and publishing RO-Crate (Research Object Crate) metadata"
+  "description": "RO-Crate Skills: agent skills for creating, reading, validating, publishing and retrieving RO-Crates (Research Object Crates)"
 }

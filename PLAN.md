@@ -11,6 +11,8 @@ Seventeen skills ship in `skills/` (eleven core skills plus six small tool skill
 moved to `references/`). Commands for ro-crate-py, signposting and rochtml were run once (ro-crate-py 0.16.0,
 signposting 0.9.9, ro-crate-html 0.1.6); re-check on new releases.
 
+Evals so far are graded by hand or by the scripted graders; trigger accuracy of the descriptions, other agents and weaker models are untested. All skills share one rule, [`tests/do_not_guess.txt`](tests/do_not_guess.txt): ask rather than guess facts about the user or project, never invent identifiers, use `TODO:` for unavoidable gaps. Related skill repositories: see Next steps, item 5.
+
 ## v0.1 scope (this branch)
 Seventeen skills, one shared "Do not guess" rule enforced by `tests/check_repo.py`, scripts with unit tests (`lint_crate.py`, `link_actions.py`), 21 evals run once each (`tests/eval-results/`), tool evaluation in `skills/ro-crate-tools/references/tool-evaluation.md`. Not in v0.1: trigger-accuracy testing, weaker-model and other-agent runs, scripted expectation checks, repeat runs for variance.
 

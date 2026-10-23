@@ -1,5 +1,13 @@
-# ro-crate-skills
-Agentic skills for RO-Crate
+# RO-Crate Skills
+
+Agent skills for working with [RO-Crate](https://w3id.org/ro/crate) (Research Object Crate), the community standard
+for packaging research data, software and workflows with their metadata as `ro-crate-metadata.json` (JSON-LD
+using schema.org). With these skills, Claude and other agents can create a crate for a folder of data, read and
+summarise an existing crate, validate it, find the crate behind a DOI, and package or deposit it in a repository.
+
+The skills follow the [RO-Crate 1.3 specification](https://www.researchobject.org/ro-crate/specification/1.3/) and
+also read crates of versions 1.0 to 1.2. They ask you for facts about you and your project (authors, licence,
+ORCIDs, funders) rather than guessing them, and never invent identifiers.
 
 ## Skills
 
@@ -26,26 +34,38 @@ Agentic skills for RO-Crate
 
 Each skill folder holds `SKILL.md` (frontmatter `name` and `description` only, so any Agent Skills reader works), optional `references/` (read on demand), optional `scripts/` (standard-library Python) and `evals/evals.json` (test prompts with expectations). Ideas for further skills (profile discovery, format conversion, recording agent work as provenance) are in [PLAN.md](PLAN.md).
 
-## Status (v0.1)
-Tools were run and results recorded in `tests/eval-results/` and `skills/ro-crate-tools/references/tool-evaluation.md`. Evals are single runs graded by hand; trigger accuracy of the descriptions, other agents and weaker models are untested. All skills share one rule, [`tests/do_not_guess.txt`](tests/do_not_guess.txt): ask rather than guess facts about the user or project, never invent identifiers, use `TODO:` for unavoidable gaps.
+## What the skills run and connect to
 
-## Related skill repositories
+The plugin contains only skills (instructions, reference notes and small standard-library Python scripts). It has
+no hooks or MCP servers, collects no data and sends nothing anywhere by itself. When a task needs it, a skill tells
+Claude to:
 
-Existing drafts to link to or align with rather than duplicate:
+- install open-source RO-Crate tools from PyPI or npm (for example `rocrate`, `roc-validator`, `runcrate`,
+  `signposting`, `ro-crate-html`, `ro-crate-excel`);
+- fetch public web resources: DOIs, landing pages and their FAIR Signposting links, crates you point it to, and the
+  RO-Crate, schema.org and Bioschemas JSON-LD contexts;
+- upload a crate to Zenodo or an InvenioRDM repository with `rocrate-zenodo` / `rocrate-inveniordm`, only after you
+  ask for it and confirm, starting with the sandbox. The tool reads your API token from your own configuration
+  (`~/.config/zenodo.ini` for Zenodo, the `INVENIORDM_API_KEY` environment variable for InvenioRDM) and sends it
+  only to that repository.
 
-- [stain/data-preparation-skills](https://github.com/stain/data-preparation-skills): `ro-crate-provenance` (RO-Crate 1.3 + Process Run Crate for data files; fuller than our placeholder, so our `ro-crate-provenance` should link to it), `reproducible-data-preparation`, `data-license-investigation`, `snakemake-data-pipeline`.
-- [sanskritsuthar/workflowhub-skills](https://github.com/sanskritsuthar/workflowhub-skills): `ro-crate-consume`, `workflowhub-find`, `workflowhub-inspect`, `workflowhub-explain`, `workflowhub-evaluate`, `workflowhub-cite`, `fair-signposting`. Overlaps with our `ro-crate-consume`, `ro-crate-workflows` and `ro-crate-repositories`.
-- [alexhambley/RO-Crate-RAG-Validator](https://github.com/alexhambley/RO-Crate-RAG-Validator) (BSD-3-Clause): experimental Streamlit/CLI tool that validates each entity against profile Markdown using RAG and an LLM (needs your own chat and embeddings API keys). Optional and not a dependency: it checks entities one at a time and gives non-deterministic results, so run `rocrate-validator` first. Its ideas (compliance vs usefulness, fixes as add/replace/remove operations, audience from the root) are used in `ro-crate-validator`.
+In claude.ai chat, skills that install tools or run scripts need code execution and network access; the reference
+material works without them.
 
-Open question: whether to depend on, vendor, or only link to the first two.
+## Related projects
 
-Based on the [RO-Crate 1.3 specification](https://www.researchobject.org/ro-crate/specification/1.3/) and the [tools list](https://www.researchobject.org/ro-crate/tools).
+- [RO-Crate tools](https://www.researchobject.org/ro-crate/tools) listed by the RO-Crate community.
+- [stain/data-preparation-skills](https://github.com/stain/data-preparation-skills): skills for reproducible data preparation, including RO-Crate provenance for data files.
+- [sanskritsuthar/workflowhub-skills](https://github.com/sanskritsuthar/workflowhub-skills): skills for finding, inspecting and citing workflows in WorkflowHub.
 
 ## Layout and installation
 
 Skills follow the open Agent Skills layout (`skills/<name>/SKILL.md`), shared by all agents. Plugin manifests live in `.claude-plugin/`, `.codex-plugin/` and `.github/plugin/`.
 
 > The commands below follow each agent's documented conventions but have not yet been tested against this repository (see [PLAN.md](PLAN.md)); agent CLIs change, so check their docs if a command fails.
+
+### Claude (claude.ai, Cowork and Claude Code)
+Add **RO-Crate Skills** from the directory under **Customize > Plugins** on claude.ai, once it is listed there. It then also loads in Claude Code.
 
 ### Claude Code
 ```text
@@ -70,9 +90,9 @@ Any agent supporting Agent Skills can use the folders in `skills/` directly: cop
 ### Using the skills
 Skills are picked up automatically when your request matches a skill's `description`, e.g. "validate this RO-Crate" or "create an RO-Crate for this folder". You can also name a skill explicitly in your prompt, for example "use the ro-crate-validator skill".
 
-## Testing
+## Development and testing
 
-See [TESTING.md](TESTING.md). Remaining work: see [PLAN.md](PLAN.md).
+See [AGENTS.md](AGENTS.md) for how to work on the skills, [TESTING.md](TESTING.md) for the checks and evals, and [PLAN.md](PLAN.md) for status and remaining work. Tool runs are recorded in `tests/eval-results/` and [tool-evaluation.md](skills/ro-crate-tools/references/tool-evaluation.md). Issues and suggestions: <https://github.com/stain/ro-crate-skills/issues>.
 
 ## License
 
