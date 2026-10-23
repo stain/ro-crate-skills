@@ -7,6 +7,7 @@
   "homepage": "https://github.com/stain/ro-crate-skills",
   "repository": "https://github.com/stain/ro-crate-skills",
   "license": "Apache-2.0",
+  "icon": "./.claude-plugin/icon.png",
   "documentationUrl": "https://github.com/stain/ro-crate-skills#readme",
   "supportUrl": "https://github.com/stain/ro-crate-skills/issues",
   "keywords": ["ro-crate", "research-object", "fair", "json-ld", "skills"]
