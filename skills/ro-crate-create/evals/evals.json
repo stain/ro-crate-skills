@@ -25,6 +25,19 @@
         "CreateAction has instrument, object and result",
         "No -DRAFT URIs are used"
       ]
+    },
+    {
+      "prompt": "Write a detached RO-Crate for the catalogue record https://catalogue.example.org/events/7, which describes the workshop at https://events.example.com/workshop-2027 (schema.org Event, Bioschemas Course profile). The record has no licence.",
+      "expected_output": "Root Dataset = the record URL with publisher, datePublished and a text licence statement; the Event as mainEntity with its own type and Bioschemas profile conformsTo; no hasPart for the event.",
+      "files": [],
+      "expectations": [
+        "The root data entity @id is the record URL and its @type is Dataset only, without Event or Course",
+        "The event is the root's mainEntity with its own schema.org type and the Bioschemas profile in its conformsTo",
+        "The event is not listed in hasPart",
+        "Does not choose a licence: uses a text statement or a TODO placeholder and says so",
+        "Uses a released Bioschemas profile URI (no -DRAFT)"
+      ],
+      "id": 3
     }
   ]
 }

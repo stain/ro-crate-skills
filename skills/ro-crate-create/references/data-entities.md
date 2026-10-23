@@ -2,7 +2,7 @@
 
 Spec: https://www.researchobject.org/ro-crate/specification/1.3/data-entities
 
-A data entity has `File` or `Dataset` in `@type` **and** an `@id` that is a relative or absolute URI. A `#`-prefixed `@id` makes it a plain contextual entity (still linkable from `hasPart`).
+A data entity is a "directory, file, or other Web resource" the crate contains, with an `@id` that is a relative or absolute URI. Files MUST have `File` in `@type` (directories `Dataset`); a web resource that is not a downloadable file, such as an online tutorial page, may be a part typed `CreativeWork` or its most specific schema.org subtype (`LearningResource`, `WebPage`, `ScholarlyArticle`, ...). A `#`-prefixed `@id` makes it a plain contextual entity (still linkable from `hasPart`). Things that are not content (an event, a person) are contextual entities, never `hasPart`; a crate *about* one uses `mainEntity` (see [web-records.md](web-records.md)).
 
 ## Directory with undescribed bulk files
 ```json

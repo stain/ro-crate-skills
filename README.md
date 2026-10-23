@@ -12,6 +12,7 @@ Agentic skills for RO-Crate
 | [`ro-crate-compatibility`](skills/ro-crate-compatibility/SKILL.md) | Differences between 1.0-1.3 and upgrade steps |
 | [`ro-crate-profiles`](skills/ro-crate-profiles/SKILL.md) | Find, declare and author profiles and Profile Crates |
 | [`ro-crate-workflows`](skills/ro-crate-workflows/SKILL.md) | Workflow RO-Crate and Workflow/Process/Provenance Run Crates |
+| [`ro-crate-bioschemas`](skills/ro-crate-bioschemas/SKILL.md) | Bioschemas profiles and types in crates: released profiles, `conformsTo`, terms missing from the context |
 | [`ro-crate-retrieve`](skills/ro-crate-retrieve/SKILL.md) | Resolve a DOI/URL (Signposting) to a crate; follow referenced crates |
 | [`ro-crate-publish`](skills/ro-crate-publish/SKILL.md) | Zip/BagIt/.eln, attached vs detached, serving, PIDs, deposit |
 | [`ro-crate-py`](skills/ro-crate-py/SKILL.md) | Use `rocrate` (ro-crate-py) CLI and library |
