@@ -1,2 +1,5 @@
 __pycache__/
 *.pyc
+# Downloaded all-in-one specifications, input to background/split_spec.py
+background/ro-crate-1.2.0.md
+background/ro-crate-1.3.0.md

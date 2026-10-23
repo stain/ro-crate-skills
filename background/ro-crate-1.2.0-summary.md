@@ -1,8 +1,10 @@
 # RO-Crate 1.2 specification: summary and section index
 
-Companion to [`ro-crate-1.2.0.md`](ro-crate-1.2.0.md), the all-in-one Markdown of RO-Crate 1.2.0
-(published 2025-06-04). Not normative: check the spec text. Line numbers refer to `ro-crate-1.2.0.md`
-(Setext-style headings; each chapter has a "Table of contents" stub that can be ignored).
+Companion to [`ro-crate-1.2/`](ro-crate-1.2/), the specification of RO-Crate 1.2.0 (published 2025-06-04)
+with one Markdown file per chapter, split from the all-in-one Markdown on Zenodo. Not normative: check the
+spec text. Line numbers refer to the chapter files (Setext-style headings; each chapter has a "Table of
+contents" stub that can be ignored). [`quick-reference.md`](ro-crate-1.2/quick-reference.md) lists every
+requirement by entity type, linked to the chapters.
 
 | | |
 |---|---|
@@ -13,7 +15,7 @@ Companion to [`ro-crate-1.2.0.md`](ro-crate-1.2.0.md), the all-in-one Markdown o
 | Descriptor `@id` | `ro-crate-metadata.json` (`.jsonld` only in legacy 1.0 crates) |
 
 **1.2 is structurally almost identical to [1.3](ro-crate-1.3.0-summary.md).** Read that summary for the general
-principles; this file records only what differs. 1.3's changelog (1.3.0 spec, lines 4911-4966) lists 1.2's changes;
+principles; this file records only what differs. 1.3's changelog ([`ro-crate-1.3/appendix/changelog.md`](ro-crate-1.3/appendix/changelog.md), lines 1-56) lists 1.2's changes;
 the 1.3 text also folds in minor fixes listed there as "applied to the web version of 1.2".
 
 ## Differences from 1.3
@@ -37,26 +39,29 @@ the 1.3 text also folds in minor fixes listed there as "applied to the web versi
   `conformsTo`-prefix algorithm.
 - **Root `@id`** is `./` or an absolute URI; `identifier` as `PropertyValue`; `cite-as` and Signposting recommendations.
 - **Web-based entities**: `contentUrl` is the direct-download property (1.1 used `url`); `localPath`; `sdDatePublished`;
-  `DataDownload` distributions; referencing other RO-Crates and **Retrieving an RO-Crate** (line 1522).
+  `DataDownload` distributions; referencing other RO-Crates and **Retrieving an RO-Crate** (`data-entities.md` line 520).
 - **File encodings and file-format profiles** (`Standard`, PRONOM, `Profile` via `conformsTo`).
 - **`mainEntity` / `mentions`** ("The focus of an RO-Crate"), "Common principles for RO-Crate entities", GeoSPARQL
   `Geometry`/`asWKT` for places, running example in the introduction, Attached/Detached conversion appendices.
 
-## Section index (lines in `ro-crate-1.2.0.md`)
+## Section index (chapter files in [`ro-crate-1.2/`](ro-crate-1.2/), lines within each file)
 
-| Topic | Line |
-|---|---|
-| Front matter / Introduction / running example | 1 / 52 / 61 |
-| Terminology | 313 |
-| Structure (types, document, attached, detached) | 388 (400, 423, 450, 564) |
-| Metadata: principles, entity principles, schema.org, other vocabularies, identifiers | 602 (624, 643, 656, 680, 771) |
-| Root Data Entity (descriptor 819, properties 881, minimal example 917) | 805 |
-| Data Entities (files 1124, encodings 1358, format profiles 1418, other crates 1441, retrieving 1522) | 1003 |
-| Contextual Entities | 1577 |
-| Focus of a crate | 2172 |
-| Provenance | 2384 |
-| Profiles (publishing 2690, conformance 2711, Profile Crate 2749) | 2681 |
-| Workflows and Scripts | 3306 |
-| Implementation notes (BagIt 3715) | 3692 |
-| RO-Crate JSON-LD appendix (context 4009, media type 4071, extending 4115, profile grouping 4230) | 3918 |
-| Relative URIs appendix | 4305 |
+| Topic | File | Line |
+|---|---|---|
+| Front matter | [index.md](ro-crate-1.2/index.md) | 1 |
+| Introduction / running example | [introduction.md](ro-crate-1.2/introduction.md) | 1 / 10 |
+| Terminology | [terminology.md](ro-crate-1.2/terminology.md) | 1 |
+| Structure (types, document, attached, detached) | [structure.md](ro-crate-1.2/structure.md) | 1 (13, 36, 63, 177) |
+| Metadata: principles, entity principles, schema.org, other vocabularies, identifiers | [metadata.md](ro-crate-1.2/metadata.md) | 1 (23, 42, 55, 79, 170) |
+| Root Data Entity (descriptor 15, properties 77, minimal example 113) | [root-data-entity.md](ro-crate-1.2/root-data-entity.md) | 1 |
+| Data Entities (files 122, encodings 356, format profiles 416, other crates 439, retrieving 520) | [data-entities.md](ro-crate-1.2/data-entities.md) | 1 |
+| Contextual Entities | [contextual-entities.md](ro-crate-1.2/contextual-entities.md) | 1 |
+| Focus of a crate | [crate-focus.md](ro-crate-1.2/crate-focus.md) | 1 |
+| Provenance | [provenance.md](ro-crate-1.2/provenance.md) | 1 |
+| Profiles (publishing 10, conformance 31, Profile Crate 69) | [profiles.md](ro-crate-1.2/profiles.md) | 1 |
+| Workflows and Scripts | [workflows.md](ro-crate-1.2/workflows.md) | 1 |
+| Implementation notes (BagIt 24) | [appendix/implementation-notes.md](ro-crate-1.2/appendix/implementation-notes.md) | 1 |
+| RO-Crate JSON-LD appendix (context 92, media type 154, extending 198, profile grouping 313) | [appendix/jsonld.md](ro-crate-1.2/appendix/jsonld.md) | 1 |
+| Relative URIs appendix | [appendix/relative-uris.md](ro-crate-1.2/appendix/relative-uris.md) | 1 |
+| Changelog | [appendix/changelog.md](ro-crate-1.2/appendix/changelog.md) | 1 |
+| Requirements by entity type, linked to the chapters | [quick-reference.md](ro-crate-1.2/quick-reference.md) | |
