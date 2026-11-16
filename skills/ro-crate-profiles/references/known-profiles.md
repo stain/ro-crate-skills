@@ -4,8 +4,8 @@ Source: https://www.researchobject.org/ro-crate/profiles and the registry https:
 
 | Use case | Profile | Notes |
 |---|---|---|
-| Package a workflow for sharing (WorkflowHub) | Workflow RO-Crate, https://w3id.org/workflowhub/workflow-ro-crate/ (1.0; the run-crate profiles reference 1.1) | needs a `ComputationalWorkflow` that is also `mainEntity`, `programmingLanguage`; ZIP named `*.crate.zip`; validator: `workflow-ro-crate-1.0` |
-| Ship test suites for a workflow | Workflow Testing RO-Crate, https://lifemonitor.eu/workflow_testing_ro_crate | extends Workflow RO-Crate with `TestSuite`/`TestInstance`/`TestDefinition` (ro-terms `test` namespace, `mentions`); validator: `workflow-testing-ro-crate-0.1` |
+| Package a workflow for sharing (WorkflowHub) | Workflow RO-Crate, https://w3id.org/workflowhub/workflow-ro-crate/ (1.1 current; 1.0 still common, including in WorkflowHub-generated crates) | needs a `ComputationalWorkflow` that is also `mainEntity`, `programmingLanguage`; ZIP named `*.crate.zip`; validator: `workflow-ro-crate-1.0` |
+| Ship test suites for a workflow | Workflow Testing RO-Crate, https://lifemonitor.eu/workflow_testing_ro_crate (also https://w3id.org/ro/wftest) | extends Workflow RO-Crate with `TestSuite`/`TestInstance`/`TestDefinition` (ro-terms `test` namespace, `mentions`); validator: `workflow-testing-ro-crate-0.1` |
 | Record that tools were run | Process Run Crate, https://w3id.org/ro/wfrun/process/0.6 | validator knows 0.5 |
 | Record a workflow execution | Workflow Run Crate, https://w3id.org/ro/wfrun/workflow/0.6 | declare also Process Run Crate and Workflow RO-Crate; validator knows 0.5 |
 | Record step-level detail | Provenance Run Crate, https://w3id.org/ro/wfrun/provenance/0.6 | adds `HowToStep`, `ControlAction`, `OrganizeAction`; validator knows 0.5 |

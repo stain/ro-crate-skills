@@ -39,7 +39,7 @@ Root `identifier` (`PropertyValue` for a DOI; or use the DOI URL as root `@id`) 
 **Adding Signposting to a web application** (one crate per record page): send the links both as a `Link` header and as HTML `<link>` elements, put them before any links the framework adds, quote every parameter value, offer the crate by content negotiation on the page URL, and test with an independent client (Python `signposting`) plus `rocrate-validator`. Details, the link table and pitfalls: [references/signposting.md](references/signposting.md).
 
 ## Repositories and tools (check the tools list for status)
-- WorkflowHub accepts Workflow RO-Crates (`*.crate.zip`) and serves one per workflow with Signposting.
+- WorkflowHub accepts Workflow RO-Crates (`*.crate.zip`) and serves one per workflow with Signposting. It serves an uploaded crate as uploaded, so change the crate and release a new version rather than editing on the site. It does not validate on upload: validate first, make sure every listed data entity is in the ZIP (missing ones break its TRS API later), avoid listing thousands of files (uploads time out), and give the root a `version` (its submission API matches existing workflows by source URL and version).
 - `rocrate-zenodo` (Zenodo legacy API) and `rocrate-inveniordm` (InvenioRDM) fill the repository metadata from the crate: see the `ro-crate-deposit` skill (sandbox first, review the derived metadata, confirm before publishing). `ro-crates-deposit` is inactive.
 - Static sites: `ro-crate-preview` GitHub Action, `rocrate-to-pages`.
 Details and current status: https://www.researchobject.org/ro-crate/tools . Run a tool against a test/sandbox record first when one exists.
