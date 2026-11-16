@@ -23,7 +23,7 @@ On the **root data entity** (not the descriptor), one entry per profile:
 ```
 - Every listed profile MUST have a contextual entity with `Profile` in `@type` (plus `CreativeWork` for a web page, `Dataset` for a Profile Crate), an absolute versioned `@id`, `name`, optional `version`.
 - Use the profile's released, versioned permalink; never a `-DRAFT` one. (Bioschemas profiles are entity profiles with their own rules, including when a draft may be used: see `ro-crate-bioschemas`.) Add the profile's JSON-LD context to `@context` if it defines terms.
-- The descriptor keeps a single `conformsTo` for the RO-Crate version. (In 1.0/1.1 crates profiles may appear as an array there: read them, and move them to the root when upgrading.)
+- The descriptor keeps a single `conformsTo` for the RO-Crate version. (In 1.0/1.1 crates, and in some newer crates such as those WorkflowHub generates, profiles may appear as an array there: read them, and move them to the root when upgrading.)
 - Declaring conformance is a claim, not proof: validate (`rocrate-validator` supports profiles) and read the profile's text.
 
 ## Applying a profile as a consumer
