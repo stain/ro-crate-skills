@@ -54,11 +54,12 @@
     },
     {
       "prompt": "masp-validate only says 'Expected at least 1 instances of RO-Crate Metadata Descriptor ... found 0' for my crate, which clearly has a metadata descriptor. How do I find out what is actually wrong?",
-      "expected_output": "Explains cascading: a property failure on the root makes the descriptor invalid; use --json property-errors (strip [ERROR] lines before jq), or wpsld-cli check / SHACL conversion for direct messages.",
+      "expected_output": "Explains cascading: a property failure on the root makes the descriptor invalid; with 0.1.0 use --json property-errors (stripping [ERROR] lines works with every version), or a release with PR #4 whose message names the cause; wpsld-cli check / SHACL conversion as alternatives.",
       "expectations": [
         "Explains that property-rule failures make an entity not count, so the error is reported as a missing descriptor",
         "Points to --json and the property-errors of the root and descriptor rules",
-        "Mentions that the [ERROR] lines after the JSON must be removed before parsing",
+        "Gives a way to parse --json that works whether or not the [ERROR] lines are on stdout (version-dependent)",
+        "Mentions that newer validator versions (PR #4) explain the count error, and suggests checking the installed version with npm ls",
         "Offers wpsld-cli check or the SHACL conversion as a way to get the direct cause"
       ],
       "id": 5,

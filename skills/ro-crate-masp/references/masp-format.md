@@ -142,7 +142,8 @@ to the root only. A schema crate (general vocabulary) does not need this.
 
 Output: only class counts become `[ERROR]`s. An entity failing a property rule is simply not a
 valid instance; that matters only if a count then fails (directly, or because a reference from
-the root no longer reaches a valid entity). `--json` has the per-entity property results.
+the root no longer reaches a valid entity). `--json` has the per-entity property results; from
+validator PR #4 on, the count error itself also names the entities that did not count and why.
 
 ## Minimal profile crate
 
