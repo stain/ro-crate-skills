@@ -6,7 +6,7 @@ Skills are prose for agents, so testing has three layers.
 ```bash
 python tests/check_repo.py
 ```
-Checks that manifests parse and share one version, and that each `skills/*/SKILL.md` has portable frontmatter (`name` equal to its directory, `description` up to 1024 characters, no Claude-only keys), is listed in the README, has no placeholder text, stays under 500 lines, has working relative links and a valid `evals/evals.json`, and that no skill file uses a `-DRAFT` spec/profile URI. Unit tests for the lint script: `python -m unittest tests.test_lint tests.test_link_actions tests.test_graders`.
+Checks that manifests parse and share one version, and that each `skills/*/SKILL.md` has portable frontmatter (`name` equal to its directory, `description` up to 1024 characters, no Claude-only keys), is listed in the README, has no placeholder text, stays under 500 lines, has working relative links and a valid `evals/evals.json`, and that no skill file uses a `-DRAFT` spec/profile URI. Unit tests for the scripts and harnesses (no model calls): `python -m unittest tests.test_lint tests.test_link_actions tests.test_graders tests.test_triggers`.
 
 ## 2. Fixtures
 `tests/fixtures/` holds tiny crates:
@@ -31,6 +31,9 @@ Confirmed with roc-validator 0.12.2 (2026-10-16): `rocrate-validator validate -p
 
 ## 2b. Scripted graders
 `python tests/graders/run.py <iteration dir>` scores eval runs mechanically (standard library only; independent of RO-Crate libraries and of the skills' lint script); see `tests/graders/README.md`. Calibration against the hand grading: `tests/eval-results/graders-calibration.md`. Tests: `python -m unittest tests.test_graders`.
+
+## 2c. Trigger tests
+Does an agent pick the right skill from the descriptions alone? `python tests/triggers/run.py [--split dev|test] [--repeats N] [--only SKILL]` runs each prompt of `tests/triggers/triggers.json` through `claude -p` with this repository as a plugin and checks the first `Skill` call (positives: one of `accept`; negatives: no `ro-crate-*` skill). It needs the `claude` CLI and a login and costs money per run; tune descriptions on `dev` only and score `test` once. Status and results: PLAN.md, Next steps 3.
 
 ## 3. Evals (per skill)
 Each skill has `evals/evals.json` (prompts with `expectations`, the format used by the skill-creator plugin). Any agent can run the prompts by hand or in CI and compare the answer with the expectations; Claude Code users can also use the skill-creator plugin's viewer, benchmark and description optimiser (these need Claude Code). Prompts that name `tests/fixtures/...` expect to run from the repository root.

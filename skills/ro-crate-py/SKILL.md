@@ -1,6 +1,6 @@
 ---
 name: ro-crate-py
-description: "Use the ro-crate-py `rocrate` CLI and Python library to create, load, modify and zip RO-Crates instead of writing custom crate code: rocrate init, add, write-zip, ROCrate().add_file. Use whenever a task involves scripting crate creation or edits in Python, bootstrapping ro-crate-metadata.json from a folder, adding workflows or files, or producing a crate zip. Remember its output still needs name, description and licence on the root."
+description: "Use the ro-crate-py `rocrate` CLI and Python library to create, load, modify and zip RO-Crates instead of writing custom crate code: rocrate init, add, write-zip, ROCrate().add_file. Use whenever a task involves scripting crate creation or edits in Python, bootstrapping ro-crate-metadata.json from a folder, adding workflows or files, or producing a crate zip. Remember its output still needs name, description and licence on the root. Consult it before answering questions about rocrate init, add or write-zip, because the generated crate needs completing."
 ---
 
 # ro-crate-py (`rocrate`)

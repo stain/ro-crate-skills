@@ -5,7 +5,7 @@ Default target: RO-Crate 1.3 (released versions only, never `-DRAFT`). Run `pyth
 `python -m unittest tests.test_lint` before every commit.
 
 ## Status
-Seventeen skills ship in `skills/` (eleven core skills plus six small tool skills: `ro-crate-runcrate`, `ro-crate-action-recorder`, `ro-crate-tabulate`, `ro-crate-js`, `ro-crate-excel`, `ro-crate-deposit`; tools tested in isolated environments as noted in each skill): `ro-crate-consume`, `ro-crate-create`, `ro-crate-validator` (with `scripts/lint_crate.py`),
+Nineteen skills ship in `skills/` (thirteen core skills, including `ro-crate-bioschemas` and `ro-crate-masp` (MASP profiles, their tools and conversion to SHACL), plus six small tool skills: `ro-crate-runcrate`, `ro-crate-action-recorder`, `ro-crate-tabulate`, `ro-crate-js`, `ro-crate-excel`, `ro-crate-deposit`; tools tested in isolated environments as noted in each skill): `ro-crate-consume`, `ro-crate-create`, `ro-crate-validator` (with `scripts/lint_crate.py`),
 `ro-crate-spec`, `ro-crate-compatibility`, `ro-crate-profiles`, `ro-crate-workflows`, `ro-crate-retrieve`, `ro-crate-publish`,
 `ro-crate-py`, `ro-crate-tools`. Each has `evals/evals.json`. The earlier 20 placeholders were condensed into these (detail
 moved to `references/`). Commands for ro-crate-py, signposting and rochtml were run once (ro-crate-py 0.16.0,
@@ -25,8 +25,14 @@ Done: `tests/graders/` and iteration 4 (3 repeats x 14 evals, `tests/eval-result
 2. **Validator** was run on all fixtures (results in `TESTING.md` and the validator skill); still open: offline behaviour, `--no-auto-profile`, `--skip-availability-checks`, reporting the over-strict Profile Crate check upstream; add known false positives (see data-preparation-skills `references/validator-findings.md`); check `--no-auto-profile`,
    `--skip-availability-checks`, offline use. Compare findings with the lint script and with
    https://github.com/alexhambley/RO-Crate-RAG-Validator (optional LLM/RAG tool, evaluated 2026-10-16: per-entity only, needs keys).
-3. **Description triggering.** Test each description with should/should-not trigger prompts (Claude Code: skill-creator `run_loop`;
-   other agents manually); neighbours to separate: consume/create/validator/tools/py, compatibility/spec, retrieve/publish.
+3. **Description triggering.** Harness in `tests/triggers/` (`run.py`, prompts in `triggers.json`, split into `dev` and
+   held-out `test`; unit tests in `tests/test_triggers.py`, no model calls). It runs each prompt through `claude -p` with this
+   repository as a plugin and records the first `Skill` call; every run costs money (about $2.50 for the dev set), so run it on
+   purpose, not in CI. Baseline on the dev set (2026-10-16, 3 runs): 86% of positives and 100% of negatives; the consistent misses
+   were the agent answering from memory instead of consulting a skill. Descriptions of ten skills were then sharpened using the dev
+   prompts only. Still to do: score the held-out `test` split once (do not tune on it), and re-run after the `ro-crate-masp` and
+   `ro-crate-bioschemas` prompts were added (2026-11-27). Neighbours to watch: consume/create/validator/tools/py,
+   compatibility/spec, retrieve/publish, profiles/masp/bioschemas.
 4. **Verify URLs and tool claims** in `references/` (spec page URLs were checked once on 2026-10-16; tool statuses come from the tools list).
 5. **Sibling repos:** link (not vendor) https://github.com/stain/data-preparation-skills (`ro-crate-provenance`, MIT) and
    https://github.com/sanskritsuthar/workflowhub-skills (BSD-3-Clause; installable as a plugin from GitHub: `claude plugin marketplace add sanskritsuthar/workflowhub-skills`).
