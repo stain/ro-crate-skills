@@ -11,6 +11,18 @@
         "Mentions at least two GUI editors",
         "Notes tools are alpha/beta and points to the tools list"
       ]
+    },
+    {
+      "prompt": "Is there a command-line tool that can check my crate, fix common problems like licence and format identifiers, and write the HTML preview, without installing Python?",
+      "expected_output": "wpsld-cli (from the wpsld release zips, Java included): check, repair --dry-run then repair, preview; with caveats.",
+      "expectations": [
+        "Recommends wpsld-cli with its check, repair and preview commands",
+        "Suggests repair --dry-run before repairing in place",
+        "Warns that repair adds missing referenced entities as Thing placeholders to review",
+        "Notes that check only applies MASP profiles and still suggests rocrate-validator for other profiles"
+      ],
+      "id": 2,
+      "files": []
     }
   ]
 }

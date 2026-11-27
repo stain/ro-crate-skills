@@ -31,7 +31,10 @@ TOOLS = [  # (name, pypi, npm, github)
     ("CheckMyCrate", None, None, "KockataEPich/CheckMyCrate"),
     ("ro-crate-validator-py", None, None, "ResearchObject/ro-crate-validator-py"),
     ("ro-crates-deposit", None, None, "beerphilipp/ro-crates-deposit"),
-    ("Crate-O", None, None, "Language-Research-Technology/crate-o"),
+    ("Crate-O", None, None, "crate-works/crate-o"),
+    ("ro-crate-masp-validator", None, "@crate-works/ro-crate-masp-validator", "crate-works/ro-crate-masp-validator"),
+    ("ro-crate-masp-tools", None, "@crate-works/ro-crate-masp-tools", "crate-works/ro-crate-masp-tools"),
+    ("wpsld", None, None, "stain/wpsld"),
     ("nf-prov", None, None, "nextflow-io/nf-prov"),
 ]
 
