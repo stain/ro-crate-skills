@@ -15,22 +15,36 @@ Install the npm tools in a project or scratch folder (`npm install --save-dev ..
 
 ## masp-validate
 ```bash
-npm install @crate-works/ro-crate-masp-validator@0.1.0
+npm view @crate-works/ro-crate-masp-validator version     # newest release
+npm install @crate-works/ro-crate-masp-validator           # then: npm ls @crate-works/ro-crate-masp-validator
 npx masp-validate [--json] target/ro-crate-metadata.json profile-crate/ro-crate-metadata.json
 ```
 - Local files only (fetch a profile first, `ro-crate-retrieve`). Exit 0 pass, 2 errors, 1 unreadable.
+  There is no `--version`; check the installed version with `npm ls`.
 - **Errors are class counts only.** Property rules decide whether an entity counts as a valid
-  instance, so a missing root `license` is reported as
-  `Expected at least 1 instances of RO-Crate Metadata Descriptor ... found 0` (the descriptor's
-  `about` no longer reaches a valid root). The cause is only in `--json`, under
-  `rules.<rule>.<entity>.property-errors`. A stray entity failing its rules is not reported at all.
-- `--json` prints the JSON and then the `[ERROR]` lines on stdout; strip them before `jq`:
+  instance, so a missing root `license` makes the descriptor's `about` miss a valid root, and the
+  error is about the descriptor. A stray entity failing its rules is not reported at all.
+- **What the error says depends on the version.** Find out which behaviour you have from the
+  message itself rather than assuming:
+  - **0.1.0** (latest release on 2026-11-27): only
+    `Expected at least 1 instances of RO-Crate Metadata Descriptor ... found 0`. The cause is only
+    in `--json`, under `rules.<rule>.<entity>.property-errors`.
+  - **With [PR #4](https://github.com/crate-works/ro-crate-masp-validator/pull/4)** (open on
+    2026-11-27; expect it in the release after 0.1.0, check its notes): the same error goes on
+    `; not counted because they fail the rules: ro-crate-metadata.json: about: value "./" ...
+    did not match any of the expected ranges: #Root_Data_Entity [license: missing required
+    property license]`. Read the innermost `[...]` first: that is the root's own problem. Up to
+    three entities are listed (`; and N more`); entities failing a rule's `@id` constraint are
+    left out. Messages are longer, but the JSON keys and exit codes are unchanged.
+- **`--json` output.** 0.1.0 prints the `[ERROR]` lines on stdout after the JSON; with PR #4 they
+  go to stderr and stdout is plain JSON. This works with both:
   ```bash
   npx masp-validate --json crate.json profile.json | sed '/^\[ERROR\]/d' \
     | jq -r '.rules[][]["property-errors"][]?.message'
   ```
   This also lists failures of entities that merely share a type (e.g. a licence `CreativeWork`
-  failing the descriptor rule's `about`): read the ones on entities that matter.
+  failing the descriptor rule's `about`): read the ones on entities that matter. Never match on
+  the exact wording of error messages in scripts; use the exit code and the JSON keys.
 - The MASP profile validates itself, and the minimal profile in `masp-format.md` passes it.
 
 ## generate-masp-docs
