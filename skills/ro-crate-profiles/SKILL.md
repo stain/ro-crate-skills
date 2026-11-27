@@ -1,6 +1,6 @@
 ---
 name: ro-crate-profiles
-description: "Find, declare, apply and author RO-Crate profiles and Profile Crates. Use when a crate should conform to a domain profile (Workflow RO-Crate, Workflow Run Crate, ARC/ISA, ELN, ...), when reading or writing conformsTo on a root data entity, when defining a new profile, or when creating a machine-readable Profile Crate (hasResource, ResourceDescriptor, isProfileOf). For the full list of profile permalinks and validators see its references; for run-crate provenance see ro-crate-workflows."
+description: "Find, declare, apply and author RO-Crate profiles and Profile Crates. Use when a crate should conform to a domain profile (Workflow RO-Crate, Workflow Run Crate, ARC/ISA, ELN, ...), when reading or writing conformsTo on a root data entity, when defining a new profile, or when creating a machine-readable Profile Crate (hasResource, ResourceDescriptor, isProfileOf). For the full list of profile permalinks and validators see its references; for machine-actionable MASP rules see ro-crate-masp; for run-crate provenance see ro-crate-workflows."
 ---
 
 # RO-Crate profiles (RO-Crate 1.2+)
@@ -32,4 +32,5 @@ Resolve each profile URI to its description (or Profile Crate via content negoti
 ## Publish a profile
 - Profile URI: resolves to a human-readable description, SHOULD be a permalink (w3id, purl, DOI), SHOULD be versioned `MAJOR.MINOR`. The description uses RFC 2119 keywords and states required/suggested entity types, properties, RO-Crate version, context, packaging.
 - Optionally a Profile Crate at the same URI: see [references/profile-crate.md](references/profile-crate.md).
-- Formal forms: JSON Schema, SHACL/ShEx shapes, hard-coded validators; combine structural JSON-LD checks with them.
+- Formal forms: MASP rules inside the Profile Crate (validator, documentation and editor forms from one crate; see `ro-crate-masp`), SHACL shapes as a rocrate-validator profile folder (`ro-crate-validator`), JSON Schema, ShEx, hard-coded validators; combine structural JSON-LD checks with them.
+- To serve both MASP tools and rocrate-validator, keep MASP rules as the source (role `schema`) and ship SHACL generated from them (role `validation`): [references/profile-crate.md](references/profile-crate.md), "Machine-actionable rules for both validators".
