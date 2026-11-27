@@ -1,6 +1,6 @@
 ---
 name: ro-crate-tools
-description: "Choose and use RO-Crate tools: libraries for Python, JavaScript, Java, R and others; editors (Describo, Crate-O, NovaCrate); HTML preview generators (rochtml); workflow-run exporters (Nextflow, Galaxy); repository uploaders. Use when the user asks which tool fits, how to preview or edit a crate in a GUI, or how to convert, export or deposit crates with existing tooling instead of writing code. For Python scripting see ro-crate-py; for validation see ro-crate-validator. Consult it for any 'is there a library or tool for ...' question about RO-Crate in Java, JavaScript, Python, R or other languages: it holds tested versions and maintenance status."
+description: "Choose and use RO-Crate tools: libraries for Python, JavaScript, Java, R and others; editors (Describo, Crate-O, NovaCrate, wpsld); command-line checking and repair (wpsld-cli); MASP profile tools; HTML preview generators (rochtml); workflow-run exporters (Nextflow, Galaxy); repository uploaders. Use when the user asks which tool fits, how to preview or edit a crate in a GUI, or how to convert, export or deposit crates with existing tooling instead of writing code. For Python scripting see ro-crate-py; for validation see ro-crate-validator. Consult it for any 'is there a library or tool for ...' question about RO-Crate in Java, JavaScript, Python, R or other languages: it holds tested versions and maintenance status."
 ---
 
 # RO-Crate tools
@@ -11,9 +11,11 @@ Authoritative, changing list with status labels: https://www.researchobject.org/
 |---|---|
 | Create/read/modify crates, Python | `ro-crate-py` (beta): see the `ro-crate-py` skill |
 | Validate against spec and profiles | `rocrate-validator` / `roc-validator` (beta): see the `ro-crate-validator` skill |
+| Check, repair and preview from the command line | `wpsld-cli` (in the wpsld release zips; Java): `check` (RO-Crate rules plus the crate's MASP profiles), `repair` (SPDX, PRONOM, ORCID/ROR/DOI forms, missing entities), `preview`: [references/tool-evaluation.md](references/tool-evaluation.md) |
+| MASP profiles (machine-actionable rules in a Profile Crate) | `masp-validate` (`@crate-works/ro-crate-masp-validator`), `generate-masp-docs`, `generate-mode-file`, `mode-to-masp`, `generate-schema-org-crate`, `owl-to-masp.py` (`@crate-works/ro-crate-masp-tools`): see the `ro-crate-masp` skill |
 | JavaScript | `ro-crate-js` (`npm install ro-crate`): see the `ro-crate-js` skill |
 | Other languages | ro-crate-java, rocrateR, ro-crate-ruby, ro-crate-rs: [references/js-and-editors.md](references/js-and-editors.md) |
-| Interactive editing | Describo (production), NovaCrate (production), Crate-O (beta), RO-Crate Playground: [references/js-and-editors.md](references/js-and-editors.md) |
+| Interactive editing | Describo (production), NovaCrate (production), Crate-O (beta), wpsld (desktop, work in progress), RO-Crate Playground: [references/js-and-editors.md](references/js-and-editors.md) |
 | HTML preview | `rochtml` from `npm install ro-crate-html`; `rocrate init --gen-preview`: [references/preview.md](references/preview.md) |
 | Spreadsheets/folders to crates | `ro-crate-excel` (`rocxl`, needs Siegfried): see the `ro-crate-excel` skill; RO-Crates-and-Excel profile |
 | Crate to tables (SQLite/CSV) | `rocrate-tabular` (`tabulator`): see the `ro-crate-tabulate` skill |
@@ -21,7 +23,7 @@ Authoritative, changing list with status labels: https://www.researchobject.org/
 | Resolve a PID to its crate (Signposting) | `signposting` (PyPI, beta): `signposting <url>` prints CiteAs/DescribedBy/Item links; see `ro-crate-retrieve` |
 | Deposit to repositories | `rocrate-zenodo`, `rocrate-inveniordm` (PyPI names; see the `ro-crate-deposit` skill); WorkflowHub accepts Workflow RO-Crates (`*.crate.zip`) |
 | Browse/search | Bowerbird (offline), Oni UI, RO-Crate Explorer, `ro-crate-tabulator` (crate to tables) |
-| Profiles | RO-Crate Profile Portal https://profiles.ro-crate.org/ , Profile Crate Creator (ROCratePCC, beta) |
+| Profiles | RO-Crate Profile Portal https://profiles.ro-crate.org/ , Profile Crate Creator (ROCratePCC, beta); MASP profile crates and their SHACL conversion: `ro-crate-masp` |
 
 ## Guidance
 - What was actually tested (versions, strengths, weaknesses, when a tool is out of scope): [references/tool-evaluation.md](references/tool-evaluation.md). Read it before recommending or running a tool.

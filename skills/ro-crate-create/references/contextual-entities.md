@@ -11,7 +11,7 @@ Give every referenced thing an entity in `@graph`, with a real absolute `@id` wh
 | Contact | `Person`/`Organization` with `contactPoint` → `ContactPoint` (`email`, `contactType`); `Dataset` itself has no `contactPoint` |
 | Publication | root `citation: {"@id": "https://doi.org/..."}` MUST be a URL; describe as `ScholarlyArticle`/`CreativeWork` with `name`, `author`, `datePublished`; `creditText` for the citation string |
 | Funding | root `funder` → `Organization` (the project may have its own `funder` chain); reference funders from the root too |
-| Licence | entity of `@type` `CreativeWork`, `@id` = licence URL, `name`, `description`; a different licence per data entity is allowed; the metadata can have its own: `license` on the descriptor (CC0 for metadata is common) |
+| Licence | entity of `@type` `CreativeWork`, `@id` = licence URL, `name`, `description`; for SPDX licences use the SPDX license URI `http://spdx.org/licenses/<id>` (as in SPDX's own RDF; not the `https://…/<id>.html` page), the same URI in Signposting `rel="license"`; a different licence per data entity is allowed; the metadata can have its own: `license` on the descriptor (CC0 for metadata is common) |
 | Place | `contentLocation` or `spatialCoverage` → `Place` (GeoNames `@id`); `geo` → `Geometry` blank node `_:g1` with `asWKT` (`<http://www.opengis.net/def/crs/OGC/1.3/CRS84> POINT (150.30 -33.71)`; longitude first) |
 | Subject / keywords | `about` → entity (e.g. DBpedia URI); `keywords` is ONE comma-separated string |
 | Time | `temporalCoverage: "1950/1975"` |

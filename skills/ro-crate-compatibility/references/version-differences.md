@@ -54,7 +54,7 @@ Version detection: read the descriptor's `conformsTo`, not `@context`.
 ### 1.0 → 1.1
 1. Rename `ro-crate-metadata.jsonld` to `ro-crate-metadata.json`; change the descriptor `@id` and `conformsTo` to
    `https://w3id.org/ro/crate/1.1`; change `@context` to `https://w3id.org/ro/crate/1.1/context`.
-2. Workflows: `Workflow` → `ComputationalWorkflow`; scripts stay `SoftwareSourceCode` (check the 1.1 context before keeping a `Script` type).
+2. Workflows: `Workflow` → `ComputationalWorkflow`; scripts stay `SoftwareSourceCode` (check the 1.1 context before keeping a `Script` type); the diagram type `WorkflowSketch` is not in the 1.1 context: use `ImageObject`. Many crates on WorkflowHub still carry `WorkflowSketch`.
 3. Optional: describe web resources as data entities; use absolute root `@id`; add `sdDatePublished` to web files.
 4. If you relied on `@base: null` from the 1.0 context, handle relative URIs as described in the relative-URI appendix.
 
@@ -77,4 +77,5 @@ RDF consumers must also recognise the old Bioschemas IRIs when reading 1.1/1.2 c
 - Accept `.jsonld` descriptors; find the root by `about` (or by `conformsTo` prefix for 1.0/1.1 if the `@id` lookup fails).
 - Accept string `identifier`, string `license`, descriptor `conformsTo` arrays containing profiles (treat entries other than the base spec as profile declarations).
 - Treat a missing `@context` version as unreliable; use `conformsTo`.
+- In RDF, the RO-Crate contexts map schema.org terms to `http://schema.org/`, while many sites' own JSON-LD uses `https://schema.org/`; Bioschemas `ComputationalWorkflow` expands to `https://bioschemas.org/ComputationalWorkflow` under the 1.1 context and `https://bioschemas.org/terms/ComputationalWorkflow` under 1.3. Normalise before comparing or merging crates.
 - Do not "fix" a crate's version silently; report the declared version, then apply the checklist if the user asks to upgrade.

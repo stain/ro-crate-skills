@@ -5,11 +5,13 @@ Default target: RO-Crate 1.3 (released versions only, never `-DRAFT`). Run `pyth
 `python -m unittest tests.test_lint` before every commit.
 
 ## Status
-Seventeen skills ship in `skills/` (eleven core skills plus six small tool skills: `ro-crate-runcrate`, `ro-crate-action-recorder`, `ro-crate-tabulate`, `ro-crate-js`, `ro-crate-excel`, `ro-crate-deposit`; tools tested in isolated environments as noted in each skill): `ro-crate-consume`, `ro-crate-create`, `ro-crate-validator` (with `scripts/lint_crate.py`),
+Nineteen skills ship in `skills/` (thirteen core skills, including `ro-crate-bioschemas` and `ro-crate-masp` (MASP profiles, their tools and conversion to SHACL), plus six small tool skills: `ro-crate-runcrate`, `ro-crate-action-recorder`, `ro-crate-tabulate`, `ro-crate-js`, `ro-crate-excel`, `ro-crate-deposit`; tools tested in isolated environments as noted in each skill): `ro-crate-consume`, `ro-crate-create`, `ro-crate-validator` (with `scripts/lint_crate.py`),
 `ro-crate-spec`, `ro-crate-compatibility`, `ro-crate-profiles`, `ro-crate-workflows`, `ro-crate-retrieve`, `ro-crate-publish`,
 `ro-crate-py`, `ro-crate-tools`. Each has `evals/evals.json`. The earlier 20 placeholders were condensed into these (detail
 moved to `references/`). Commands for ro-crate-py, signposting and rochtml were run once (ro-crate-py 0.16.0,
 signposting 0.9.9, ro-crate-html 0.1.6); re-check on new releases.
+
+Evals so far are graded by hand or by the scripted graders; trigger accuracy of the descriptions, other agents and weaker models are untested. All skills share one rule, [`tests/do_not_guess.txt`](tests/do_not_guess.txt): ask rather than guess facts about the user or project, never invent identifiers, use `TODO:` for unavoidable gaps. Related skill repositories: see Next steps, item 5.
 
 ## v0.1 scope (this branch)
 Seventeen skills, one shared "Do not guess" rule enforced by `tests/check_repo.py`, scripts with unit tests (`lint_crate.py`, `link_actions.py`), 21 evals run once each (`tests/eval-results/`), tool evaluation in `skills/ro-crate-tools/references/tool-evaluation.md`. Not in v0.1: trigger-accuracy testing, weaker-model and other-agent runs, scripted expectation checks, repeat runs for variance.
@@ -23,14 +25,28 @@ Done: `tests/graders/` and iteration 4 (3 repeats x 14 evals, `tests/eval-result
 2. **Validator** was run on all fixtures (results in `TESTING.md` and the validator skill); still open: offline behaviour, `--no-auto-profile`, `--skip-availability-checks`, reporting the over-strict Profile Crate check upstream; add known false positives (see data-preparation-skills `references/validator-findings.md`); check `--no-auto-profile`,
    `--skip-availability-checks`, offline use. Compare findings with the lint script and with
    https://github.com/alexhambley/RO-Crate-RAG-Validator (optional LLM/RAG tool, evaluated 2026-10-16: per-entity only, needs keys).
-3. **Description triggering.** Test each description with should/should-not trigger prompts (Claude Code: skill-creator `run_loop`;
-   other agents manually); neighbours to separate: consume/create/validator/tools/py, compatibility/spec, retrieve/publish.
+3. **Description triggering.** Harness in `tests/triggers/` (`run.py`, prompts in `triggers.json`, split into `dev` and
+   held-out `test`; unit tests in `tests/test_triggers.py`, no model calls). It runs each prompt through `claude -p` with this
+   repository as a plugin and records the first `Skill` call; every run costs money (about $2.50 for the dev set), so run it on
+   purpose, not in CI. Baseline on the dev set (2026-10-16, 3 runs): 86% of positives and 100% of negatives; the consistent misses
+   were the agent answering from memory instead of consulting a skill. Descriptions of ten skills were then sharpened using the dev
+   prompts only. Still to do: score the held-out `test` split once (do not tune on it), and re-run after the `ro-crate-masp` and
+   `ro-crate-bioschemas` prompts were added (2026-11-27). Neighbours to watch: consume/create/validator/tools/py,
+   compatibility/spec, retrieve/publish, profiles/masp/bioschemas.
 4. **Verify URLs and tool claims** in `references/` (spec page URLs were checked once on 2026-10-16; tool statuses come from the tools list).
 5. **Sibling repos:** link (not vendor) https://github.com/stain/data-preparation-skills (`ro-crate-provenance`, MIT) and
    https://github.com/sanskritsuthar/workflowhub-skills (BSD-3-Clause; installable as a plugin from GitHub: `claude plugin marketplace add sanskritsuthar/workflowhub-skills`).
    Our `ro-crate-retrieve`/`ro-crate-consume` overlap with its `fair-signposting`/`ro-crate-consume`; prefer pointing to it where it is deeper.
-6. **Versioning and CI:** bump `version` in all five manifests together on meaningful changes (currently 0.1.0); add a GitHub Action running
+6. **Versioning and CI:** bump `version` in all five manifests together on meaningful changes (currently 0.2.1); add a GitHub Action running
    `tests/check_repo.py` and `tests.test_lint`. Test install in each agent (Claude Code plugin, Copilot, Codex, plain copy into `.agents/skills`).
+7. **Anthropic directory submission: on hold** (decided 2026-10-23). The plugin is prepared (v0.2.1: icon, listing fields in
+   `.claude-plugin/plugin.json`, README for the listing, every file under 256 KiB; `claude plugin validate .` reports no directory
+   findings), but submitting from the developer portal (https://claude.ai/directory/manage) needs a paid claude.ai plan, and the
+   listing belongs to the organization it is submitted from: the first organization to submit a repository folder holds the listing
+   long term. Decide which account or organization should own it before submitting. When submitting: Plugin bundle, repository
+   `stain/ro-crate-skills`, empty plugin path, track `main`; the icon is read only on the first save. See
+   https://claude.com/docs/plugins/submit and https://claude.com/docs/plugins/pre-submission-checklist. Expect a possible reviewer
+   hold for the "RO-Crate" name and for `rocrate-inveniordm` reading `INVENIORDM_API_KEY` from the environment.
 
 ## Gaps and ideas
 - **Profile discovery:** help choose a profile for a use case (Workflow Run, ARC/ISA, ELN, 5 Safes, language-data, ...) from the profile registry.
@@ -41,27 +57,3 @@ Done: `tests/graders/` and iteration 4 (3 repeats x 14 evals, `tests/eval-result
   crates by script (do not commit large ones; record version, validator result, licence, source URL).
 - **Lint script:** extend with profile-aware checks only if they stay deterministic; keep standard library only.
 - `background/` holds the spec copies (Apache-2.0, see NOTICE) and summaries for people and agents developing skills; shipped skills must not link into it.
-
-## Notes from stalled session
-
-
-
-I'll test triggering the way the skill-creator does, by running claude -p with the plugin loaded and checking which skill the agent consults. First I need to see what the CLI supports here.
-...
-
-
-The harness is confirmed working — the plugin loads all 17 skills alongside the built-ins, and I can see which skill gets picked per query (~6s each). Next I'll build a larger prompt set, split into development and held-out test prompts, so I can tune skill descriptions without overfitting. · summary
-
-  Ran 2 shell commands
-
-Harness tests pass. Now the first real run on the 66 development prompts, scored by what the agent actually invokes.
-
-  Ran 1 shell command
-
-First pass scored 43/51 on positives and 15/15 on negatives (~$2.50), with nearly all failures caused by the agent skipping skill consultation. Since results are noisy, I'm rerunning it three times to identify which misses are consistent. · summary
-
-  Ran 1 shell command
-
-Baseline runs show 86% positive and 100% negative accuracy, with consistent misses on cases where the agent relies on memory instead of verified skill facts. I'll sharpen the skill descriptions and keywords for those tasks using only the dev prompts, then evaluate on the held-out set. ·
-
-claude --resume 369cabbf-2ae2-445a-913d-5c7107fcc707

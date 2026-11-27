@@ -30,7 +30,7 @@ DO_NOT_GUESS = (root / "tests/do_not_guess.txt").read_text().strip()
 # skills that write metadata or act for the user must carry the canonical rule verbatim
 MUST_CARRY_DO_NOT_GUESS = {"ro-crate-create", "ro-crate-py", "ro-crate-js", "ro-crate-workflows",
                            "ro-crate-profiles", "ro-crate-publish", "ro-crate-deposit", "ro-crate-excel",
-                           "ro-crate-action-recorder", "ro-crate-runcrate"}
+                           "ro-crate-action-recorder", "ro-crate-runcrate", "ro-crate-masp"}
 skill_names = {p.parent.name for p in (root / "skills").glob("*/SKILL.md")}
 ALLOWED_KEYS = {"name", "description", "license", "compatibility", "metadata", "allowed-tools"}
 readme = (root / "README.md").read_text()

@@ -23,6 +23,19 @@
         "Reports 0 errors",
         "States that profile/SHACL checks were not run"
       ]
+    },
+    {
+      "prompt": "I want rocrate-validator to also check our own profile: the root must have at least one author who is a Person. How do I set that up without forking the validator?",
+      "expected_output": "Profile folder <token>/<version>/profile.ttl (prof:hasToken, prof:isProfileOf 1.3, prof:isTransitiveProfileOf 1.3 and 1.2) + SHACL shape targeting the validator's RootDataEntity class with sh:path schema:author, sh:minCount 1, sh:class schema:Person; run with --extra-profiles-path and -p.",
+      "expectations": [
+        "Uses --extra-profiles-path with a folder <token>/<version>/ holding profile.ttl and a SHACL .ttl file",
+        "profile.ttl declares prof:hasToken and prof:isProfileOf the RO-Crate version",
+        "Targets the root through the validator's RootDataEntity class (or the descriptor's about), not sh:targetClass schema:Dataset",
+        "The shape uses sh:path schema:author with sh:minCount 1 and sh:class schema:Person",
+        "Mentions MASP rules / ro-crate-masp as an alternative or source if the profile also has a Profile Crate"
+      ],
+      "id": 3,
+      "files": []
     }
   ]
 }

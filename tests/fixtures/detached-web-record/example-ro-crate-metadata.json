@@ -1,0 +1,29 @@
+{
+  "@context": "https://w3id.org/ro/crate/1.3/context",
+  "@graph": [
+    {"@id": "ro-crate-metadata.json", "@type": "CreativeWork",
+     "about": {"@id": "https://catalogue.example.org/materials/42"},
+     "conformsTo": {"@id": "https://w3id.org/ro/crate/1.3"}},
+    {"@id": "https://catalogue.example.org/materials/42", "@type": "Dataset",
+     "name": "Introduction to sequence alignment",
+     "description": "Catalogue record for a training material on sequence alignment.",
+     "datePublished": "2026-10-01",
+     "license": {"@id": "http://spdx.org/licenses/CC-BY-4.0"},
+     "publisher": {"@id": "https://catalogue.example.org/"},
+     "mainEntity": {"@id": "https://training.example.com/alignment/"},
+     "hasPart": {"@id": "https://training.example.com/alignment/"}},
+    {"@id": "https://training.example.com/alignment/", "@type": "LearningResource",
+     "name": "Introduction to sequence alignment",
+     "description": "Tutorial on pairwise and multiple sequence alignment.",
+     "license": {"@id": "http://spdx.org/licenses/CC-BY-4.0"},
+     "conformsTo": {"@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE"},
+     "sdPublisher": {"@id": "https://catalogue.example.org/"},
+     "keywords": "sequence alignment, bioinformatics"},
+    {"@id": "https://catalogue.example.org/", "@type": "Organization", "name": "Example training catalogue",
+     "url": "https://catalogue.example.org/"},
+    {"@id": "http://spdx.org/licenses/CC-BY-4.0", "@type": "CreativeWork",
+     "name": "Creative Commons Attribution 4.0 International"},
+    {"@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE", "@type": ["CreativeWork", "Profile"],
+     "name": "Bioschemas TrainingMaterial profile 1.0-RELEASE"}
+  ]
+}

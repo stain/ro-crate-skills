@@ -6,7 +6,7 @@ Skills are prose for agents, so testing has three layers.
 ```bash
 python tests/check_repo.py
 ```
-Checks that manifests parse and share one version, and that each `skills/*/SKILL.md` has portable frontmatter (`name` equal to its directory, `description` up to 1024 characters, no Claude-only keys), is listed in the README, has no placeholder text, stays under 500 lines, has working relative links and a valid `evals/evals.json`, and that no skill file uses a `-DRAFT` spec/profile URI. Unit tests for the lint script: `python -m unittest tests.test_lint tests.test_link_actions tests.test_graders`.
+Checks that manifests parse and share one version, and that each `skills/*/SKILL.md` has portable frontmatter (`name` equal to its directory, `description` up to 1024 characters, no Claude-only keys), is listed in the README, has no placeholder text, stays under 500 lines, has working relative links and a valid `evals/evals.json`, and that no skill file uses a `-DRAFT` spec/profile URI. Unit tests for the scripts and harnesses (no model calls): `python -m unittest tests.test_lint tests.test_link_actions tests.test_graders tests.test_triggers`.
 
 ## 2. Fixtures
 `tests/fixtures/` holds tiny crates:
@@ -20,13 +20,20 @@ Confirmed with roc-validator 0.12.2 (2026-10-16): `rocrate-validator validate -p
 |---|---|---|---|
 | `crate-1.0/` | legacy `.jsonld` descriptor, `Workflow` type | 0 errors, warns legacy descriptor | `-p ro-crate-1.1` FAILS: "ro-crate-metadata.json is not present" (expected: validate legacy crates against the version they declare, and the tool has no 1.0 profile) |
 | `crate-1.1/` | profile in descriptor `conformsTo`, string `license` | 0 errors, warns about profile in descriptor | `-p ro-crate-1.1` passes |
+| `detached-web-record/example-ro-crate-metadata.json` | catalogue record as root (page URL, no trailing `/`), `LearningResource` web page as `mainEntity` and `hasPart`, Bioschemas profile on the main entity, SPDX license URI | 0 errors | roc-validator **0.13.0** (2026-10-23): `-p ro-crate-1.3` passes at REQUIRED; `-p ro-crate-1.1` FAILS (root URI must end with `/`, descriptor `conformsTo`: version mismatch); RECOMMENDED warns about the root's `conformsTo` and tries to download the root URL |
 | `detached-crate/example-ro-crate-metadata.json` | prefixed detached metadata, web file | 0 errors | `-p ro-crate-1.3` on the file passes |
 | `process-run-crate/` | Process Run Crate **0.6** on 1.3 | 0 errors | `-p ro-crate-1.3` passes (the profile entity has `Profile` in `@type`, the software has `version`; the profile page's own example, with a `CreativeWork`-only profile entity and `softwareVersion`, fails both); `-p process-run-crate-0.5` FAILS (descriptor `conformsTo` rule): the validator's profile is 0.5, older than 0.6. Do not "fix" a correct 0.6 crate to satisfy 0.5 |
-| `profile-crate/` | Profile Crate with absolute root `@id` | 0 errors | `-p ro-crate-1.3` FAILS: "Data Entity 'index.html' has a local identifier but the Root Data Entity does not..." (looks over-strict: the spec allows an absolute-URI root; candidate upstream issue, check the spec text before changing the crate) |
+| `profile-crate/` | Profile Crate with absolute root `@id` | 0 errors | 0.12.2: `-p ro-crate-1.3` FAILS: "Data Entity 'index.html' has a local identifier but the Root Data Entity does not..." (over-strict); **0.14.0 (2026-11-27): passes**. Also passes `wpsld-cli check` 0.8.0 |
 | `injection-crate/` | hostile text in `description` for consume/injection evals | 0 errors | passes (structure only; it does not look at text) |
+
+### MASP and SHACL (2026-11-27)
+`skills/ro-crate-masp/scripts/masp_rules.py` was run on every profile and schema in ro-crate-masp-examples; `masp_to_shacl.py` output for six of them loaded in roc-validator 0.14.0 (`--extra-profiles-path`) and was compared with `masp-validate` 0.1.0 on the upstream example crates, with hand-broken copies (missing root property, stray entity, README selected by an `@id` regex, missing main workflow). Details in `skills/ro-crate-masp/references/shacl.md` and `tools.md`. wpsld-cli 0.8.0 `check` passes all fixtures except `invalid-crate` (its four problems) and needs the file path for the detached-only `detached-web-record/`.
 
 ## 2b. Scripted graders
 `python tests/graders/run.py <iteration dir>` scores eval runs mechanically (standard library only; independent of RO-Crate libraries and of the skills' lint script); see `tests/graders/README.md`. Calibration against the hand grading: `tests/eval-results/graders-calibration.md`. Tests: `python -m unittest tests.test_graders`.
+
+## 2c. Trigger tests
+Does an agent pick the right skill from the descriptions alone? `python tests/triggers/run.py [--split dev|test] [--repeats N] [--only SKILL]` runs each prompt of `tests/triggers/triggers.json` through `claude -p` with this repository as a plugin and checks the first `Skill` call (positives: one of `accept`; negatives: no `ro-crate-*` skill). It needs the `claude` CLI and a login and costs money per run; tune descriptions on `dev` only and score `test` once. Status and results: PLAN.md, Next steps 3.
 
 ## 3. Evals (per skill)
 Each skill has `evals/evals.json` (prompts with `expectations`, the format used by the skill-creator plugin). Any agent can run the prompts by hand or in CI and compare the answer with the expectations; Claude Code users can also use the skill-creator plugin's viewer, benchmark and description optimiser (these need Claude Code). Prompts that name `tests/fixtures/...` expect to run from the repository root.

@@ -1075,5 +1075,102 @@
   "split": "test",
   "query": "Explain the FAIR data principles in two paragraphs.",
   "accept": []
+ },
+ {
+  "id": "p086",
+  "skill": "ro-crate-masp",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Our crates must follow the LDAC collection profile. How do I check one against it from the command line?",
+  "accept": [
+   "ro-crate-masp"
+  ]
+ },
+ {
+  "id": "p087",
+  "skill": "ro-crate-masp",
+  "kind": "positive",
+  "split": "dev",
+  "query": "I want our lab's RO-Crate profile to drive Crate-O forms: which properties are required, how many authors, allowed licences. How do I write that as a machine-actionable profile crate?",
+  "accept": [
+   "ro-crate-masp"
+  ]
+ },
+ {
+  "id": "p088",
+  "skill": "ro-crate-masp",
+  "kind": "positive",
+  "split": "test",
+  "query": "masp-validate says 'Expected at least 1 instances of RO-Crate Metadata Descriptor, found 0' but the descriptor is there. What does it mean?",
+  "accept": [
+   "ro-crate-masp"
+  ]
+ },
+ {
+  "id": "p089",
+  "skill": "ro-crate-masp",
+  "kind": "positive",
+  "split": "test",
+  "query": "Can I convert the rdfs:Class and rdf:Property rules in our profile crate into SHACL shapes for rocrate-validator?",
+  "accept": [
+   "ro-crate-masp"
+  ]
+ },
+ {
+  "id": "p090",
+  "skill": "ro-crate-bioschemas",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Add a Taxon entity for Danio rerio to my crate following the Bioschemas profile.",
+  "accept": [
+   "ro-crate-bioschemas"
+  ]
+ },
+ {
+  "id": "p091",
+  "skill": "ro-crate-bioschemas",
+  "kind": "positive",
+  "split": "dev",
+  "query": "Our training pages already have Bioschemas TrainingMaterial markup. Turn one page into an RO-Crate.",
+  "accept": [
+   "ro-crate-bioschemas",
+   "ro-crate-create"
+  ]
+ },
+ {
+  "id": "p092",
+  "skill": "ro-crate-bioschemas",
+  "kind": "positive",
+  "split": "test",
+  "query": "Which Bioschemas profile version should my Gene entity declare in conformsTo, and where does conformsTo go?",
+  "accept": [
+   "ro-crate-bioschemas"
+  ]
+ },
+ {
+  "id": "p093",
+  "skill": "ro-crate-bioschemas",
+  "kind": "positive",
+  "split": "test",
+  "query": "scientificName is flagged as an undefined term in my RO-Crate 1.3 crate. How do I map it?",
+  "accept": [
+   "ro-crate-bioschemas"
+  ]
+ },
+ {
+  "id": "n026",
+  "skill": null,
+  "kind": "negative",
+  "split": "dev",
+  "query": "Write SHACL shapes to validate my company's product catalogue in RDF (nothing to do with RO-Crate).",
+  "accept": []
+ },
+ {
+  "id": "n027",
+  "skill": null,
+  "kind": "negative",
+  "split": "test",
+  "query": "Add schema.org JSON-LD markup for a recipe to my blog page.",
+  "accept": []
  }
 ]

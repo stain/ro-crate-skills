@@ -1,14 +1,15 @@
 # Background material
 
-Reference material for people and agents *developing* the skills. It is not itself a skill and is not installed
-with the plugin. Start from the summaries, then read only the relevant line ranges of the full text.
+Reference material for people and agents *developing* the skills. It is not itself a skill, and no skill links to it
+(it is copied with the plugin because the plugin is the whole repository). Start from the summaries, then read only
+the relevant line ranges of the full text.
 
 ## Specification versions
 
 | Version | Permalink | Full text | Summary | Zenodo |
 |---|---|---|---|---|
-| 1.3 | <https://w3id.org/ro/crate/1.3> | [ro-crate-1.3.0.md](ro-crate-1.3.0.md) | [ro-crate-1.3.0-summary.md](ro-crate-1.3.0-summary.md) (**start here**: general principles, section index, per-skill reading list, checklist) | <https://doi.org/10.5281/zenodo.20720080> |
-| 1.2 | <https://w3id.org/ro/crate/1.2> | [ro-crate-1.2.0.md](ro-crate-1.2.0.md) | [ro-crate-1.2.0-summary.md](ro-crate-1.2.0-summary.md) | <https://doi.org/10.5281/zenodo.13751027> |
+| 1.3 | <https://w3id.org/ro/crate/1.3> | [ro-crate-1.3/](ro-crate-1.3/) (one file per chapter; [index.md](ro-crate-1.3/index.md), [quick-reference.md](ro-crate-1.3/quick-reference.md)) | [ro-crate-1.3.0-summary.md](ro-crate-1.3.0-summary.md) (**start here**: general principles, section index, per-skill reading list, checklist) | <https://doi.org/10.5281/zenodo.20720080> |
+| 1.2 | <https://w3id.org/ro/crate/1.2> | [ro-crate-1.2/](ro-crate-1.2/) (one file per chapter; [index.md](ro-crate-1.2/index.md), [quick-reference.md](ro-crate-1.2/quick-reference.md)) | [ro-crate-1.2.0-summary.md](ro-crate-1.2.0-summary.md) | <https://doi.org/10.5281/zenodo.13751027> |
 | 1.1 | <https://w3id.org/ro/crate/1.1> | [ro-crate-1.1.md](ro-crate-1.1.md) | [ro-crate-1.1-summary.md](ro-crate-1.1-summary.md) | <https://doi.org/10.5281/zenodo.7867028> |
 | 1.0 | <https://w3id.org/ro/crate/1.0> | [ro-crate-1.0.md](ro-crate-1.0.md) | [ro-crate-1.0-summary.md](ro-crate-1.0-summary.md) | <https://doi.org/10.5281/zenodo.3541888> |
 
@@ -16,7 +17,16 @@ Permalinks are the values used in a crate's `conformsTo` (and as base for `@cont
 <https://doi.org/10.5281/zenodo.3406497>.
 
 How the full texts were obtained:
-- 1.3 and 1.2: the project's all-in-one Markdown, downloaded unmodified from Zenodo (`ro-crate-1.3.0.md`, `ro-crate-1.2.0.md`).
+- 1.3 and 1.2: the project's all-in-one Markdown (`ro-crate-1.3.0.md`, `ro-crate-1.2.0.md`), downloaded unmodified from Zenodo,
+  then split into one file per chapter by [split_spec.py](split_spec.py), with the file names the specification uses on
+  GitHub (`docs/_specification/<version>/`). The text is unchanged except that links to a section in another chapter
+  point at that chapter's file (`](data-entities.md#web-based-data-entities)`); line N of a chapter is line
+  (chapter start + N - 1) of the all-in-one file. Each folder also has `quick-reference.md`, the
+  [quick reference](ro-crate-quick-reference-1.2-1.3.md) with its links rewritten to the chapter files. The chapter files
+  are what agents read; the script and the all-in-one files are only needed again for a new specification version:
+  download the all-in-one Markdown into this folder (it is in `.gitignore`), then run
+  `python split_spec.py ro-crate-X.Y.Z.md ro-crate-X.Y/ ro-crate-quick-reference-1.2-1.3.md`. The split keeps every file
+  under 256 KiB, the limit above which Anthropic's plugin directory holds a plugin version for a reviewer.
 - 1.1 and 1.0: Zenodo has no Markdown; converted from the record's single-page HTML (`ro-crate-1.1.2.html`, `ro-crate-1.0.0.html`)
   with pandoc (see the notes in each summary). The 1.1 record is version 1.1.3 but its HTML carries the 1.1.2 text.
 

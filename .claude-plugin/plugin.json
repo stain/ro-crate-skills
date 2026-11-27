@@ -1,10 +1,14 @@
 {
   "name": "ro-crate-skills",
-  "description": "Agent skills for consuming, creating and tooling RO-Crate (Research Object Crate) metadata",
-  "version": "0.1.0",
+  "displayName": "RO-Crate Skills",
+  "description": "Create, read, validate, publish and retrieve RO-Crates (Research Object Crates) with agent skills for the RO-Crate 1.3 specification",
+  "version": "0.3.1",
   "author": {"name": "Stian Soiland-Reyes"},
   "homepage": "https://github.com/stain/ro-crate-skills",
   "repository": "https://github.com/stain/ro-crate-skills",
   "license": "Apache-2.0",
+  "icon": "./.claude-plugin/icon.png",
+  "documentationUrl": "https://github.com/stain/ro-crate-skills#readme",
+  "supportUrl": "https://github.com/stain/ro-crate-skills/issues",
   "keywords": ["ro-crate", "research-object", "fair", "json-ld", "skills"]
 }

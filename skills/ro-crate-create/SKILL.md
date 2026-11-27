@@ -14,7 +14,7 @@ If you cannot ask: leave optional properties out. For what the root data entity 
 
 ## Before writing
 - **New crate:** target 1.3. **Existing crate:** read its declared version (descriptor `conformsTo`) and keep it; upgrade only if asked (changes: https://www.researchobject.org/ro-crate/whats-changed-in-1-2 and `-1-3`).
-- **Only released versions.** Never write `-DRAFT` specs, contexts, `conformsTo` or profile URIs.
+- **Only released versions.** Never write `-DRAFT` specs, contexts, `conformsTo` or profile URIs. One exception: a Bioschemas profile for a type that has no released profile may be declared in its draft version, though it is not recommended (see `ro-crate-bioschemas`).
 - If the Python tool is available, prefer `pip install rocrate` and `rocrate init` to bootstrap from a directory, then edit by hand; do not write RO-Crate libraries yourself.
 - Example identifier: the ORCID `https://orcid.org/0000-0002-1825-0097` (fictional Josiah Carberry) is a deliberate example record, fine for examples and tests only.
 
@@ -89,6 +89,7 @@ If you cannot ask: leave optional properties out. For what the root data entity 
 - [references/data-entities.md](references/data-entities.md): directories, web-based files, `contentUrl`/`localPath`, distributions, file formats, path encoding.
 - [references/contextual-entities.md](references/contextual-entities.md): people, organisations, licences, funding, citations, places, keywords, identifiers.
 - [references/jsonld.md](references/jsonld.md): `@context`, extending with new terms, relative URIs and `@base`.
+- [references/web-records.md](references/web-records.md): a detached crate per record of a web application or catalogue (root = the record, described thing = `mainEntity`), generated from existing schema.org/Bioschemas JSON-LD.
 - [references/provenance.md](references/provenance.md): software, equipment, change history actions, recording an AI agent's own work.
 - [references/from-other-metadata.md](references/from-other-metadata.md): starting from CITATION.cff, codemeta.json or other project metadata (cffconvert + JSON-LD flattening).
 

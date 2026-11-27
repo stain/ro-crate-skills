@@ -1,0 +1,69 @@
+{
+  "skill_name": "ro-crate-masp",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Make our lab's RO-Crate profile machine-actionable with MASP: every crate's root needs a name and at least one author who is a Person with a name, and the licence must be CC-BY-4.0 or CC0-1.0. The profile will live at https://example.org/profiles/lab/0.1.",
+      "expected_output": "A MASP profile crate: root Dataset+Profile with isProfileOf, conformsTo the MASP profile, hasResource with a schema ResourceDescriptor listing all rules; root-detection rules; class and property rules with prov:specializationOf, domainIncludes, rangeIncludes and sh:minCount/sh:maxCount; licence choices as an ItemList referenced from rangeIncludes.",
+      "files": [],
+      "expectations": [
+        "The schema rules are listed in hasPart of a ResourceDescriptor with hasRole http://www.w3.org/ns/dx/prof/role/schema, linked from the root's hasResource",
+        "Includes the root-detection pattern: a property rule with rdfs:label \"@id\" whose rangeIncludes is a PropertyValue with value ro-crate-metadata.json, and an about rule pointing to the root class rule",
+        "Property rules use plain domainIncludes/rangeIncludes keys pointing at class rules, with prov:specializationOf the schema.org property",
+        "The allowed licences are an ItemList (or PropertyValue) referenced from rangeIncludes, not a value on the property rule",
+        "Asks for or marks as TODO the profile's licence and authors instead of inventing them",
+        "Mentions that MASP is a prototype and suggests checking with masp_rules.py and masp-validate"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "masp-validate says: [ERROR] Expected at least 1 instances of Profile : http://schema.org/CreativeWork, http://schema.org/Profile, found 0. My crate has {\"@id\": \"https://w3id.org/workflowhub/workflow-ro-crate/1.0\", \"@type\": \"Profile\"}. What is wrong?",
+      "expected_output": "Explains class-rule instance counts and that all types in prov:specializationOf must be present: the profile entity needs @type [\"CreativeWork\", \"Profile\"].",
+      "files": [],
+      "expectations": [
+        "Explains that sh:minCount on a class rule counts entities in the whole crate",
+        "Explains that an entity must have every type listed in the class rule's prov:specializationOf, so Profile alone does not match",
+        "Suggests @type [\"CreativeWork\", \"Profile\"] on the profile entity",
+        "Does not suggest editing the profile crate to make the error go away"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Where do I get the MASP validator and the documentation generator now? The ro-crate-masp repository README looks different from last month.",
+      "expected_output": "Points to crate-works/ro-crate-masp-validator (npm @crate-works/ro-crate-masp-validator, masp-validate) and crate-works/ro-crate-masp-tools (generate-masp-docs, generate-mode-file, owl-to-masp), examples in ro-crate-masp-examples and templates in masp-templates.",
+      "files": [],
+      "expectations": [
+        "Names crate-works/ro-crate-masp-validator and the npm package @crate-works/ro-crate-masp-validator with the masp-validate command",
+        "Names crate-works/ro-crate-masp-tools for generate-masp-docs",
+        "Mentions ro-crate-masp-examples for example profiles and masp-templates for the schema template",
+        "Does not send the user to the old soss-validator.js or a scripts folder in ro-crate-masp"
+      ]
+    },
+    {
+      "prompt": "Our lab profile is a MASP profile crate. Some partners use rocrate-validator in CI. Can one Profile Crate work for both?",
+      "expected_output": "Yes: keep MASP rules as source, generate a rocrate-validator profile folder with scripts/masp_to_shacl.py, ship it under a ResourceDescriptor with role validation, run with --extra-profiles-path; explain root targeting via RootDataEntity and the strictness difference.",
+      "expectations": [
+        "Recommends keeping the MASP rules as the single source and generating SHACL from them (masp_to_shacl.py)",
+        "Says the generated folder has profile.ttl with prof:hasToken and prof:isProfileOf, used with rocrate-validator --extra-profiles-path and -p <token>-<version>",
+        "Ships the SHACL in the Profile Crate with a ResourceDescriptor of role http://www.w3.org/ns/dx/prof/role/validation and text/turtle / conformsTo https://www.w3.org/TR/shacl/",
+        "Explains that SHACL checks every entity of a class while masp-validate only reports class counts",
+        "Suggests validating an example crate with both tools"
+      ],
+      "id": 4,
+      "files": []
+    },
+    {
+      "prompt": "masp-validate only says 'Expected at least 1 instances of RO-Crate Metadata Descriptor ... found 0' for my crate, which clearly has a metadata descriptor. How do I find out what is actually wrong?",
+      "expected_output": "Explains cascading: a property failure on the root makes the descriptor invalid; with 0.1.0 use --json property-errors (stripping [ERROR] lines works with every version), or a release with PR #4 whose message names the cause; wpsld-cli check / SHACL conversion as alternatives.",
+      "expectations": [
+        "Explains that property-rule failures make an entity not count, so the error is reported as a missing descriptor",
+        "Points to --json and the property-errors of the root and descriptor rules",
+        "Gives a way to parse --json that works whether or not the [ERROR] lines are on stdout (version-dependent)",
+        "Mentions that newer validator versions (PR #4) explain the count error, and suggests checking the installed version with npm ls",
+        "Offers wpsld-cli check or the SHACL conversion as a way to get the direct cause"
+      ],
+      "id": 5,
+      "files": []
+    }
+  ]
+}
