@@ -29,10 +29,17 @@ From its guide, [Writing a new profile](https://rocrate-validator.readthedocs.io
   `.../1.2` (the 1.3 profile reuses the 1.2 checks; with 1.3 alone validation stops with
   "Invalid check dependency in profile 'ro-crate-1.3'").
 - The folder's version must match a version in the profile IRI ("Inconsistent versions found").
+  The profile identifier uses the version number only: for a draft whose folder and IRI carry a
+  pre-release suffix after `1.0`, it is `-p <token>-1.0`. Unrelated profiles in one
+  `--extra-profiles-path` folder can trip the same check (seen with the upstream MASP
+  examples together: "Inconsistent versions found: {'2', '0.1'}"): give each its own folder.
 - Use your own folder without changing the package:
   `rocrate-validator validate --extra-profiles-path <dir> -p <token>-<version> <crate>`; a
   profile with the URI of a bundled one replaces it. `rocrate-validator profiles check <id>`
-  reports duplicate check identities.
+  reports duplicate check identities. Without `-p` the validator picks the most specific
+  profile whose IRI the crate's root `conformsTo` names, so a crate declaring a module and its
+  core profile is checked against the module, and through `prof:isProfileOf` the core too.
+  It does not read a Profile Crate's `validation` resource, so the folder must be local.
 - **Finding the root.** The RO-Crate profile has a hidden shape whose SPARQL target selects
   the `Dataset` the descriptor is `about`, and a `sh:TripleRule` that types it
   `https://github.com/crs4/rocrate-validator/profiles/ro-crate-1.2/RootDataEntity`
@@ -52,11 +59,14 @@ rocrate-validator validate --extra-profiles-path shacl -p <token>-<version> -m <
 
 | MASP | SHACL generated |
 |---|---|
-| class rule | `sh:NodeShape`, `sh:targetClass` the specialised type; several types, or an `@id` rule, → `sh:SPARQLTarget` (all types; `@id` regex or literal matched on the last path segment) |
+| class rule | `sh:NodeShape`, `sh:targetClass` the specialised type; several types, or an `@id` rule, → `sh:SPARQLTarget` (all types; `@id` regex as written, matched on the whole IRI or its last path segment; a literal `@id` on the last path segment) |
+| class rules with the same types as another rule (roles, such as two kinds of `Dataset`), without counts | `sh:NodeShape` with no target, testing the types with `sh:class` and the parent rule (`rdfs:subClassOf`) with `sh:node`; ranges refer to it with `sh:node`, so its rules apply only where it is referenced |
 | the root rule (descriptor `about`) | `sh:targetClass` the validator's `RootDataEntity` class; several alternative root rules → `sh:or` of their shapes |
-| the descriptor's own rules | left to the RO-Crate profile |
+| the descriptor rule | selected by its `@id` rule, so a profile can add to the RO-Crate checks (such as the RO-Crate version in `conformsTo`); its count is left to the RO-Crate profile |
+| root `isProfileOf` other than RO-Crate | also in `prof:isProfileOf`, so a module's folder next to its core profile's runs the core checks too |
 | property rule | property shape: `sh:path` from `prov:specializationOf` (else `rdfs:label` through the context), `sh:minCount`, `sh:maxCount`, `sh:name` "Class: property" |
-| `rangeIncludes` | `sh:or` of: class rule → `sh:class`; Text/Date → `sh:nodeKind sh:Literal`; Number → numeric `sh:datatype`s; Boolean → `xsd:boolean`; URL → `sh:IRIOrLiteral`; `PropertyValue` → `sh:hasValue` or `sh:pattern` + `sh:flags`; `ItemList` → `sh:in` |
+| `rangeIncludes` | `sh:or` of: class rule → `sh:class`; Text/Date → `sh:nodeKind sh:Literal`; Number → numeric `sh:datatype`s; Boolean → `xsd:boolean`; URL → `sh:IRIOrLiteral`; `ItemList` → `sh:in` |
+| `PropertyValue` in `rangeIncludes` | a second property shape with `sh:qualifiedValueShape` (`sh:in` for a literal or `@id`, `sh:pattern` + `sh:flags` for a `/regex/`) and `sh:qualifiedMinCount`/`sh:qualifiedMaxCount` from the value's counts, as MASP counts the matching values; it joins the `sh:or` when there are other ranges, and with only values the other values are free |
 | class `sh:minCount`/`sh:maxCount` | `sh:SPARQLConstraint` on the root counting entities (`$this` must appear in the pattern: a query with only a sub-select never reports in pySHACL) |
 
 All shapes go in `must/` (REQUIRED). The script prints what it could not convert; review the
@@ -77,6 +87,11 @@ without `conformsTo` in the LDAC `cooee` example).
 - **Literals vs references.** SHACL distinguishes `"./"` from `{"@id": "./"}`; `masp-validate` does not.
 - **Not converted:** `@id` rules other than selecting entities, `DefinedTermSet` documentation,
   Crate-O layout. Several `@id` rules on one class: only the first becomes the filter.
+- **Absolute identifiers.** A relative `@id` is an absolute IRI once parsed, so an `@id` rule
+  meant to select only absolute identifiers (`/^[A-Za-z][A-Za-z0-9+.-]*:/`) selects every
+  entity and cannot report a local `#person`.
+- **Roles.** A role rule (same types as another rule) is checked only where a range refers to
+  it; an entity of its type that nothing refers to through such a range is not checked against it.
 
 ## Shipping both in the Profile Crate
 
